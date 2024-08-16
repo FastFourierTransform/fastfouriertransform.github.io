@@ -3,8 +3,8 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | 测试</title>
-    <meta name="author" content="John Doe" />
+    <title>Archives | test</title>
+    <meta name="author" content="测试" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta
@@ -59,7 +59,7 @@
         <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
     <nav id="desktop-menu">
         <a class="title" href="/">
-            <span>测试</span>
+            <span>TEST</span>
         </a>
         
         <a href="/">
@@ -91,7 +91,7 @@
     <nav id="mobile-menu">
         <div class="title" @click="showMenuItems = !showMenuItems">
             <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;测试</span>
+            <span>&emsp;TEST</span>
         </div>
         <transition name="slide">
             <div class="items" v-show="showMenuItems">
@@ -169,6 +169,35 @@
             </div>
         </div>
         
+        <div class="timeline" data-title="mynewpost">
+            <div class="timeline-tail"></div>
+            <div class="timeline-content">
+                <div class="item-time">2024/8/16</div>
+                <a href="/2024/08/16/My-New-Post/">
+                    <h3>My New Post</h3>
+                </a>
+                <div class="info">
+                    
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </span>
+                        
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/array/" style="color: #00bcd4">
+                                array
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </div>
+        </div>
+        
     </div>
 </div>
 
@@ -176,11 +205,11 @@
     <div id="footer-wrap">
         <div>
             &copy;
-            2022 - 2024 测试
+            2022 - 2024 test
             <span id="footer-icon">
                 <i class="fa-solid fa-font-awesome fa-fw"></i>
             </span>
-            &commat;John Doe
+            &commat;测试
         </div>
         <div>
             Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;

@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | test</title>
+    <title>My New Post | test</title>
     <meta name="author" content="测试" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -150,55 +154,48 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>My New Post</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/8/16
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
             
-<div id="archives">
-    
-    <div id="timeline-wrap" ref="timeline">
-        
-        <div class="timeline" data-title="helloworld">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/8/16</div>
-                <a href="/2024/08/16/hello-world/">
-                    <h3>Hello World</h3>
+            
+            <span class="tag">
+                
+                <a href="/tags/array/" style="color: #00a596">
+                    array
                 </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="mynewpost">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/8/16</div>
-                <a href="/2024/08/16/My-New-Post/">
-                    <h3>My New Post</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/array/" style="color: #03a9f4">
-                                array
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
+            </span>
+            
+        </span>
         
     </div>
+    
+    <div class="content" v-pre>
+        <pre><code class="yaml">$ printf(&quot;6666\n&quot;);
+</code></pre>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
             <footer id="footer">
@@ -229,6 +226,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
