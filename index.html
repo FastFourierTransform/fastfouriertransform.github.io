@@ -181,8 +181,8 @@
         
 
 <div class="post">
-    <a href="/2024/08/27/kalman2/">
-        <h2 class="post-title">卡尔曼滤波（一）</h2>
+    <a href="/2024/10/09/rag/">
+        <h2 class="post-title">rag</h2>
     </a>
     <div class="category-and-date">
         
@@ -190,7 +190,7 @@
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/8/27
+            2024/10/9
         </span>
         
         
@@ -198,11 +198,7 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h3 id="系统模型"><a href="#系统模型" class="headerlink" title="系统模型"></a>系统模型</h3><p>对于线性系统</p>
-<p>状态方程：$x_{k+1}&#x3D;A_kx_k+B_ku_k+w_k$<br>测量方程：$z_k&#x3D;H_kx_k+v_k$</p>
-<p>其中：<br>$A_k$：状态转移矩阵<br>$x_k$：k 时刻的状态向量<br>$B_k$：系统控制矩阵<br>$u_k$：k 时刻的系统输入<br>$H_k$：测量矩阵，反映系统状态到测量值的转换关系<br>$w_k$：过程噪声，均值为0，协方差矩阵为$Q_k$<br>$v_k$：测量噪声，均值为0，协方差矩阵为$R_k$\</p>
-<h3 id="状态预测"><a href="#状态预测" class="headerlink" title="状态预测"></a>状态预测</h3><p>状态预测方程；$\hat{x}<em>{k+1|k}&#x3D;A_kx</em>{k|k}+B_ku_k + 0$<br>测量估计方程：$\hat{z}<em>{k+1}&#x3D;H</em>{k+1}\hat{x}_{k+1|k}$</p>
-
+            
             
         </div>
     </div>
@@ -211,7 +207,7 @@
         
         
     </div>
-    <a href="/2024/08/27/kalman2/" class="go-post">阅读全文</a>
+    <a href="/2024/10/09/rag/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -276,6 +272,8 @@ $ hexo s
 </code></pre>
 <h3 id="部署网站"><a href="#部署网站" class="headerlink" title="部署网站"></a>部署网站</h3><pre><code class="bash">$ hexo deploy
 $ hexo d
+</code></pre>
+<h3 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h3><pre><code class="bash">$ hexo new &lt;title&gt;
 </code></pre>
 
             
