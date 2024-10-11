@@ -170,8 +170,9 @@
     </div>
     
     <div class="content" v-pre>
-        <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>我希望让大模型根据一个频繁更新的数据库进行回答，这种情况下，每次对话都将整个数据库输入肯定是不现实的，最终，我发现检索增强生成技术（Retrieval-Augmented Generation，RAG）正好可以完美的解决我的问题（赞美98）</p>
+        <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>我希望让大模型根据一个频繁更新的数据库进行回答，这种情况下，每次对话都将整个数据库输入肯定是不现实的，最终，我了解到检索增强生成技术（Retrieval-Augmented Generation，RAG）正好可以完美的解决我的问题（赞美98）。</p>
 <p><img src="/2024/10/09/Retrieval%20Augmented%20Generation/image.png" alt="alt text"></p>
+<span id="more"></span>
 <p>完整的RAG应用流程主要包含两个阶段：<br>数据准备阶段：数据提取，文本分割，向量化（embedding），数据入库<br>应用阶段：用户提问，数据检索（召回）<strong>（R）</strong>，注入Prompt <strong>（A）</strong>，LLM生成答案 <strong>（G）</strong></p>
 <p>RAG的本质依然是为模型提供额外的输入，只是这里的额外输入都是精挑细选出来的，而非囫囵吞枣的直接输入，开卷考试还现场帮你对着题目划重点，效率比直接生成要高出不少。</p>
 <h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><pre><code>!pip install -q torch transformers transformers accelerate bitsandbytes langchain sentence-transformers faiss-gpu openpyxl pacmap datasets langchain-community ragatouille
