@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>渡河</title>
+    <title>使用Langchain构建RAG | 渡河</title>
     <meta name="author" content="傅里叶今天不想变换" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -42,7 +42,9 @@
 
 
 
-<script src="/js/lib/home.js"></script>
+
+
+
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -152,40 +154,11 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="home-head">
-    <div
-        id="home-background"
-        ref="homeBackground"
-        data-images="/images/background.jpg"
-    ></div>
-    <div id="home-info" @click="homeClick">
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="info">
-            <div class="wrap">
-                <h1>渡河</h1>
-                <h3>公无渡河,公竟渡河,堕河而死,当奈公何</h3>
-                <h5></h5>
-            </div>
-        </span>
+            <div class="article">
+    <div>
+        <h1>使用Langchain构建RAG</h1>
     </div>
-</div>
-<div
-    id="home-posts-wrap"
-    ref="homePostsWrap"
-    true
->
-    <div id="home-posts">
-        
-
-<div class="post">
-    <a href="/2024/10/09/Retrieval-Augmented%20Generation/">
-        <h2 class="post-title">使用Langchain构建RAG</h2>
-    </a>
-    <div class="category-and-date">
-        
+    <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
@@ -195,10 +168,9 @@
         
         
     </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>我希望让大模型根据一个频繁更新的数据库进行回答，这种情况下，每次对话都将整个数据库输入肯定是不现实的，最终，我发现检索增强生成技术（Retrieval-Augmented Generation，RAG）正好可以完美的解决我的问题（赞美98）</p>
+    
+    <div class="content" v-pre>
+        <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>我希望让大模型根据一个频繁更新的数据库进行回答，这种情况下，每次对话都将整个数据库输入肯定是不现实的，最终，我发现检索增强生成技术（Retrieval-Augmented Generation，RAG）正好可以完美的解决我的问题（赞美98）</p>
 <p><img src="/image.png" alt="alt text"></p>
 <p>完整的RAG应用流程主要包含两个阶段：<br>数据准备阶段：数据提取，文本分割，向量化（embedding），数据入库<br>应用阶段：用户提问，数据检索（召回）<strong>（R）</strong>，注入Prompt <strong>（A）</strong>，LLM生成答案 <strong>（G）</strong></p>
 <p>RAG的本质依然是为模型提供额外的输入，只是这里的额外输入都是精挑细选出来的，而非囫囵吞枣的直接输入，开卷考试还现场帮你对着题目划重点，效率比直接生成要高出不少。</p>
@@ -627,131 +599,13 @@ answer, relevant_docs = answer_with_rag(question, READER_LLM, KNOWLEDGE_VECTOR_D
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>基本就是搬运了别人的文章，然后加了一些补充让整篇文章从一篇简单易懂的文章变成了一篇面向纯小白的文章，不过我好像也确实就是纯小白，其中还有好多概念其实不是特别清楚，不过短时间应该够用了，日后有机会再回过头来查漏补缺吧。</p>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>1.<a target="_blank" rel="noopener" href="https://huggingface.co/learn/cookbook/zh-CN/advanced_rag">https://huggingface.co/learn/cookbook/zh-CN/advanced_rag</a><br>2.<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzkxNjYxMjUwMA==&mid=2247484519&idx=1&sn=55a9fa5107d3b69a019db36703b86538&chksm=c14c709cf63bf98a615255cb55041338eaaa024066f721c9c81456c99eaf8f423ae27a56fa8a&token=1160261652&lang=zh_CN#rd">https://mp.weixin.qq.com/s?__biz=MzkxNjYxMjUwMA==&amp;mid=2247484519&amp;idx=1&amp;sn=55a9fa5107d3b69a019db36703b86538&amp;chksm=c14c709cf63bf98a615255cb55041338eaaa024066f721c9c81456c99eaf8f423ae27a56fa8a&amp;token=1160261652&amp;lang=zh_CN#rd</a></p>
 
-            
-        </div>
     </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2024/10/09/Retrieval-Augmented%20Generation/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/08/27/kalman1/">
-        <h2 class="post-title">卡尔曼滤波（一）</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/8/27
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h3 id="系统模型"><a href="#系统模型" class="headerlink" title="系统模型"></a>系统模型</h3><p>对于线性系统</p>
-<p>状态方程：$x_{k+1}&#x3D;A_kx_k+B_ku_k+w_k$<br>测量方程：$z_k&#x3D;H_kx_k+v_k$</p>
-<p>其中：<br>$A_k$：状态转移矩阵<br>$x_k$：k 时刻的状态向量<br>$B_k$：系统控制矩阵<br>$u_k$：k 时刻的系统输入<br>$H_k$：测量矩阵，反映系统状态到测量值的转换关系<br>$w_k$：过程噪声，均值为0，协方差矩阵为$Q_k$<br>$v_k$：测量噪声，均值为0，协方差矩阵为$R_k$\</p>
-<h3 id="状态预测"><a href="#状态预测" class="headerlink" title="状态预测"></a>状态预测</h3><p>状态预测方程；$\hat{x}<em>{k+1|k}&#x3D;A_kx</em>{k|k}+B_ku_k + 0$<br>测量估计方程：$\hat{z}<em>{k+1}&#x3D;H</em>{k+1}\hat{x}_{k+1|k}$</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2024/08/27/kalman1/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/08/19/hexo-commands/">
-        <h2 class="post-title">hexo常用指令</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/8/19
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h3 id="清除缓存"><a href="#清除缓存" class="headerlink" title="清除缓存"></a>清除缓存</h3><pre><code class="bash">$ hexo clean
-</code></pre>
-<h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><pre><code class="bash">$ hexo generate
-$ hexo g
-</code></pre>
-<h3 id="启动本地服务器"><a href="#启动本地服务器" class="headerlink" title="启动本地服务器"></a>启动本地服务器</h3><pre><code class="bash">$ hexo server
-$ hexo s
-</code></pre>
-<h3 id="部署网站"><a href="#部署网站" class="headerlink" title="部署网站"></a>部署网站</h3><pre><code class="bash">$ hexo deploy
-$ hexo d
-</code></pre>
-<h3 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h3><pre><code class="bash">$ hexo new &lt;title&gt;
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2024/08/19/hexo-commands/" class="go-post">阅读全文</a>
-</div>
-
-
-        <div class="page-current">
     
-    <span class="current">1</span>
     
     
     
     
-</div>
-
-    </div>
     
-    <div id="home-card">
-        <div id="card-style">
-    <div id="card-div">
-        <div class="avatar">
-            <img src="/images/avatar.jpg" alt="avatar" />
-        </div>
-        <div class="name">傅里叶今天不想变换</div>
-        <div class="description">
-            <p>Description<br>…</p>
-
-        </div>
-        
-        
-        <div class="friend-links">
-            
-            <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://argvchs.github.io">Argvchs</a>
-            </div>
-            
-        </div>
-        
-    </div>
-</div>
-
-    </div>
     
 </div>
 
@@ -783,6 +637,12 @@ $ hexo d
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
