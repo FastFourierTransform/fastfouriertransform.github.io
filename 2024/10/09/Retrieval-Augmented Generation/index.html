@@ -174,10 +174,10 @@
 <p><img src="/2024/10/09/Retrieval-Augmented%20Generation/image.png" alt="alt text"></p>
 <p>完整的RAG应用流程主要包含两个阶段：<br>数据准备阶段：数据提取，文本分割，向量化（embedding），数据入库<br>应用阶段：用户提问，数据检索（召回）<strong>（R）</strong>，注入Prompt <strong>（A）</strong>，LLM生成答案 <strong>（G）</strong></p>
 <p>RAG的本质依然是为模型提供额外的输入，只是这里的额外输入都是精挑细选出来的，而非囫囵吞枣的直接输入，开卷考试还现场帮你对着题目划重点，效率比直接生成要高出不少。</p>
-<h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><pre><code class="bash">!pip install -q torch transformers transformers accelerate bitsandbytes langchain sentence-transformers faiss-gpu openpyxl pacmap datasets langchain-community ragatouille
+<h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><pre><code>!pip install -q torch transformers transformers accelerate bitsandbytes langchain sentence-transformers faiss-gpu openpyxl pacmap datasets langchain-community ragatouille
 </code></pre>
 <p>学大模型的时候走了一大堆弯路，环境里也跟着安装了一大堆意义不明的包，等到把手头的东西正式工程化的时候还是从零开始重新配置一下吧，屎山少一点是一点。</p>
-<pre><code class="bash">from tqdm.notebook import tqdm
+<pre><code class="python">from tqdm.notebook import tqdm
 import pandas as pd
 from typing import Optional, List, Tuple
 from datasets import Dataset
@@ -186,12 +186,12 @@ import matplotlib.pyplot as plt
 pd.set_option(&quot;display.max_colwidth&quot;, None) 
 </code></pre>
 <p>这里是设置<code>Pandas</code>库中显示的最大列宽为无限制（None）。在可视化检索器的输出时，确保长文本或字符串不会被截断，从而更完整地查看数据内容。</p>
-<h3 id="加载知识基础"><a href="#加载知识基础" class="headerlink" title="加载知识基础"></a>加载知识基础</h3><pre><code class="bash">import datasets
+<h3 id="加载知识基础"><a href="#加载知识基础" class="headerlink" title="加载知识基础"></a>加载知识基础</h3><pre><code class="python">import datasets
 
 ds = datasets.load_dataset(&quot;m-ric/huggingface_doc&quot;, split=&quot;train&quot;)
 </code></pre>
 <p>加载数据集，大多数数据集会被分割为不同的部分（split），如训练集、验证集，以及其他根据语言、任务等进行的分割，具体由数据库本身决定。</p>
-<pre><code class="bash">from langchain.docstore.document import Document as LangchainDocument
+<pre><code class="python">from langchain.docstore.document import Document as LangchainDocument
 
 RAW_KNOWLEDGE_BASE = [
     LangchainDocument(page_content=doc[&quot;text&quot;], metadata=&#123;&quot;source&quot;: doc[&quot;source&quot;]&#125;) for doc in tqdm(ds)
@@ -211,7 +211,7 @@ RAW_KNOWLEDGE_BASE = [
 <p>该方法首先在出现双行中断”\n\n”的任何地方拆分文档。<br>结果文档将在简单的行中断”\n”处再次拆分，然后在句子结尾”.”处拆分。<br>最后，如果有些片段仍然太大，它们将在超过最大大小时拆分。  </p>
 </blockquote>
 <p>使用这种方法，整体结构得到了很好的保留，代价是片段大小会有轻微的变化。</p>
-<pre><code class="bash">from langchain.text_splitter import RecursiveCharacterTextSplitter
+<pre><code class="python">from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 MARKDOWN_SEPARATORS = [
     &quot;\n#&#123;1,6&#125; &quot;,
@@ -248,7 +248,7 @@ for doc in RAW_KNOWLEDGE_BASE:
 </ul>
 <p>当我们嵌入文档时，我们将使用一个接受特定最大序列长度 <code>max_seq_length</code>的嵌入模型。</p>
 <p>因此，我们应该确保我们的片段大小低于这个限制，因为任何更长的片段在处理之前都会被截断，进而失去相关性</p>
-<pre><code class="bash">from sentence_transformers import SentenceTransformer
+<pre><code class="python">from sentence_transformers import SentenceTransformer
 
 print(f&quot;Model&#39;s maximum sequence length: &#123;SentenceTransformer(&#39;thenlper/gte-small&#39;).max_seq_length&#125;&quot;)
 
@@ -271,7 +271,7 @@ plt.show()
 </blockquote>
 <p> 可以看到，片段长度与我们的 512 个 token 的限制不匹配，并且有些文档超出了限制，因此它们的一部分将在截断中丢失！</p>
 <p>因此，我们应该更改 <code>RecursiveCharacterTextSplitter</code> 类，以计算 token 数量而不是字符数量。然后，我们可以选择一个特定的片段大小，这里我们会选择低于 512 的阈值，较小的文档可能允许拆分更专注于特定想法的内容，但太小的片段会拆分句子，从而再次失去意义，适当的调整是一个平衡的问题。</p>
-<pre><code class="bash">from langchain.text_splitter import RecursiveCharacterTextSplitter
+<pre><code class="python">from langchain.text_splitter import RecursiveCharacterTextSplitter
 from transformers import AutoTokenizer
 
 EMBEDDING_MODEL_NAME = &quot;thenlper/gte-small&quot;
@@ -336,7 +336,7 @@ plt.show()
 <p><strong>欧氏距离</strong>是向量末端之间的距离。</p>
 </blockquote>
 <p>我们的特定模型与余弦相似度配合得很好，所以我们选择这个距离度量，并在嵌入模型中以及 FAISS 索引的 <code>distance_strategy</code> 参数中设置它。使用余弦相似度，我们需要归一化我们的嵌入向量。</p>
-<pre><code class="bash">from langchain.vectorstores import FAISS
+<pre><code class="python">from langchain.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores.utils import DistanceStrategy
 
@@ -360,12 +360,12 @@ KNOWLEDGE_VECTOR_DATABASE = FAISS.from_documents(
 </ul>
 <p>我们使用 PaCMAP 将我们的嵌入向量从 384 维降至 2 维。</p>
 <p>我们选择 PaCMAP 而不是其他技术，如 t-SNE 或 UMAP，因为它效率高（保留局部和全局结构），对初始化参数鲁棒且速度快。</p>
-<pre><code class="bash"># embed a user query in the same space
+<pre><code class="python"># embed a user query in the same space
 user_query = &quot;How to create a pipeline object?&quot;
 query_vector = embedding_model.embed_query(user_query)
 </code></pre>
 <p><code>embed_query</code>是嵌入模型中的一个方法，用于将用户的查询语句嵌入到向量空间中,将自然语言的文本转换成一个高维向量表示。</p>
-<pre><code class="bash">import pacmap
+<pre><code class="python">import pacmap
 import numpy as np
 import plotly.express as px
 
@@ -412,7 +412,7 @@ documents_projected = embedding_projector.fit_transform(np.array(embeddings_2d),
 </ol>
 <p>总之，通过将嵌入向量从高维空间降维到二维空间，可以帮助我们直观地理解数据的结构和相似性，发现潜在的模式、聚类和异常，简化分析过程，并帮助调试和优化模型。</p>
 <p>绘图:</p>
-<pre><code class="bash">df = pd.DataFrame.from_dict(
+<pre><code class="python">df = pd.DataFrame.from_dict(
     [
         &#123;
             &quot;x&quot;: documents_projected[i, 0],
@@ -461,12 +461,12 @@ fig.show()
 <p><img src="/2024/10/09/Retrieval-Augmented%20Generation/image-3.png" alt="alt text"></p>
 </blockquote>
 <p>我们想要找到意义最接近的 k 个文档，因此我们选择最接近的 k 个向量。在 <code>LangChain</code> 向量数据库实现中，这个搜索操作是由方法 <code>vector_database.similarity_search(query)</code> 执行的。</p>
-<pre><code class="bash">retrieved_docs = KNOWLEDGE_VECTOR_DATABASE.similarity_search(query=user_query, k=5)
+<pre><code class="python">retrieved_docs = KNOWLEDGE_VECTOR_DATABASE.similarity_search(query=user_query, k=5)
 print(retrieved_docs[0].page_content)
 </code></pre>
 <h2 id="阅读器LLM"><a href="#阅读器LLM" class="headerlink" title="阅读器LLM"></a>阅读器LLM</h2><p>LLM 阅读器读取检索到的上下文以形成其答案</p>
 <h3 id="阅读器模型"><a href="#阅读器模型" class="headerlink" title="阅读器模型"></a>阅读器模型</h3><p>阅读器模型的 <code>max_seq_length</code> 必须适应我们的提示(prompt)，其中包括检索器调用输出的上下文：上下文包括 5 个每份 512 个 token 的文档，所以我们至少需要 4k 个 token 的上下文长度。</p>
-<pre><code class="bash">from transformers import pipeline
+<pre><code class="python">from transformers import pipeline
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 
@@ -509,7 +509,7 @@ READER_LLM = pipeline(
 <li><code>return_full_text=False</code>：设置为False，只返回生成的新增文本，而不包括输入文本。</li>
 <li><code>max_new_tokens=500</code>：生成的最大新token数量为500个。</li>
 </ul>
-<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><pre><code class="bash">prompt_in_chat_format = [
+<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><pre><code class="python">prompt_in_chat_format = [
     &#123;
         &quot;role&quot;: &quot;system&quot;,
         &quot;content&quot;: &quot;&quot;&quot;Using the information contained in the context,
@@ -537,7 +537,7 @@ print(RAG_PROMPT_TEMPLATE)
 <p>用户消息 (user)是用户的问题消息，带有两个占位符：<code>&#123;context&#125;</code> 和 <code>&#123;question&#125;</code>，其中,<code>&#123;context&#125;</code>：这检索到的上下文。<code>&#123;question&#125;</code>是用户想要回答的问题。</p>
 <p><code>tokenize=False</code>表示不对模板进行token化（即将模板转换为模型可以直接处理的token）。这是因为我们只想要模板的文本形式而不是token形式。</p>
 <p><code>add_generation_prompt=True</code>表示可能会在模板中增加提示信息，以便模型知道它需要生成新的内容。通常，这个提示可能是告诉模型进入生成模式，而不是只回答问题。</p>
-<pre><code class="bash">retrieved_docs_text = [doc.page_content for doc in retrieved_docs]
+<pre><code class="python">retrieved_docs_text = [doc.page_content for doc in retrieved_docs]
 context = &quot;\nExtracted documents:\n&quot;
 context += &quot;&quot;.join([f&quot;Document &#123;str(i)&#125;:::\n&quot; + doc for i, doc in enumerate(retrieved_docs_text)])
 
@@ -551,11 +551,11 @@ print(answer)
 <h3 id="重排序-可选"><a href="#重排序-可选" class="headerlink" title="重排序(可选)"></a>重排序(可选)</h3><p>对于 RAG 来说，通常更好的选择会最终检索出比你想要的更多的文档，然后在保留 top_k 之前，使用更强大的检索模型对结果进行重新排序。</p>
 <p>为此，Colbertv2是一个很好的选择：它不是像我们传统的嵌入模型那样的双向编码器，而是一个交叉编码器，它计算查询 token 与每个文档 token 之间更细致的交互。</p>
 <p>由于有了 RAGatouille 库，它的使用变得非常简单。</p>
-<pre><code class="bash">from ragatouille import RAGPretrainedModel
+<pre><code class="python">from ragatouille import RAGPretrainedModel
 
 RERANKER = RAGPretrainedModel.from_pretrained(&quot;colbert-ir/colbertv2.0&quot;)
 </code></pre>
-<h2 id="集成所有组件"><a href="#集成所有组件" class="headerlink" title="集成所有组件"></a>集成所有组件</h2><pre><code class="bash">from transformers import Pipeline
+<h2 id="集成所有组件"><a href="#集成所有组件" class="headerlink" title="集成所有组件"></a>集成所有组件</h2><pre><code class="python">from transformers import Pipeline
 
 
 def answer_with_rag(
@@ -591,7 +591,7 @@ def answer_with_rag(
 
     return answer, relevant_docs
 </code></pre>
-<pre><code class="bash">question = &quot;how to create a pipeline object?&quot;
+<pre><code class="python">question = &quot;how to create a pipeline object?&quot;
 
 answer, relevant_docs = answer_with_rag(question, READER_LLM, KNOWLEDGE_VECTOR_DATABASE, reranker=RERANKER)
 </code></pre>
