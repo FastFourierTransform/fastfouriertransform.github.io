@@ -166,7 +166,7 @@
         <span class="info">
             <div class="wrap">
                 <h1>渡河</h1>
-                <h3>公无渡河,公竟渡河,堕河而死,当奈公何</h3>
+                <h3>公无渡河，公竟渡河，堕河而死，当奈公何</h3>
                 <h5></h5>
             </div>
         </span>
@@ -181,7 +181,50 @@
         
 
 <div class="post">
-    <a href="/2024/10/09/Retrieval-Augmented%20Generation/">
+    <a href="/2024/10/11/hello-world/">
+        <h2 class="post-title">Hello World</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/10/11
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
+</code></pre>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2024/10/11/hello-world/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2024/10/09/Retrieval%20Augmented%20Generation/">
         <h2 class="post-title">使用Langchain构建RAG</h2>
     </a>
     <div class="category-and-date">
@@ -199,7 +242,7 @@
         <div class="content" v-pre>
             
             <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>我希望让大模型根据一个频繁更新的数据库进行回答，这种情况下，每次对话都将整个数据库输入肯定是不现实的，最终，我发现检索增强生成技术（Retrieval-Augmented Generation，RAG）正好可以完美的解决我的问题（赞美98）</p>
-<p><img src="/2024/10/09/Retrieval-Augmented%20Generation/image.png" alt="alt text"></p>
+<p><img src="/2024/10/09/Retrieval%20Augmented%20Generation/image.png" alt="alt text"></p>
 <p>完整的RAG应用流程主要包含两个阶段：<br>数据准备阶段：数据提取，文本分割，向量化（embedding），数据入库<br>应用阶段：用户提问，数据检索（召回）<strong>（R）</strong>，注入Prompt <strong>（A）</strong>，LLM生成答案 <strong>（G）</strong></p>
 <p>RAG的本质依然是为模型提供额外的输入，只是这里的额外输入都是精挑细选出来的，而非囫囵吞枣的直接输入，开卷考试还现场帮你对着题目划重点，效率比直接生成要高出不少。</p>
 <h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><pre><code>!pip install -q torch transformers transformers accelerate bitsandbytes langchain sentence-transformers faiss-gpu openpyxl pacmap datasets langchain-community ragatouille
@@ -295,7 +338,7 @@ plt.show()
 <p>执行结果</p>
 <blockquote>
 <p>Model’s maximum sequence length: 512</p>
-<p><img src="/2024/10/09/Retrieval-Augmented%20Generation/image-1.png" alt="alt text"></p>
+<p><img src="/2024/10/09/Retrieval%20Augmented%20Generation/image1.png" alt="alt text"></p>
 </blockquote>
 <p> 可以看到，片段长度与我们的 512 个 token 的限制不匹配，并且有些文档超出了限制，因此它们的一部分将在截断中丢失！</p>
 <p>因此，我们应该更改 <code>RecursiveCharacterTextSplitter</code> 类，以计算 token 数量而不是字符数量。然后，我们可以选择一个特定的片段大小，这里我们会选择低于 512 的阈值，较小的文档可能允许拆分更专注于特定想法的内容，但太小的片段会拆分句子，从而再次失去意义，适当的调整是一个平衡的问题。</p>
@@ -352,7 +395,7 @@ plt.show()
 </code></pre>
 <p>这里多初始化一个空字典<code>unique_texts</code>以跟踪唯一的文本内容，避免重复。遍历<code>docs_processed</code>中的每个文档，检查其内容是否已存在于<code>unique_texts</code>中,<br>如果不在，就将其添加到<code>unique_texts</code>中，并将该文档加入<code>docs_processed_unique</code>列表。</p>
 <blockquote>
-<p><img src="/2024/10/09/Retrieval-Augmented%20Generation/image-2.png" alt="alt text"></p>
+<p><img src="/image-2.png" alt="alt text"></p>
 </blockquote>
 <h3 id="构建向量数据库"><a href="#构建向量数据库" class="headerlink" title="构建向量数据库"></a>构建向量数据库</h3><p>一旦所有片段都被嵌入，我们就将它们存储到一个向量数据库中。当用户输入一个查询时，它会被之前使用的同一模型嵌入，并且相似性搜索会返回向量数据库中最接近的文档。</p>
 <p>因此，技术挑战在于，给定一个查询向量，快速找到向量数据库中这个向量的最近邻。为此，我们需要选择两件事：一个距离度量，以及一个搜索算法，以便在成千上万的记录数据库中快速找到最近邻。</p>
@@ -486,7 +529,7 @@ fig.show()
 </code></pre>
 <p>输出:</p>
 <blockquote>
-<p><img src="/2024/10/09/Retrieval-Augmented%20Generation/image-3.png" alt="alt text"></p>
+<p><img src="/2024/10/09/Retrieval%20Augmented%20Generation/image3.png" alt="alt text"></p>
 </blockquote>
 <p>我们想要找到意义最接近的 k 个文档，因此我们选择最接近的 k 个向量。在 <code>LangChain</code> 向量数据库实现中，这个搜索操作是由方法 <code>vector_database.similarity_search(query)</code> 执行的。</p>
 <pre><code class="python">retrieved_docs = KNOWLEDGE_VECTOR_DATABASE.similarity_search(query=user_query, k=5)
@@ -635,84 +678,7 @@ answer, relevant_docs = answer_with_rag(question, READER_LLM, KNOWLEDGE_VECTOR_D
         
         
     </div>
-    <a href="/2024/10/09/Retrieval-Augmented%20Generation/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/08/27/kalman1/">
-        <h2 class="post-title">卡尔曼滤波（一）</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/8/27
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h3 id="系统模型"><a href="#系统模型" class="headerlink" title="系统模型"></a>系统模型</h3><p>对于线性系统</p>
-<p>状态方程：$x_{k+1}&#x3D;A_kx_k+B_ku_k+w_k$<br>测量方程：$z_k&#x3D;H_kx_k+v_k$</p>
-<p>其中：<br>$A_k$：状态转移矩阵<br>$x_k$：k 时刻的状态向量<br>$B_k$：系统控制矩阵<br>$u_k$：k 时刻的系统输入<br>$H_k$：测量矩阵，反映系统状态到测量值的转换关系<br>$w_k$：过程噪声，均值为0，协方差矩阵为$Q_k$<br>$v_k$：测量噪声，均值为0，协方差矩阵为$R_k$\</p>
-<h3 id="状态预测"><a href="#状态预测" class="headerlink" title="状态预测"></a>状态预测</h3><p>状态预测方程；$\hat{x}<em>{k+1|k}&#x3D;A_kx</em>{k|k}+B_ku_k + 0$<br>测量估计方程：$\hat{z}<em>{k+1}&#x3D;H</em>{k+1}\hat{x}_{k+1|k}$</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2024/08/27/kalman1/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/08/19/hexo-commands/">
-        <h2 class="post-title">hexo常用指令</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/8/19
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h3 id="清除缓存"><a href="#清除缓存" class="headerlink" title="清除缓存"></a>清除缓存</h3><pre><code class="bash">$ hexo clean
-</code></pre>
-<h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><pre><code class="bash">$ hexo generate
-$ hexo g
-</code></pre>
-<h3 id="启动本地服务器"><a href="#启动本地服务器" class="headerlink" title="启动本地服务器"></a>启动本地服务器</h3><pre><code class="bash">$ hexo server
-$ hexo s
-</code></pre>
-<h3 id="部署网站"><a href="#部署网站" class="headerlink" title="部署网站"></a>部署网站</h3><pre><code class="bash">$ hexo deploy
-$ hexo d
-</code></pre>
-<h3 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h3><pre><code class="bash">$ hexo new &lt;title&gt;
-</code></pre>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2024/08/19/hexo-commands/" class="go-post">阅读全文</a>
+    <a href="/2024/10/09/Retrieval%20Augmented%20Generation/" class="go-post">阅读全文</a>
 </div>
 
 
@@ -735,7 +701,7 @@ $ hexo d
         </div>
         <div class="name">傅里叶今天不想变换</div>
         <div class="description">
-            <p>Description<br>������</p>
+            <p>Description<br>年过半摆</p>
 
         </div>
         
