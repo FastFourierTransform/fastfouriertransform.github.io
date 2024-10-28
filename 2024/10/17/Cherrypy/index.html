@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>渡河</title>
+    <title>Cherrypy���� | 渡河</title>
     <meta name="author" content="傅里叶今天不想变换" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -42,7 +42,9 @@
 
 
 
-<script src="/js/lib/home.js"></script>
+
+
+
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -152,40 +154,11 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="home-head">
-    <div
-        id="home-background"
-        ref="homeBackground"
-        data-images="/images/background.jpg"
-    ></div>
-    <div id="home-info" @click="homeClick">
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="info">
-            <div class="wrap">
-                <h1>渡河</h1>
-                <h3>公无渡河，公竟渡河，堕河而死，当奈公何</h3>
-                <h5></h5>
-            </div>
-        </span>
+            <div class="article">
+    <div>
+        <h1>Cherrypy����</h1>
     </div>
-</div>
-<div
-    id="home-posts-wrap"
-    ref="homePostsWrap"
-    true
->
-    <div id="home-posts">
-        
-
-<div class="post">
-    <a href="/2024/10/17/Computer-Network/">
-        <h2 class="post-title">�����������ظ���</h2>
-    </a>
-    <div class="category-and-date">
-        
+    <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
@@ -195,155 +168,62 @@
         
         
     </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>���������ĸ���Ͷ������������������</p>
-<h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><p>URL��Uniform Resource Locator��ͳһ��Դ��λ������������ʶ�Ͷ�λ�������ϵ���Դ�ĵ�ַ�����������������������������ҵ���Դ������ͨ���ɶ��������ɣ�����Э�飨��HTTP��HTTPS����������·���Ͳ�ѯ�����ȡ�URL���ǻ������ϵġ���ַ���������û���Ӧ�ó����ҵ��ض�����ҳ���ļ�����������Դ��</p>
-<h3 id="·��"><a href="#·��" class="headerlink" title="·��"></a>·��</h3><p>·�ɣ�Routing����ָ������������ HTTP ���󣩷ַ�����Ӧ�����߼��Ļ��ơ�����˵���� Web �����У�·�ɾ��ǽ��û�ͨ�� URL ���������ӳ�䵽ĳ��������������������ϣ���������������ɶ�Ӧ����Ӧ��</p>
-<p>�� Web ��ܣ��� Flask��Django��CherryPy���У�·��ͨ��ͨ�� URL ·����ƥ�����󣬾���Ӧ�õ����ĸ�������������Ӧ�û������󡣲�ͬ�� URL �ᱻӳ�䵽��ͬ�Ĵ����߼���</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2024/10/17/Computer-Network/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/10/17/Cherrypy/">
-        <h2 class="post-title">Cherrypy����</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/10/17
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>CherryPy ��һ�� pythonic �ģ��������� Web ��ܡ�CherryPy ����������Ա���빹���κ������������� Python ������ͬ�ķ�ʽ���� Web Ӧ�ó��򡣿����ڸ��̵�ʱ���ڿ�������С��Դ���롣</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2024/10/17/Cherrypy/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/10/09/Retrieval%20Augmented%20Generation/">
-        <h2 class="post-title">使用Langchain构建RAG</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/10/9
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>我希望让大模型根据一个频繁更新的数据库进行回答，这种情况下，每次对话都将整个数据库输入肯定是不现实的，最终，我了解到检索增强生成技术（Retrieval-Augmented Generation，RAG）正好可以完美的解决我的问题。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2024/10/09/Retrieval%20Augmented%20Generation/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2024/10/01/hello-world/">
-        <h2 class="post-title">Hello World</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/10/1
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        
-        
-    </div>
-    <a href="/2024/10/01/hello-world/" class="go-post">阅读全文</a>
-</div>
-
-
-        <div class="page-current">
     
-    <span class="current">1</span>
+    <div class="content" v-pre>
+        <p>��˻���˳�㲹һ�¼��������֪ʶ����Ų���̫���ӣ�����ֱ�ӿ�ʼ�ɡ�</p>
+<pre><code class="bash">pip install cherrypy
+</code></pre>
+<pre><code class="python">import cherrypy
+
+class HelloWorld:
+    @cherrypy.expose
+    def index(serlf):
+        return &quot;hello world!&quot;
+cherrypy.quickstart(HelloWorld())
+</code></pre>
+<p>�����漰��һ��װ�����ĸ��</p>
+<p>װ������Decorator����Python�е�һ�ָ߼���������Ҫ�����ڲ��ı�ԭ�������������£���̬���޸Ļ���չ��������Ĺ��ܡ�������ͨ���ں����򷽷�ǰ����װ������ִ�ж�����߼���������־��¼��Ȩ�޼�顢���ܼ��ȡ�</p>
+<p>װ������������һ�����ܺ�����Ϊ�����ĺ�����������һ���µĺ�������ǿ��İ汾����ͨ��ͨ��**@����**�����﷨��Ӧ���ں����򷽷�������Ϸ���</p>
+<p>һ����򵥵�װ������ʽ���£�<br>��</p>
+<pre><code class="python">def my_decorator(func):
+    def wrapper():
+        print(&quot;װ�����߼�����ԭ����ִ��֮ǰ&quot;)
+        func()  # ִ��ԭ����
+        print(&quot;װ�����߼�����ԭ����ִ��֮��&quot;)
+    return wrapper
+
+@my_decorator
+def say_hello():
+    print(&quot;Hello!&quot;)
+
+say_hello()
+</code></pre>
+<p>������Ϊ��</p>
+<pre><code class="bash">װ�����߼�����ԭ����ִ��֮ǰ
+Hello!
+װ�����߼�����ԭ����ִ��֮��
+</code></pre>
+<p><code>@cherrypy.expose</code>������һ�� CherryPy �Դ���װ������������ĳ��������¶Ϊ��ͨ�� HTTP ���ʵ� Web API ·�ɡ�</p>
+<p>Ȼ���������������õ�װ������</p>
+<p><code>@cherrypy.tools.json_in()</code><br><code>@cherrypy.tools.json_out()</code></p>
+<p>����ͨ��json�ļ�ʵ�����������</p>
+<pre><code class="python">import requests
+
+# ��ȡ��ҳ���
+requests.get(URL).json()
+
+# ����json�ļ�������ȡ���
+requsets.post(URL,json_file).json()
+</code></pre>
+<p><code>cherrypy.tools</code>�л��������������ܣ����������ڵ�����˵��Ŀǰ�����������ˡ�</p>
+
+    </div>
     
     
     
     
-</div>
-
-    </div>
     
-    <div id="home-card">
-        <div id="card-style">
-    <div id="card-div">
-        <div class="avatar">
-            <img src="/images/avatar.jpg" alt="avatar" />
-        </div>
-        <div class="name">傅里叶今天不想变换</div>
-        <div class="description">
-            <p>Description<br>年过半摆</p>
-
-        </div>
-        
-        
-        <div class="friend-links">
-            
-            <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://argvchs.github.io">Argvchs</a>
-            </div>
-            
-        </div>
-        
-    </div>
-</div>
-
-    </div>
+    
     
 </div>
 
@@ -375,6 +255,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
