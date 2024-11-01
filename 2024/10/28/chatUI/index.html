@@ -1,0 +1,622 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>chatUI入门 | 渡河</title>
+    <meta name="author" content="傅里叶今天不想变换" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>渡河</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;渡河</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>chatUI入门</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/10/28
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E5%89%8D%E7%AB%AF/" style="color: #03a9f4">
+                    前端
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>作为一名嵌入式软件工程师，我理应具备丰富的前端知识。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前的llm基本能用了，现在该基于他来搭建一个chatbot了。但对于从来没接触过前端开发的我来说，从零开始的工程量有些感人了（虽然应该会很有趣吧），所以还是老老实实用人家的开源项目吧。</p>
+<h2 id="开发准备"><a href="#开发准备" class="headerlink" title="开发准备"></a>开发准备</h2><p>正如我前面所说的，我此前完全没有接触过前端开发，所以这里也需要从配置环境和<code>hello world</code>开始。</p>
+<h3 id="安装fnm"><a href="#安装fnm" class="headerlink" title="安装fnm"></a>安装fnm</h3><p>fnm（Fast Node Manager）是一款轻量、快速的Node.js版本管理工具，用来替代nvm来管理Node.js版本。它比nvm更高效，特别适合需要频繁切换Node.js版本的开发者。</p>
+<p>直接在github上下载：<a target="_blank" rel="noopener" href="https://github.com/Schniz/fnm/releases">https://github.com/Schniz/fnm/releases</a></p>
+<p>解压后将<code>fnm.exe</code>放到创建好的目录下，我放到了<code>D:\fnm</code>目录下。</p>
+<p>然后再系统变量的<code>path</code>中添加<code>D:\fnm</code>，再添加如下两个系统变量：</p>
+<pre><code>FNM_DIR  
+E:\fnm\node
+
+FNM_NODE_DIST_MIRRORs  
+E:\fnm\node
+</code></pre>
+<p>在<code>power shell</code>中输入<code>fnm -V</code>  </p>
+<p><img src="/2024/10/28/chatUI/image.png" alt="alt text"><br>安装成功</p>
+<h3 id="安装Node-js和npm"><a href="#安装Node-js和npm" class="headerlink" title="安装Node.js和npm"></a>安装Node.js和npm</h3><p>参照node.js官网上的说明：<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/download/package-manager">https://nodejs.org/zh-cn/download/package-manager</a></p>
+<pre><code class="powershell"># 安装 fnm (快速 Node 管理器)
+winget install Schniz.fnm
+
+# 配置 fnm 环境
+fnm env --use-on-cd | Out-String | Invoke-Expression
+
+# 下载并安装 Node.js
+fnm use --install-if-missing 20
+
+# 验证环境中是否存在正确的 Node.js 版本
+node -v # 应该打印 `v20.18.0`
+
+# 验证环境中是否存在正确的 npm 版本
+npm -v # 应该打印 `10.8.2`
+</code></pre>
+<p><img src="/2024/10/28/chatUI/image-1.png" alt="alt text"><br>安装成功</p>
+<p>配置国内的镜像源：</p>
+<pre><code class="powershell">npm config set registry https://registry.npmmirror.com
+</code></pre>
+<p>这里设置的是淘宝镜像。</p>
+<h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2><p>先来创建一个React项目：</p>
+<pre><code class="bash">npx create-react-app my-chat-app
+</code></pre>
+<p>然后在<strong>项目中</strong>安装chatui的包：</p>
+<pre><code class="bash">cd my-chat-app
+npm install @chatui/core --save
+</code></pre>
+<p>在终端中运行以下命令以启动服务器：</p>
+<pre><code class="bash">npm start
+</code></pre>
+<p>这样就会打开一个本地的网页。</p>
+<p>生成React项目后会得到一个文件夹：<br><img src="/2024/10/28/chatUI/image-2.png" alt="alt text">  </p>
+<p>其中的<code>ChatApp.js</code>是我新增的，内容如下：</p>
+<pre><code class="JavaScript">import React from &#39;react&#39;;
+import &#39;@chatui/core/es/styles/index.less&#39;;
+import Chat, &#123; Bubble, useMessages &#125; from &#39;@chatui/core&#39;;
+import &#39;@chatui/core/dist/index.css&#39;;
+
+const ChatApp = () =&gt; &#123;
+    const &#123; messages, appendMsg, setTyping &#125; = useMessages([]);
+  
+    function handleSend(type, val) &#123;
+      if (type === &#39;text&#39; &amp;&amp; val.trim()) &#123;
+        appendMsg(&#123;
+          type: &#39;text&#39;,
+          content: &#123; text: val &#125;,
+          position: &#39;right&#39;,
+        &#125;);
+  
+        setTyping(true);
+  
+        setTimeout(() =&gt; &#123;
+          appendMsg(&#123;
+            type: &#39;text&#39;,
+            content: &#123; text: &#39;嗯嗯好的，知道了&#39; &#125;,
+          &#125;);
+        &#125;, 1000);
+      &#125;
+    &#125;
+  
+    function renderMessageContent(msg) &#123;
+      const &#123; content &#125; = msg;
+      return &lt;Bubble content=&#123;content.text&#125; /&gt;;
+    &#125;
+  
+    return (
+      &lt;Chat
+        navbar=&#123;&#123; title: '智能助理' &#125;&#125;
+        messages=&#123;messages&#125;
+        renderMessageContent=&#123;renderMessageContent&#125;
+        onSend=&#123;handleSend&#125;
+      /&gt;
+    );
+&#125;;
+
+export default ChatApp;
+</code></pre>
+<p><code>const App = () =&gt; &#123;...&#125;;</code>：定义App函数组件，构成整个应用的聊天界面。括号里的内容是函数的参数，大括号里的是函数的具体内容。  </p>
+<p><code>const &#123; messages, appendMsg, setTyping &#125; = useMessages([]);</code>：使用useMessages钩子管理消息列表，获取<code>messages</code>、<code>appendMsg</code>和<code>setTyping</code>等函数。</p>
+<ul>
+<li><code>messages</code>：当前消息的数组列表，用于渲染聊天记录。</li>
+<li><code>appendMsg</code>：用于在消息列表中追加消息的函数。</li>
+<li><code>setTyping</code>：设置“正在输入”状态的函数。</li>
+</ul>
+<p><code>function handleSend(type, val) &#123;...&#125;</code>：定义消息发送处理函数handleSend。</p>
+<ul>
+<li><code>type</code>：消息的类型，例如<code>text</code>表示文本消息。</li>
+<li><code>val</code>：消息内容。</li>
+</ul>
+<p><code>if (type === &#39;text&#39; &amp;&amp; val.trim()) &#123;...&#125;</code>：确认消息类型是文本且内容不为空。</p>
+<ul>
+<li><code>appendMsg(&#123;...&#125;)</code>：在消息列表中添加用户的消息，内容为<code>val</code>。</li>
+<li><code>position: &#39;right&#39;</code>：表示该消息显示在右侧（表示用户消息）。</li>
+<li><code>setTyping(true);</code>：设置“正在输入”状态。</li>
+<li><code>setTimeout(...)</code>：模拟1秒后回复固定消息”‘嗯嗯好的，知道了’”。</li>
+</ul>
+<p><code>function renderMessageContent(msg) &#123;...&#125;</code>：定义渲染消息内容的函数<code>renderMessageContent</code>。</p>
+<ul>
+<li><code>msg</code>：消息对象，包含消息内容和类型等信息。</li>
+<li><code>return &lt;Bubble content=&#123;content.text&#125; /&gt;;</code>：使用Bubble组件显示消息内容。</li>
+</ul>
+<p><code>&lt;Chat ... /&gt;</code>：渲染ChatUI的<code>Chat</code>组件。</p>
+<ul>
+<li><code>navbar=&#123;&#123; title: '智能助理' &#125;&#125;</code>：设置聊天窗口标题为“智能助理”。</li>
+<li><code>messages=&#123;messages&#125;</code>：将<code>messages</code>列表传入<code>Chat</code>组件，以渲染消息内容。</li>
+<li><code>renderMessageContent=&#123;renderMessageContent&#125;</code>：指定消息内容的渲染函数。</li>
+<li><code>onSend=&#123;handleSend&#125;</code>：设置消息发送处理函数<code>handleSend</code>，以便在用户发送消息时调用。</li>
+</ul>
+<p><code>export default ChatApp;</code>：将模块中的ChatApp组件作为默认导出导出。</p>
+<p>然后修改<code>App.js</code>以调用<code>ChatApp</code>组件：</p>
+<pre><code class="JavaScript">import &#39;./App.css&#39;;
+import ChatApp from &#39;./ChatApp.js&#39;
+
+function App() &#123;
+  return (
+    &lt;div&gt;
+      &lt;div className=&#39;title&#39;&gt;
+        &lt;p&gt;标题标题标题&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;chatApp&quot;&gt;
+        &lt;ChatApp /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+&#125;
+export default App;
+</code></pre>
+<p><code>&lt;div&gt;</code>是HTML中的一个块级元素，代表一个文档中的一个容器或分组，用于组织和布局内容,通常用于将页面分成不同的区域，以便更好地组织和管理内容。<code>&lt;div&gt;</code>本身没有特定的语义，可以在其中放置其他HTML元素，如文本、图像、其他容器等。</p>
+<p>访问 <a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000/</a> ，页面显示如下效果：<br><img src="/2024/10/28/chatUI/image-3.png" alt="alt text"></p>
+<p>到此为止，我们就实现了一个稍微复杂了点的hello world，下一步就是将这个对话界面和我们的LLM服务连接起来。</p>
+<h2 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h2><p>WebSocket 是一种协议，用于在 Web 应用程序中创建实时、双向的通信通道。</p>
+<p>传统的 HTTP 请求通常是一次请求一次响应的，而 WebSocket 则可以建立一个持久连接，允许服务器即时向客户端推送数据，同时也可以接收客户端发送的数据。WebSocket 相比于传统的轮询或长轮询方式，能够显著减少网络流量和延迟，提高数据传输的效率和速度。它对实时 Web 应用程序和在线游戏的开发非常有用。</p>
+<p>我的理解是，HTTP相当于写信，收到来信了才知道怎么回信，Websocket更像打电话，两边接通了就能想说什么说什么了。</p>
+<p>在文章《Cherrypy入门》中，用的其实就是传统的HTTP请求，每次调用都向后端进行一次 request，然后等待后端的响应。这种方式虽然也可以实现我的需要，但更先进的通讯方式总是更好的，也许能避免许多不必要的麻烦。</p>
+<p>更基础的原理部分我将把他放到《计算机网络相关概念》一文中，遇到了其他不懂的概念可以一并整理，这里只介绍应用部分。</p>
+<p>实现并不复杂，首先是前端部分：</p>
+<pre><code class="JavaScript">import React, &#123; useEffect, useState &#125; from &#39;react&#39;;
+import &#39;@chatui/core/es/styles/index.less&#39;;
+import Chat, &#123; Bubble, useMessages &#125; from &#39;@chatui/core&#39;;
+import &#39;@chatui/core/dist/index.css&#39;;
+
+// 初始信息
+const initialMessages = [
+  &#123;
+    type: &#39;text&#39;,
+    content: &#123;text: &#39;智能助理加载中，这需要耗费一定时间，请耐心等待。&#39;&#125;,
+    user: &#123; avatar: &#39;//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg&#39; &#125;,
+  &#125;
+]
+
+const ChatApp = () =&gt; &#123;
+  const &#123; messages, appendMsg, setTyping &#125; = useMessages(initialMessages);
+  // 定义socket
+  const [socket, setSocket] = useState(null);
+  const [initialized, setInitialized] = useState(false)
+  const MAX_RETRIES = 5
+
+  useEffect(() =&gt; &#123; 
+    // 建立新的websocket连接
+    const ws = new WebSocket(&quot;ws://localhost:8765&quot;);
+    setSocket(ws);
+
+    ws.onopen = () =&gt; &#123;
+      console.log(&quot;WebSocket connection established&quot;);
+      sendInitMessages(ws);
+    &#125;;
+
+    ws.onmessage = (event) =&gt; &#123;
+      // 接收到信息
+      if (event.data === &quot;llm_done&quot;)
+      &#123;
+        setInitialized(true)
+        setTyping(true);
+        setTimeout(() =&gt; &#123;
+          appendMsg(&#123;
+            type: &#39;text&#39;,
+            content: &#123; text: &#39;初始化完成，欢迎使用！&#39; &#125;,
+            user: &#123; avatar: &#39;//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg&#39; &#125;,
+          &#125;);
+        &#125;, 1000);
+        console.log(&quot;connect to llm&quot;);
+      &#125;
+      else
+      &#123;
+        setTyping(true);
+        setTimeout(() =&gt; &#123;
+        appendMsg(&#123;
+          type: &#39;text&#39;,
+          content: &#123; text: event.data &#125;,
+          user: &#123; avatar: &#39;//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg&#39; &#125;,
+        &#125;);
+      &#125;, 1000);
+      &#125;
+    &#125;;
+
+    ws.onclose = () =&gt; &#123;
+      // 关闭连接
+      console.log(&quot;WebSocket connection closed111&quot;);
+    &#125;;
+
+    return () =&gt; &#123;
+      ws.close();
+    &#125;;
+  &#125;, [appendMsg]);
+
+  const sendInitMessages = (ws) =&gt; &#123;
+    const initMessages = &quot;initLLM02175&quot;;
+    let attempts = 0;
+
+    const sendMessageWithRetry = (msg) =&gt; &#123;
+      if (initialized === true) 
+      &#123;
+        return
+      &#125; 
+      if (ws.readyState === WebSocket.OPEN) 
+      &#123;
+        ws.send(msg);
+      &#125; 
+      else if (attempts &lt; MAX_RETRIES)
+      &#123;
+        attempts += 1;
+        console.log(`Retrying to send: $&#123;msg&#125; (attempt $&#123;attempts&#125;)`);
+        setTimeout(() =&gt; sendMessageWithRetry(msg), 1000); // 延时重试
+      &#125; 
+      else 
+      &#123;
+        console.warn(`Failed to send message: $&#123;msg&#125; after $&#123;MAX_RETRIES&#125; attempts`);
+      &#125;
+    &#125;;
+
+    sendMessageWithRetry(initMessages)
+  &#125;;
+
+  function handleSend(type, val) &#123;
+    if (type === &#39;text&#39; &amp;&amp; val.trim()) &#123;
+      appendMsg(&#123;
+        type: &#39;text&#39;,
+        content: &#123; text: val &#125;,
+        position: &#39;right&#39;,
+      &#125;);
+
+      setTyping(true);
+
+      if (initialized != true)
+      &#123;
+        setTimeout(() =&gt; &#123;
+          appendMsg(&#123;
+            type: &#39;text&#39;,
+            content: &#123; text: &#39;初始化中，请稍后...&#39; &#125;,
+            user: &#123; avatar: &#39;//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg&#39; &#125;,
+          &#125;);
+        &#125;, 1000);
+      &#125;
+      else 
+      &#123;
+        if (socket &amp;&amp; socket.readyState === WebSocket.OPEN)
+        &#123;
+          socket.send(val);
+        &#125;
+      &#125;
+
+      
+    &#125;
+  &#125;
+
+  function renderMessageContent(msg) &#123;
+    const &#123; content &#125; = msg;
+    return &lt;Bubble content=&#123;content.text&#125; /&gt;;
+  &#125;
+
+  return (
+    &lt;div&gt;
+        &lt;Chat
+          navbar=&#123;&#123; title: '智能助理' &#125;&#125;
+          messages=&#123;messages&#125;
+          renderMessageContent=&#123;renderMessageContent&#125;
+          onSend=&#123;handleSend&#125;
+        /&gt;
+    &lt;/div&gt;
+  );
+&#125;;
+
+export default ChatApp;
+</code></pre>
+<p>为了确保未来的我在源代码遗失的情况下还能看懂，还是把整个写好的前端都放上来吧。</p>
+<p>建立连接后首先会向后端发送初始化大模型的消息，后端接收到消息后开始初始化大模型，初始化完毕后再向前端返回初始化完成的消息，整个chat组件开始正常工作。</p>
+<p>为保证后端收到初始化消息，前端会按固定的间隔发送多条消息，保证初始化顺利进行。</p>
+<p>后端就更简单了：</p>
+<pre><code class="python">import os
+import cherrypy
+import asyncio
+import websockets
+import threading 
+import mdk_llm.llm_client as llm
+import mdk_llm.dataset_client as dataset
+
+ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
+
+llmc : llm.LLMClient
+dsc : dataset.DatasetClient
+
+class WebSocketServer:
+    clients = set()
+
+    def __init__(self):
+        self.llm_initialized = False
+
+    async def handler(self, websocket, path):
+        self.clients.add(websocket)
+        try:
+            async for message in websocket:
+                print(message)
+                await self.message_processing (message)
+        except websockets.exceptions.ConnectionClosed:
+            pass
+        finally:
+            self.clients.remove(websocket)
+    
+    async def init_llm(self):
+        dsc.connect_dbc()
+        dataset_json = dsc.create_dataset(temp_patient_id)
+        llmc.init_dataset(dataset_json)
+        llmc.init_reader()
+
+    async def broadcast(self, message):
+        if message != &quot;llm_done&quot;:
+            response, relevant_docs = llmc.chat(message)
+        else:
+            response = message
+        for client in self.clients:
+            if client.open:
+                await client.send(response)
+
+    async def message_processing(self, message):
+        if message == &quot;initLLM02175&quot; and self.llm_initialized == True:
+            await self.broadcast(&quot;llm_done&quot;)
+        elif message == &quot;initLLM02175&quot; and self.llm_initialized == False:
+            await self.init_llm()
+            await self.broadcast(&quot;llm_done&quot;)
+            self.llm_initialized = True
+        else:
+            await self.broadcast(message)
+
+    def run(self):
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        server = websockets.serve(self.handler, &quot;localhost&quot;, 8765)
+        loop.run_until_complete(server)
+        loop.run_forever()
+
+class Root:
+
+    @cherrypy.expose
+    def index(self):
+        return open(f&#39;C:/Users/76489/Desktop/chatUI/my-chat-app/public/index.html&#39;)
+    
+if __name__ == &#39;__main__&#39;:
+
+    llmc = llm.LLMClient()
+    dsc = dataset.DatasetClient()
+
+    websocket_thread = threading.Thread(target=WebSocketServer().run)
+    websocket_thread.start()
+
+    cherrypy.quickstart(Root(), &#39;/&#39;, &#123;&#39;/&#39;: &#123;&#39;tools.sessions.on&#39;: True&#125;&#125;)
+</code></pre>
+<p>后端建立一个无限循环，保证服务持续进行，保证前后端ws服务的地址相同就能建立起通讯了。  </p>
+<p>效果大概是这样：<br><img src="/2024/10/28/chatUI/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-10-31%20163918.png" alt="alt text"></p>
+<p>还有很多不完善的地方，但至少能用了。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>大部分内容好像和ChatUI没啥关系，毕竟这块儿主要还是补充了些前后端和网络的相关知识，未来或许还需要给这个聊天组件添加别的功能，到时候再做补充吧。</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tn666/p/18082581">https://www.cnblogs.com/tn666/p/18082581</a><br><a target="_blank" rel="noopener" href="https://apifox.com/apiskills/what-is-websocket/">https://apifox.com/apiskills/what-is-websocket/</a></p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2024 渡河
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;傅里叶今天不想变换
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

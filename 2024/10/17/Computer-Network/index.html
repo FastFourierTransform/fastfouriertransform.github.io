@@ -173,6 +173,28 @@
         <h3 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h3><p>URL（Uniform Resource Locator，统一资源定位符）是用来标识和定位互联网上的资源的地址。它告诉浏览器或者其他软件如何找到资源，并且通常由多个部分组成，比如协议（如HTTP或HTTPS）、域名、路径和查询参数等。URL像是互联网上的“地址”，帮助用户和应用程序找到特定的网页、文件或者其他资源。</p>
 <h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><p>路由（Routing）是指将网络请求（如 HTTP 请求）分发到相应处理逻辑的机制。简单来说，在 Web 开发中，路由就是将用户通过 URL 发起的请求映射到某个函数、方法或控制器上，这个函数负责生成对应的响应。</p>
 <p>在 Web 框架（如 Flask、Django、CherryPy）中，路由通常通过 URL 路径来匹配请求，决定应该调用哪个处理程序来响应用户的请求。不同的 URL 会被映射到不同的处理逻辑。</p>
+<h3 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h3><p>WebSocket是一种网络通信协议，提供了在客户端和服务器之间建立持久连接的方式。它允许双向实时通信，减少了延迟和带宽消耗。</p>
+<p>特点：  </p>
+<ol>
+<li>双向通信：与HTTP不同，WebSocket允许客户端和服务器之间双向数据传输，能够主动发送消息。</li>
+<li>持久连接：连接建立后，WebSocket会保持开放状态，直到一方关闭连接，这样可以避免频繁的连接和断开。</li>
+<li>低开销：相比于HTTP的请求&#x2F;响应模式，WebSocket在数据交换时的开销更小，适合实时应用。</li>
+<li>事件驱动：WebSocket使用事件驱动模型，能够实时响应事件变化，适合用于实时更新的应用场景，如聊天应用、在线游戏等。</li>
+</ol>
+<p>使用场景：</p>
+<ul>
+<li>实时聊天应用</li>
+<li>在线游戏</li>
+<li>股票和金融数据推送</li>
+<li>物联网设备的数据传输</li>
+</ul>
+<p>工作流程：  </p>
+<ol>
+<li>握手：客户端发起HTTP请求，服务器返回响应以确认建立WebSocket连接。  </li>
+<li>数据传输：连接建立后，双方可以随时发送和接收消息。  </li>
+<li>关闭连接：一方可以通过发送关闭帧来优雅地关闭连接。</li>
+</ol>
+<p>WebSocket为需要快速、实时通信的应用提供了理想的解决方案！</p>
 
     </div>
     
