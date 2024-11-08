@@ -48,7 +48,119 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 <body>
     <div id="layout">
         <transition name="fade">
@@ -184,7 +296,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/python/" style="color: #ff7d73">
+                <a href="/tags/python/" style="color: #03a9f4">
                     python
                 </a>
             </span>
@@ -198,14 +310,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/cuda/" style="color: #03a9f4">
+                <a href="/tags/cuda/" style="color: #00a596">
                     cuda
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/RAG/" style="color: #00bcd4">
+                <a href="/tags/RAG/" style="color: #03a9f4">
                     RAG
                 </a>
             </span>
@@ -215,66 +327,79 @@
     </div>
     
     <div class="content" v-pre>
-        <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>我希望让大模型根据一个频繁更新的数据库进行回答，这种情况下，每次对话都将整个数据库输入肯定是不现实的，最终，我了解到检索增强生成技术（Retrieval-Augmented Generation，RAG）正好可以完美的解决我的问题（赞美98）。</p>
-<p><img src="/2024/10/09/Retrieval%20Augmented%20Generation/image.png" alt="alt text"></p>
-<span id="more"></span>
-<p>完整的RAG应用流程主要包含两个阶段：<br>数据准备阶段：数据提取，文本分割，向量化（embedding），数据入库<br>应用阶段：用户提问，数据检索（召回）<strong>（R）</strong>，注入Prompt <strong>（A）</strong>，LLM生成答案 <strong>（G）</strong></p>
+        <h2 id="准备">准备</h2>
+<h3 id="背景">背景</h3>
+<p>我希望让大模型根据一个频繁更新的数据库进行回答，这种情况下，每次对话都将整个数据库输入肯定是不现实的，最终，我了解到检索增强生成技术（Retrieval-Augmented
+Generation，RAG）正好可以完美的解决我的问题（赞美98）。</p>
+<p><img src="image.png" alt="alt text"><br>
+<span id="more"></span><br>
+完整的RAG应用流程主要包含两个阶段：<br>
+数据准备阶段：数据提取，文本分割，向量化（embedding），数据入库<br>
+应用阶段：用户提问，数据检索（召回）<strong>（R）</strong>，注入Prompt
+<strong>（A）</strong>，LLM生成答案 <strong>（G）</strong></p>
 <p>RAG的本质依然是为模型提供额外的输入，只是这里的额外输入都是精挑细选出来的，而非囫囵吞枣的直接输入，开卷考试还现场帮你对着题目划重点，效率比直接生成要高出不少。</p>
-<h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><p>查看cuda版本：</p>
-<pre><code class="bash">nvcc --version
-</code></pre>
+<h3 id="配置环境">配置环境</h3>
+<p>查看cuda版本：</p>
+<pre class="bash"><code>nvcc --version</code></pre>
 <p>我的cuda版本为12.4，在Pytorch官网上查询到对应的安装指令为：</p>
-<pre><code class="bash">conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
-</code></pre>
+<pre class="bash"><code>conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia</code></pre>
 <p>其他依赖项：</p>
-<pre><code class="bash">pip install -q transformers accelerate langchain pacmap datasets langchain-community ragatouille
-</code></pre>
+<pre class="bash"><code>pip install -q transformers accelerate langchain pacmap datasets langchain-community ragatouille</code></pre>
 <p>是设置<code>Pandas</code>库中显示的最大列宽为无限制（None）。在可视化检索器的输出时，确保长文本或字符串不会被截断，从而更完整地查看数据内容。</p>
-<pre><code class="python">from tqdm.notebook import tqdm
+<pre class="python"><code>from tqdm.notebook import tqdm
 import pandas as pd
 from typing import Optional, List, Tuple
 from datasets import Dataset
 import matplotlib.pyplot as plt
 
-pd.set_option(&quot;display.max_colwidth&quot;, None) 
-</code></pre>
-<h3 id="加载知识基础"><a href="#加载知识基础" class="headerlink" title="加载知识基础"></a>加载知识基础</h3><pre><code class="python">import datasets
+pd.set_option("display.max_colwidth", None) </code></pre>
+<h3 id="加载知识基础">加载知识基础</h3>
+<pre class="python"><code>import datasets
 
-ds = datasets.load_dataset(&quot;m-ric/huggingface_doc&quot;, split=&quot;train&quot;)
-</code></pre>
+ds = datasets.load_dataset("m-ric/huggingface_doc", split="train")</code></pre>
 <p>加载数据集，大多数数据集会被分割为不同的部分（split），如训练集、验证集，以及其他根据语言、任务等进行的分割，具体由数据库本身决定。</p>
-<pre><code class="python">from langchain.docstore.document import Document as LangchainDocument
+<pre class="python"><code>from langchain.docstore.document import Document as LangchainDocument
 
 RAW_KNOWLEDGE_BASE = [
-    LangchainDocument(page_content=doc[&quot;text&quot;], metadata=&#123;&quot;source&quot;: doc[&quot;source&quot;]&#125;) for doc in tqdm(ds)
-]
-</code></pre>
-<p>遍历<code>ds</code>中的每个文档<code>doc</code>，将文本内容<code>doc[&quot;text&quot;]</code>幅值给<code>page_content</code>表示这个文档的主要内容；将文档的来源信息<code>doc[&quot;source&quot;]</code>存储在元数据中，以便之后引用或追踪数据来源。由此创建一个<code>LangchainDocument</code>对象，并将其保存在列表<code>RAW_KNOWLEDGE_BASE</code>中。</p>
+    LangchainDocument(page_content=doc["text"], metadata={"source": doc["source"]}) for doc in tqdm(ds)
+]</code></pre>
+<p>遍历<code>ds</code>中的每个文档<code>doc</code>，将文本内容<code>doc["text"]</code>幅值给<code>page_content</code>表示这个文档的主要内容；将文档的来源信息<code>doc["source"]</code>存储在元数据中，以便之后引用或追踪数据来源。由此创建一个<code>LangchainDocument</code>对象，并将其保存在列表<code>RAW_KNOWLEDGE_BASE</code>中。</p>
 <p><code>tqdm()</code>用于在遍历过程中显示一个进度条，方便追踪进度</p>
-<h2 id="检索器-嵌入"><a href="#检索器-嵌入" class="headerlink" title="检索器-嵌入"></a>检索器-嵌入</h2><p>检索器的作用类似于内部搜索引擎：给定用户查询，它从你的知识库中返回几个相关的片段。这些片段随后将被输入到阅读器模型中，以帮助其生成答案。所以 我们的目标是，给定一个用户问题，从我们的知识库中找到最多的片段来回答这个问题。</p>
-<p>但是，我们应该检索多少片段？这个参数将被命名为<code>top_k</code>。这些片段应该有多长？这被称为 <code>chunk size</code> （片段大小）。没有一刀切的答案，但这里有一些要点：</p>
+<h2 id="检索器-嵌入">检索器-嵌入</h2>
+<p>检索器的作用类似于内部搜索引擎：给定用户查询，它从你的知识库中返回几个相关的片段。这些片段随后将被输入到阅读器模型中，以帮助其生成答案。所以
+我们的目标是，给定一个用户问题，从我们的知识库中找到最多的片段来回答这个问题。</p>
+<p>但是，我们应该检索多少片段？这个参数将被命名为<code>top_k</code>。这些片段应该有多长？这被称为
+<code>chunk size</code>
+（片段大小）。没有一刀切的答案，但这里有一些要点：</p>
 <p>你的<code>chunk size</code>允许从一段片段到另一段片段有所不同。由于你的检索中总会存在一些噪音，增加<code>top_k</code>可以提高你检索到的片段中包含相关元素的概率</p>
-<p>同时，你检索到的文档的总长度不应过高：例如，对于大多数当前模型来说，16k 个 token 可能会因为中间丢失现象而在信息中淹没你的阅读器模型。</p>
-<p>我们使用<code>Langchain</code>库，因为 它为向量数据库提供了大量的选项，并允许我们在整个处理过程中保留文档的元数据。</p>
-<h3 id="将文档拆分为片段"><a href="#将文档拆分为片段" class="headerlink" title="将文档拆分为片段"></a>将文档拆分为片段</h3><p>在这一部分，我们将知识库中的文档拆分成更小的片段，这些片段将是喂给阅读器 LLM 生成答案的片段。目标是准备一组语义上相关的片段。因此，它们的大小应该适配确切的想法：太小会截断想法，太大则会稀释它们。</p>
+<p>同时，你检索到的文档的总长度不应过高：例如，对于大多数当前模型来说，16k
+个 token 可能会因为中间丢失现象而在信息中淹没你的阅读器模型。</p>
+<p>我们使用<code>Langchain</code>库，因为
+它为向量数据库提供了大量的选项，并允许我们在整个处理过程中保留文档的元数据。</p>
+<h3 id="将文档拆分为片段">将文档拆分为片段</h3>
+<p>在这一部分，我们将知识库中的文档拆分成更小的片段，这些片段将是喂给阅读器
+LLM
+生成答案的片段。目标是准备一组语义上相关的片段。因此，它们的大小应该适配确切的想法：太小会截断想法，太大则会稀释它们。</p>
 <p>对于文本拆分存在许多选项：按单词拆分，按句子边界拆分，递归拆分以树状方式处理文档以保留结构信息……</p>
-<p>递归拆分使用给定的一组分隔符逐步将文本分解为更小的部分，这些分隔符按从最重要到最不重要的顺序排序。如果第一次拆分没有给出正确大小或形状的片段，该方法会使用不同的分隔符在新的片段上重复自身。例如，使用分隔符列表[“\n\n”, “\n”, “.”, “”]：</p>
-<blockquote>
-<p>该方法首先在出现双行中断”\n\n”的任何地方拆分文档。<br>结果文档将在简单的行中断”\n”处再次拆分，然后在句子结尾”.”处拆分。<br>最后，如果有些片段仍然太大，它们将在超过最大大小时拆分。  </p>
-</blockquote>
+<p>递归拆分使用给定的一组分隔符逐步将文本分解为更小的部分，这些分隔符按从最重要到最不重要的顺序排序。如果第一次拆分没有给出正确大小或形状的片段，该方法会使用不同的分隔符在新的片段上重复自身。例如，使用分隔符列表["",
+"", ".", ""]：<br>
+&gt;<br>
+&gt;该方法首先在出现双行中断""的任何地方拆分文档。<br>
+结果文档将在简单的行中断""处再次拆分，然后在句子结尾"."处拆分。<br>
+最后，如果有些片段仍然太大，它们将在超过最大大小时拆分。</p>
 <p>使用这种方法，整体结构得到了很好的保留，代价是片段大小会有轻微的变化。</p>
-<pre><code class="python">from langchain.text_splitter import RecursiveCharacterTextSplitter
+<pre class="python"><code>from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 MARKDOWN_SEPARATORS = [
-    &quot;\n#&#123;1,6&#125; &quot;,
-    &quot;```\n&quot;,
-    &quot;\n\\*\\*\\*+\n&quot;,
-    &quot;\n---+\n&quot;,
-    &quot;\n___+\n&quot;,
-    &quot;\n\n&quot;,
-    &quot;\n&quot;,
-    &quot; &quot;,
-    &quot;&quot;,
+    "\n#{1,6} ",
+    "```\n",
+    "\n\\*\\*\\*+\n",
+    "\n---+\n",
+    "\n___+\n",
+    "\n\n",
+    "\n",
+    " ",
+    "",
 ]
 
 text_splitter = RecursiveCharacterTextSplitter(
@@ -287,46 +412,56 @@ text_splitter = RecursiveCharacterTextSplitter(
 
 docs_processed = []
 for doc in RAW_KNOWLEDGE_BASE:
-    docs_processed += text_splitter.split_documents([doc])
-</code></pre>
+    docs_processed += text_splitter.split_documents([doc])</code></pre>
 <ul>
-<li><code>RecursiveCharacterTextSplitter</code>类是<code>LangChain</code>库中的一个文本拆分工具，用于递归地将大文本拆分成较小的片段  </li>
-<li><code>MARKDOWN_SEPARATORS</code>:一个分隔符列表，根据MarkDown格式进行文本拆分如各级标题，代码块、换行、空行、空格等  </li>
-<li><code>chunk_size=1000</code>：定义拆分后的文本块的最大字符数为1000个字符。  </li>
-<li><code>chunk_overlap=100</code>：每个拆分块之间有100个字符的重叠，这样可以确保重要信息不会因为分块而丢失。  </li>
-<li><code>add_start_index=True</code>：在拆分块的元数据中包含每个块的起始索引，这样可以保留块在原始文档中的位置。  </li>
-<li><code>strip_whitespace=True</code>：在拆分过程中，会去除每个文档块前后多余的空白。  </li>
+<li><code>RecursiveCharacterTextSplitter</code>类是<code>LangChain</code>库中的一个文本拆分工具，用于递归地将大文本拆分成较小的片段<br>
+</li>
+<li><code>MARKDOWN_SEPARATORS</code>:一个分隔符列表，根据MarkDown格式进行文本拆分如各级标题，代码块、换行、空行、空格等<br>
+</li>
+<li><code>chunk_size=1000</code>：定义拆分后的文本块的最大字符数为1000个字符。<br>
+</li>
+<li><code>chunk_overlap=100</code>：每个拆分块之间有100个字符的重叠，这样可以确保重要信息不会因为分块而丢失。<br>
+</li>
+<li><code>add_start_index=True</code>：在拆分块的元数据中包含每个块的起始索引，这样可以保留块在原始文档中的位置。<br>
+</li>
+<li><code>strip_whitespace=True</code>：在拆分过程中，会去除每个文档块前后多余的空白。<br>
+</li>
 <li><code>separators=MARKDOWN_SEPARATORS</code>：指定用来拆分文本的分隔符列表（前面定义的MARKDOWN_SEPARATORS），使拆分逻辑能够识别Markdown文档结构。</li>
 </ul>
-<p>当我们嵌入文档时，我们将使用一个接受特定最大序列长度 <code>max_seq_length</code>的嵌入模型。</p>
+<p>当我们嵌入文档时，我们将使用一个接受特定最大序列长度
+<code>max_seq_length</code>的嵌入模型。</p>
 <p>因此，我们应该确保我们的片段大小低于这个限制，因为任何更长的片段在处理之前都会被截断，进而失去相关性</p>
-<pre><code class="python">from sentence_transformers import SentenceTransformer
+<pre class="python"><code>from sentence_transformers import SentenceTransformer
 
-print(f&quot;Model&#39;s maximum sequence length: &#123;SentenceTransformer(&#39;thenlper/gte-small&#39;).max_seq_length&#125;&quot;)
+print(f"Model's maximum sequence length: {SentenceTransformer('thenlper/gte-small').max_seq_length}")
 
 from transformers import AutoTokenizer
 
-tokenizer = AutoTokenizer.from_pretrained(&quot;thenlper/gte-small&quot;)
+tokenizer = AutoTokenizer.from_pretrained("thenlper/gte-small")
 lengths = [len(tokenizer.encode(doc.page_content)) for doc in tqdm(docs_processed)]
 
 fig = pd.Series(lengths).hist()
-plt.title(&quot;Distribution of document lengths in the knowledge base (in count of tokens)&quot;)
-plt.show()
-</code></pre>
+plt.title("Distribution of document lengths in the knowledge base (in count of tokens)")
+plt.show()</code></pre>
 <p>导入<code>SentenceTransformer</code>类，并加载一个名为<code>thenlper/gte-small</code>的预训练句子转换模型。<code>max_seq_length</code>属性返回模型可以处理的最大序列长度。</p>
 <p>导入<code>AutoTokenizer</code>，用于加载与之前模型相对应的分词器（tokenizer）。分词器会将文本转换为令牌，以便输入到模型中。</p>
-<p>遍历处理过的文档<code>docs_processed</code>中的每个文档<code>doc</code>。<code>tokenizer.encode(doc.page_content)</code>将文档的内容<code>doc.page_content</code>编码为令牌序列，并返回这些令牌的列表。<br><code>len</code>计算这些令牌的数量（即文档的令牌长度），并将结果存储在<code>lengths</code>列表中</p>
-<p>执行结果</p>
-<blockquote>
-<p>Model’s maximum sequence length: 512</p>
-<p><img src="/2024/10/09/Retrieval%20Augmented%20Generation/image1.png" alt="alt text"></p>
-</blockquote>
-<p> 可以看到，片段长度与我们的 512 个 token 的限制不匹配，并且有些文档超出了限制，因此它们的一部分将在截断中丢失！</p>
-<p>因此，我们应该更改 <code>RecursiveCharacterTextSplitter</code> 类，以计算 token 数量而不是字符数量。然后，我们可以选择一个特定的片段大小，这里我们会选择低于 512 的阈值，较小的文档可能允许拆分更专注于特定想法的内容，但太小的片段会拆分句子，从而再次失去意义，适当的调整是一个平衡的问题。</p>
-<pre><code class="python">from langchain.text_splitter import RecursiveCharacterTextSplitter
+<p>遍历处理过的文档<code>docs_processed</code>中的每个文档<code>doc</code>。<code>tokenizer.encode(doc.page_content)</code>将文档的内容<code>doc.page_content</code>编码为令牌序列，并返回这些令牌的列表。<br>
+<code>len</code>计算这些令牌的数量（即文档的令牌长度），并将结果存储在<code>lengths</code>列表中</p>
+<p>执行结果<br>
+&gt;Model's maximum sequence length: 512<br>
+&gt;<br>
+&gt;<img src="image1.png" alt="alt text"></p>
+<p>可以看到，片段长度与我们的 512 个 token
+的限制不匹配，并且有些文档超出了限制，因此它们的一部分将在截断中丢失！</p>
+<p>因此，我们应该更改 <code>RecursiveCharacterTextSplitter</code>
+类，以计算 token
+数量而不是字符数量。然后，我们可以选择一个特定的片段大小，这里我们会选择低于
+512
+的阈值，较小的文档可能允许拆分更专注于特定想法的内容，但太小的片段会拆分句子，从而再次失去意义，适当的调整是一个平衡的问题。</p>
+<pre class="python"><code>from langchain.text_splitter import RecursiveCharacterTextSplitter
 from transformers import AutoTokenizer
 
-EMBEDDING_MODEL_NAME = &quot;thenlper/gte-small&quot;
+EMBEDDING_MODEL_NAME = "thenlper/gte-small"
 
 
 def split_documents(
@@ -349,7 +484,7 @@ def split_documents(
         docs_processed += text_splitter.split_documents([doc])
 
     # Remove duplicates
-    unique_texts = &#123;&#125;
+    unique_texts = {}
     docs_processed_unique = []
     for doc in docs_processed:
         if doc.page_content not in unique_texts:
@@ -365,59 +500,63 @@ docs_processed = split_documents(
     tokenizer_name=EMBEDDING_MODEL_NAME,
 )
 
-# Let&#39;s visualize the chunk sizes we would have in tokens from a common model
+# Let's visualize the chunk sizes we would have in tokens from a common model
 from transformers import AutoTokenizer
 
 tokenizer = AutoTokenizer.from_pretrained(EMBEDDING_MODEL_NAME)
 lengths = [len(tokenizer.encode(doc.page_content)) for doc in tqdm(docs_processed)]
 fig = pd.Series(lengths).hist()
-plt.title(&quot;Distribution of document lengths in the knowledge base (in count of tokens)&quot;)
-plt.show()
-</code></pre>
-<p>这里多初始化一个空字典<code>unique_texts</code>以跟踪唯一的文本内容，避免重复。遍历<code>docs_processed</code>中的每个文档，检查其内容是否已存在于<code>unique_texts</code>中,<br>如果不在，就将其添加到<code>unique_texts</code>中，并将该文档加入<code>docs_processed_unique</code>列表。</p>
-<blockquote>
-<p><img src="/2024/10/09/Retrieval%20Augmented%20Generation/image2.png" alt="alt text"></p>
-</blockquote>
-<h3 id="构建向量数据库"><a href="#构建向量数据库" class="headerlink" title="构建向量数据库"></a>构建向量数据库</h3><p>一旦所有片段都被嵌入，我们就将它们存储到一个向量数据库中。当用户输入一个查询时，它会被之前使用的同一模型嵌入，并且相似性搜索会返回向量数据库中最接近的文档。</p>
+plt.title("Distribution of document lengths in the knowledge base (in count of tokens)")
+plt.show()</code></pre>
+<p>这里多初始化一个空字典<code>unique_texts</code>以跟踪唯一的文本内容，避免重复。遍历<code>docs_processed</code>中的每个文档，检查其内容是否已存在于<code>unique_texts</code>中,<br>
+如果不在，就将其添加到<code>unique_texts</code>中，并将该文档加入<code>docs_processed_unique</code>列表。<br>
+&gt;<img src="image2.png" alt="alt text"></p>
+<h3 id="构建向量数据库">构建向量数据库</h3>
+<p>一旦所有片段都被嵌入，我们就将它们存储到一个向量数据库中。当用户输入一个查询时，它会被之前使用的同一模型嵌入，并且相似性搜索会返回向量数据库中最接近的文档。</p>
 <p>因此，技术挑战在于，给定一个查询向量，快速找到向量数据库中这个向量的最近邻。为此，我们需要选择两件事：一个距离度量，以及一个搜索算法，以便在成千上万的记录数据库中快速找到最近邻。</p>
-<p>最近邻搜索算法有很多选择：我们选择 Facebook 的 FAISS，因为 FAISS 对于大多数用例来说性能足够好，而且它广为人知，因此被广泛实现</p>
+<p>最近邻搜索算法有很多选择：我们选择 Facebook 的 FAISS，因为 FAISS
+对于大多数用例来说性能足够好，而且它广为人知，因此被广泛实现</p>
 <blockquote>
 <p>关于距离度量，简而言之：</p>
 <p><strong>余弦相似度</strong>计算两个向量之间的相似性，作为它们相对角度的余弦值：它允许我们比较向量的方向，而不考虑它们的幅度。使用它需要对所有向量进行归一化，将它们重新缩放到单位范数。</p>
 <p><strong>点积</strong>考虑幅度，有时会有不希望的效果，即增加向量的长度会使它与所有其他向量更相似。</p>
 <p><strong>欧氏距离</strong>是向量末端之间的距离。</p>
 </blockquote>
-<p>我们的特定模型与余弦相似度配合得很好，所以我们选择这个距离度量，并在嵌入模型中以及 FAISS 索引的 <code>distance_strategy</code> 参数中设置它。使用余弦相似度，我们需要归一化我们的嵌入向量。</p>
-<pre><code class="python">from langchain.vectorstores import FAISS
+<p>我们的特定模型与余弦相似度配合得很好，所以我们选择这个距离度量，并在嵌入模型中以及
+FAISS 索引的 <code>distance_strategy</code>
+参数中设置它。使用余弦相似度，我们需要归一化我们的嵌入向量。</p>
+<pre class="python"><code>from langchain.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores.utils import DistanceStrategy
 
 embedding_model = HuggingFaceEmbeddings(
     model_name=EMBEDDING_MODEL_NAME,
     multi_process=True,
-    model_kwargs=&#123;&quot;device&quot;: &quot;cuda&quot;&#125;,
-    encode_kwargs=&#123;&quot;normalize_embeddings&quot;: True&#125;,  # set True for cosine similarity
+    model_kwargs={"device": "cuda"},
+    encode_kwargs={"normalize_embeddings": True},  # set True for cosine similarity
 )
 
 KNOWLEDGE_VECTOR_DATABASE = FAISS.from_documents(
     docs_processed, embedding_model, distance_strategy=DistanceStrategy.COSINE
-)
-</code></pre>
+)</code></pre>
 <ul>
-<li><code>FAISS.from_documents</code>方法将处理过的文档列表转化为嵌入向量，并创建一个可搜索的向量数据库。  </li>
-<li><code>distance_strategy=DistanceStrategy.COSINE</code>：<strong>余弦相似度</strong>适合高维稀疏数据（如文本嵌入）。如果数据维度高，向量的大小差异较大而不重要，选择余弦相似度比较合适。  </li>
+<li><code>FAISS.from_documents</code>方法将处理过的文档列表转化为嵌入向量，并创建一个可搜索的向量数据库。<br>
+</li>
+<li><code>distance_strategy=DistanceStrategy.COSINE</code>：<strong>余弦相似度</strong>适合高维稀疏数据（如文本嵌入）。如果数据维度高，向量的大小差异较大而不重要，选择余弦相似度比较合适。<br>
+</li>
 <li><code>distance_strategy=DistanceStrategy.EUCLIDEAN</code>：<strong>欧几里得距离</strong>适合低维密集数据（如图像、地理坐标等）。如果数据可以自然地用几何距离来衡量，用欧几里得距离。</li>
-<li><code>distance_strategy=DistanceStrategy.DOT</code>：<strong>内积</strong>适合度量向量间的相关性，尤其在推荐系统、矩阵分解等领域。  </li>
+<li><code>distance_strategy=DistanceStrategy.DOT</code>：<strong>内积</strong>适合度量向量间的相关性，尤其在推荐系统、矩阵分解等领域。<br>
+</li>
 <li><code>distance_strategy=DistanceStrategy.MANHATTAN</code>：<strong>曼哈顿距离</strong>适合用在特定网格空间中，通常在某些特定算法中使用。</li>
 </ul>
 <p>我们使用 PaCMAP 将我们的嵌入向量从 384 维降至 2 维。</p>
-<p>我们选择 PaCMAP 而不是其他技术，如 t-SNE 或 UMAP，因为它效率高（保留局部和全局结构），对初始化参数鲁棒且速度快。</p>
-<pre><code class="python"># embed a user query in the same space
-user_query = &quot;How to create a pipeline object?&quot;
-query_vector = embedding_model.embed_query(user_query)
-</code></pre>
+<p>我们选择 PaCMAP 而不是其他技术，如 t-SNE 或
+UMAP，因为它效率高（保留局部和全局结构），对初始化参数鲁棒且速度快。</p>
+<pre class="python"><code># embed a user query in the same space
+user_query = "How to create a pipeline object?"
+query_vector = embedding_model.embed_query(user_query)</code></pre>
 <p><code>embed_query</code>是嵌入模型中的一个方法，用于将用户的查询语句嵌入到向量空间中,将自然语言的文本转换成一个高维向量表示。</p>
-<pre><code class="python">import pacmap
+<pre class="python"><code>import pacmap
 import numpy as np
 import plotly.express as px
 
@@ -428,106 +567,115 @@ embeddings_2d = [
 ] + [query_vector]
 
 # fit the data (The index of transformed data corresponds to the index of the original data)
-documents_projected = embedding_projector.fit_transform(np.array(embeddings_2d), init=&quot;pca&quot;)
-</code></pre>
-<p> <code>embedding_projector = pacmap.PaCMAP(...)</code>创建了一个PaCMAP模型，用于将高维嵌入向量降维到二维空间  </p>
-<ul>
-<li><code>n_components=2</code>：表示我们要将嵌入降到二维空间。  </li>
-<li><code>n_neighbors=None</code>：表示使用PaCMAP的默认邻居设置。邻居用于保持局部结构。  </li>
-<li><code>MN_ratio=0.5</code>：这个参数调节了”中间邻居”与”最近邻居”的比例。值越大，算法越注重保留全局结构。  </li>
-<li><code>FP_ratio=2.0</code>：控制远邻居的比例，用于保持局部和远距离结构。  </li>
-<li><code>random_state=1</code>：固定随机种子，以确保每次运行时结果一致。</li>
-</ul>
-<p><br><code>embeddings_2d = [...]</code>生成了嵌入向量列表，包括文档嵌入向量和查询向量  </p>
-<ul>
-<li><code>KNOWLEDGE_VECTOR_DATABASE.index.reconstruct_n(idx, 1)[0]</code>：这是从向量数据库中重构出第idx个文档的向量。  </li>
-<li><code>reconstruct_n</code>方法用于从FAISS索引中提取存储的向量。</li>
-<li><code>+[query_vector]</code>：将用户的查询向量也加入到嵌入向量的列表中。</li>
-</ul>
-<p><br><code>documents_projected = embedding_projector.fit_transform(np.array(embeddings_2d), init=&quot;pca&quot;)</code></p>
-<ul>
-<li><code>embedding_projector.fit_transform(...)</code>：调用PaCMAP模型的<code>fit_transform</code>方法对嵌入向量进行降维。输入是所有文档和查询的向量，输出是这些向量在二维空间中的坐标。</li>
-<li><code>np.array(embeddings_2d)</code>：将<code>embeddings_2d</code>转换为NumPy数组，以便PaCMAP算法进行处理。<br>init&#x3D;”pca”：表示使用PCA（主成分分析）作为降维的初始化方法。这可以使降维过程更加稳定和高效。</li>
-</ul>
+documents_projected = embedding_projector.fit_transform(np.array(embeddings_2d), init="pca")</code></pre>
+<p><code>embedding_projector = pacmap.PaCMAP(...)</code>创建了一个PaCMAP模型，用于将高维嵌入向量降维到二维空间<br>
++ <code>n_components=2</code>：表示我们要将嵌入降到二维空间。<br>
++
+<code>n_neighbors=None</code>：表示使用PaCMAP的默认邻居设置。邻居用于保持局部结构。<br>
++
+<code>MN_ratio=0.5</code>：这个参数调节了"中间邻居"与"最近邻居"的比例。值越大，算法越注重保留全局结构。<br>
++
+<code>FP_ratio=2.0</code>：控制远邻居的比例，用于保持局部和远距离结构。<br>
++
+<code>random_state=1</code>：固定随机种子，以确保每次运行时结果一致。</p>
+<p><br>
+<br>
+<code>embeddings_2d = [...]</code>生成了嵌入向量列表，包括文档嵌入向量和查询向量<br>
++
+<code>KNOWLEDGE_VECTOR_DATABASE.index.reconstruct_n(idx, 1)[0]</code>：这是从向量数据库中重构出第idx个文档的向量。<br>
++ <code>reconstruct_n</code>方法用于从FAISS索引中提取存储的向量。<br>
++
+<code>+[query_vector]</code>：将用户的查询向量也加入到嵌入向量的列表中。</p>
+<p><br>
+<br>
+<code>documents_projected = embedding_projector.fit_transform(np.array(embeddings_2d), init="pca")</code><br>
++
+<code>embedding_projector.fit_transform(...)</code>：调用PaCMAP模型的<code>fit_transform</code>方法对嵌入向量进行降维。输入是所有文档和查询的向量，输出是这些向量在二维空间中的坐标。<br>
++
+<code>np.array(embeddings_2d)</code>：将<code>embeddings_2d</code>转换为NumPy数组，以便PaCMAP算法进行处理。<br>
+init="pca"：表示使用PCA（主成分分析）作为降维的初始化方法。这可以使降维过程更加稳定和高效。</p>
 <p>将嵌入向量从高维空间降维到二维空间的主要目的是可视化。以下是需要降维的几个关键原因：</p>
-<ol>
-<li><p>可视化高维数据<br>高维数据很难直接用人类感知的方式来理解，特别是在嵌入模型中，通常向量会有数百甚至数千个维度。降维将数据映射到二维或三维空间中，可以使用图形工具将其可视化，让我们直观地理解嵌入向量之间的相似性、聚类和分布。例如，降维后的结果可以显示哪些文档与查询向量距离接近，哪些文档之间存在聚类关系。</p>
-</li>
-<li><p>探索数据结构<br>降维可以揭示高维数据中的结构，比如数据是否存在聚类（即数据分成若干自然的组），是否有异常值或某些向量彼此非常接近。通过在二维图中观察数据，我们可以找到嵌入向量中的模式，从而更好地理解文本或其他高维数据在嵌入空间中的表示。</p>
-</li>
-<li><p>调试与分析模型<br>在训练嵌入模型时，降维是分析嵌入向量质量的有用工具。通过观察降维后的向量分布，我们可以评估模型是否正确地将相似的文本放在接近的位置，或者是否存在向量表示错误的现象。对比不同模型的嵌入表现时，也可以通过降维的可视化比较模型输出的效果，帮助模型调优和选择。</p>
-</li>
-<li><p>简化复杂性<br>虽然高维向量中可能包含大量复杂的语义信息，但某些情况下只需要考虑全局趋势和大致相似性。降维到二维后，仍然能够保留重要的相似性信息，同时降低了复杂度，方便解释。</p>
-</li>
-<li><p>揭示全局与局部关系<br>像PaCMAP、t-SNE、UMAP等降维技术不仅保留了嵌入向量的全局关系，还能在一定程度上保持局部相似性。这样，可以帮助理解哪些向量是紧密相连的，哪些是远离的。</p>
-</li>
+<ol type="1">
+<li><p>可视化高维数据<br>
+高维数据很难直接用人类感知的方式来理解，特别是在嵌入模型中，通常向量会有数百甚至数千个维度。降维将数据映射到二维或三维空间中，可以使用图形工具将其可视化，让我们直观地理解嵌入向量之间的相似性、聚类和分布。例如，降维后的结果可以显示哪些文档与查询向量距离接近，哪些文档之间存在聚类关系。</p></li>
+<li><p>探索数据结构<br>
+降维可以揭示高维数据中的结构，比如数据是否存在聚类（即数据分成若干自然的组），是否有异常值或某些向量彼此非常接近。通过在二维图中观察数据，我们可以找到嵌入向量中的模式，从而更好地理解文本或其他高维数据在嵌入空间中的表示。</p></li>
+<li><p>调试与分析模型<br>
+在训练嵌入模型时，降维是分析嵌入向量质量的有用工具。通过观察降维后的向量分布，我们可以评估模型是否正确地将相似的文本放在接近的位置，或者是否存在向量表示错误的现象。对比不同模型的嵌入表现时，也可以通过降维的可视化比较模型输出的效果，帮助模型调优和选择。</p></li>
+<li><p>简化复杂性<br>
+虽然高维向量中可能包含大量复杂的语义信息，但某些情况下只需要考虑全局趋势和大致相似性。降维到二维后，仍然能够保留重要的相似性信息，同时降低了复杂度，方便解释。</p></li>
+<li><p>揭示全局与局部关系<br>
+像PaCMAP、t-SNE、UMAP等降维技术不仅保留了嵌入向量的全局关系，还能在一定程度上保持局部相似性。这样，可以帮助理解哪些向量是紧密相连的，哪些是远离的。</p></li>
 </ol>
 <p>总之，通过将嵌入向量从高维空间降维到二维空间，可以帮助我们直观地理解数据的结构和相似性，发现潜在的模式、聚类和异常，简化分析过程，并帮助调试和优化模型。</p>
 <p>绘图:</p>
-<pre><code class="python">df = pd.DataFrame.from_dict(
+<pre class="python"><code>df = pd.DataFrame.from_dict(
     [
-        &#123;
-            &quot;x&quot;: documents_projected[i, 0],
-            &quot;y&quot;: documents_projected[i, 1],
-            &quot;source&quot;: docs_processed[i].metadata[&quot;source&quot;].split(&quot;/&quot;)[1],
-            &quot;extract&quot;: docs_processed[i].page_content[:100] + &quot;...&quot;,
-            &quot;symbol&quot;: &quot;circle&quot;,
-            &quot;size_col&quot;: 4,
-        &#125;
+        {
+            "x": documents_projected[i, 0],
+            "y": documents_projected[i, 1],
+            "source": docs_processed[i].metadata["source"].split("/")[1],
+            "extract": docs_processed[i].page_content[:100] + "...",
+            "symbol": "circle",
+            "size_col": 4,
+        }
         for i in range(len(docs_processed))
     ]
     + [
-        &#123;
-            &quot;x&quot;: documents_projected[-1, 0],
-            &quot;y&quot;: documents_projected[-1, 1],
-            &quot;source&quot;: &quot;User query&quot;,
-            &quot;extract&quot;: user_query,
-            &quot;size_col&quot;: 100,
-            &quot;symbol&quot;: &quot;star&quot;,
-        &#125;
+        {
+            "x": documents_projected[-1, 0],
+            "y": documents_projected[-1, 1],
+            "source": "User query",
+            "extract": user_query,
+            "size_col": 100,
+            "symbol": "star",
+        }
     ]
 )
 
 # visualize the embedding
 fig = px.scatter(
     df,
-    x=&quot;x&quot;,
-    y=&quot;y&quot;,
-    color=&quot;source&quot;,
-    hover_data=&quot;extract&quot;,
-    size=&quot;size_col&quot;,
-    symbol=&quot;symbol&quot;,
-    color_discrete_map=&#123;&quot;User query&quot;: &quot;black&quot;&#125;,
+    x="x",
+    y="y",
+    color="source",
+    hover_data="extract",
+    size="size_col",
+    symbol="symbol",
+    color_discrete_map={"User query": "black"},
     width=1000,
     height=700,
 )
-fig.update_traces(marker=dict(opacity=1, line=dict(width=0, color=&quot;DarkSlateGrey&quot;)), selector=dict(mode=&quot;markers&quot;))
+fig.update_traces(marker=dict(opacity=1, line=dict(width=0, color="DarkSlateGrey")), selector=dict(mode="markers"))
 fig.update_layout(
-    legend_title_text=&quot;&lt;b&gt;Chunk source&lt;/b&gt;&quot;,
-    title=&quot;&lt;b&gt;2D Projection of Chunk Embeddings via PaCMAP&lt;/b&gt;&quot;,
+    legend_title_text="&lt;b&gt;Chunk source&lt;/b&gt;",
+    title="&lt;b&gt;2D Projection of Chunk Embeddings via PaCMAP&lt;/b&gt;",
 )
-fig.show()
-</code></pre>
-<p>输出:</p>
-<blockquote>
-<p><img src="/2024/10/09/Retrieval%20Augmented%20Generation/image3.png" alt="alt text"></p>
-</blockquote>
-<p>我们想要找到意义最接近的 k 个文档，因此我们选择最接近的 k 个向量。在 <code>LangChain</code> 向量数据库实现中，这个搜索操作是由方法 <code>vector_database.similarity_search(query)</code> 执行的。</p>
-<pre><code class="python">retrieved_docs = KNOWLEDGE_VECTOR_DATABASE.similarity_search(query=user_query, k=5)
-print(retrieved_docs[0].page_content)
-</code></pre>
-<h2 id="阅读器LLM"><a href="#阅读器LLM" class="headerlink" title="阅读器LLM"></a>阅读器LLM</h2><p>LLM 阅读器读取检索到的上下文以形成其答案</p>
-<h3 id="阅读器模型"><a href="#阅读器模型" class="headerlink" title="阅读器模型"></a>阅读器模型</h3><p>阅读器模型的 <code>max_seq_length</code> 必须适应我们的提示(prompt)，其中包括检索器调用输出的上下文：上下文包括 5 个每份 512 个 token 的文档，所以我们至少需要 4k 个 token 的上下文长度。</p>
-<pre><code class="python">from transformers import pipeline
+fig.show()</code></pre>
+<p>输出:<br>
+&gt;<img src="image3.png" alt="alt text"></p>
+<p>我们想要找到意义最接近的 k 个文档，因此我们选择最接近的 k 个向量。在
+<code>LangChain</code> 向量数据库实现中，这个搜索操作是由方法
+<code>vector_database.similarity_search(query)</code> 执行的。</p>
+<pre class="python"><code>retrieved_docs = KNOWLEDGE_VECTOR_DATABASE.similarity_search(query=user_query, k=5)
+print(retrieved_docs[0].page_content)</code></pre>
+<h2 id="阅读器llm">阅读器LLM</h2>
+<p>LLM 阅读器读取检索到的上下文以形成其答案</p>
+<h3 id="阅读器模型">阅读器模型</h3>
+<p>阅读器模型的 <code>max_seq_length</code>
+必须适应我们的提示(prompt)，其中包括检索器调用输出的上下文：上下文包括 5
+个每份 512 个 token 的文档，所以我们至少需要 4k 个 token
+的上下文长度。</p>
+<pre class="python"><code>from transformers import pipeline
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 
-READER_MODEL_NAME = &quot;HuggingFaceH4/zephyr-7b-beta&quot;
+READER_MODEL_NAME = "HuggingFaceH4/zephyr-7b-beta"
 
 bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_use_double_quant=True,
-    bnb_4bit_quant_type=&quot;nf4&quot;,
+    bnb_4bit_quant_type="nf4",
     bnb_4bit_compute_dtype=torch.bfloat16,
 )
 model = AutoModelForCausalLM.from_pretrained(READER_MODEL_NAME, quantization_config=bnb_config)
@@ -536,78 +684,91 @@ tokenizer = AutoTokenizer.from_pretrained(READER_MODEL_NAME)
 READER_LLM = pipeline(
     model=model,
     tokenizer=tokenizer,
-    task=&quot;text-generation&quot;,
+    task="text-generation",
     do_sample=True,
     temperature=0.2,
     repetition_penalty=1.1,
     return_full_text=False,
     max_new_tokens=500,
-)
-</code></pre>
-<p><code>bnb_config = BitsAndBytesConfig</code> 用于配置量化参数，以优化模型的计算效率和内存使用。</p>
-<ul>
-<li><code>load_in_4bit=True</code>：启用4位量化，目的是降低内存占用和计算成本，特别适用于较大模型的推理。</li>
-<li><code>bnb_4bit_use_double_quant=True</code>：启用双重量化，这是一种优化技术，用于进一步压缩模型参数而不显著影响精度。</li>
-<li><code>bnb_4bit_quant_type=&quot;nf4&quot;</code>：量化类型设置为NF4，这是一种优化的量化格式，常用于大语言模型。</li>
-<li><code>bnb_4bit_compute_dtype=torch.bfloat16</code>：设置计算的数据类型为bfloat16，可以加速计算，同时比float16有更好的数值稳定性。</li>
-</ul>
-<p><br><code>READER_LLM = pipeline(...)</code>创建一个任务为<code>&quot;text-generation&quot;</code>的<code>pipeline</code>，用于生成文本。</p>
-<ul>
-<li><code>model=model和tokenizer=tokenizer</code>：指定使用的模型和分词器。</li>
-<li><code>task=&quot;text-generation&quot;</code>：设置任务为文本生成。</li>
-<li><code>do_sample=True</code>：表示生成时启用随机采样，这样生成的文本会有一定的多样性。</li>
-<li><code>temperature=0.2</code>：控制生成的多样性。较低的温度会使模型更加保守（输出更确定的内容）。</li>
-<li><code>repetition_penalty=1.1</code>：这是一个重复惩罚因子，用于减少生成过程中重复的句子或词汇。</li>
-<li><code>return_full_text=False</code>：设置为False，只返回生成的新增文本，而不包括输入文本。</li>
-<li><code>max_new_tokens=500</code>：生成的最大新token数量为500个。</li>
-</ul>
-<h3 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h3><pre><code class="python">prompt_in_chat_format = [
-    &#123;
-        &quot;role&quot;: &quot;system&quot;,
-        &quot;content&quot;: &quot;&quot;&quot;Using the information contained in the context,
+)</code></pre>
+<p><code>bnb_config = BitsAndBytesConfig</code>
+用于配置量化参数，以优化模型的计算效率和内存使用。<br>
++
+<code>load_in_4bit=True</code>：启用4位量化，目的是降低内存占用和计算成本，特别适用于较大模型的推理。<br>
++
+<code>bnb_4bit_use_double_quant=True</code>：启用双重量化，这是一种优化技术，用于进一步压缩模型参数而不显著影响精度。<br>
++
+<code>bnb_4bit_quant_type="nf4"</code>：量化类型设置为NF4，这是一种优化的量化格式，常用于大语言模型。<br>
++
+<code>bnb_4bit_compute_dtype=torch.bfloat16</code>：设置计算的数据类型为bfloat16，可以加速计算，同时比float16有更好的数值稳定性。</p>
+<p><br>
+<br>
+<code>READER_LLM = pipeline(...)</code>创建一个任务为<code>"text-generation"</code>的<code>pipeline</code>，用于生成文本。<br>
++
+<code>model=model和tokenizer=tokenizer</code>：指定使用的模型和分词器。<br>
++ <code>task="text-generation"</code>：设置任务为文本生成。<br>
++
+<code>do_sample=True</code>：表示生成时启用随机采样，这样生成的文本会有一定的多样性。<br>
++
+<code>temperature=0.2</code>：控制生成的多样性。较低的温度会使模型更加保守（输出更确定的内容）。<br>
++
+<code>repetition_penalty=1.1</code>：这是一个重复惩罚因子，用于减少生成过程中重复的句子或词汇。<br>
++
+<code>return_full_text=False</code>：设置为False，只返回生成的新增文本，而不包括输入文本。<br>
++ <code>max_new_tokens=500</code>：生成的最大新token数量为500个。</p>
+<h3 id="提示">提示</h3>
+<pre class="python"><code>prompt_in_chat_format = [
+    {
+        "role": "system",
+        "content": """Using the information contained in the context,
 give a comprehensive answer to the question.
 Respond only to the question asked, response should be concise and relevant to the question.
 Provide the number of the source document when relevant.
-If the answer cannot be deduced from the context, do not give an answer.&quot;&quot;&quot;,
-    &#125;,
-    &#123;
-        &quot;role&quot;: &quot;user&quot;,
-        &quot;content&quot;: &quot;&quot;&quot;Context:
-&#123;context&#125;
+If the answer cannot be deduced from the context, do not give an answer.""",
+    },
+    {
+        "role": "user",
+        "content": """Context:
+{context}
 ---
 Now here is the question you need to answer.
 
-Question: &#123;question&#125;&quot;&quot;&quot;,
-    &#125;,
+Question: {question}""",
+    },
 ]
 RAG_PROMPT_TEMPLATE = tokenizer.apply_chat_template(
     prompt_in_chat_format, tokenize=False, add_generation_prompt=True
 )
-print(RAG_PROMPT_TEMPLATE)
-</code></pre>
-<p>系统消息 (system)的内容是告诉模型如何处理问题。具体来说，它要求模型从上下文中提取信息，并给出一个简明且相关的回答。还特别说明，模型应提到文档的编号，并且如果答案不能从上下文中推导出来，就不要回答。</p>
-<p>用户消息 (user)是用户的问题消息，带有两个占位符：<code>&#123;context&#125;</code> 和 <code>&#123;question&#125;</code>，其中,<code>&#123;context&#125;</code>：这检索到的上下文。<code>&#123;question&#125;</code>是用户想要回答的问题。</p>
+print(RAG_PROMPT_TEMPLATE)</code></pre>
+<p>系统消息
+(system)的内容是告诉模型如何处理问题。具体来说，它要求模型从上下文中提取信息，并给出一个简明且相关的回答。还特别说明，模型应提到文档的编号，并且如果答案不能从上下文中推导出来，就不要回答。</p>
+<p>用户消息
+(user)是用户的问题消息，带有两个占位符：<code>{context}</code> 和
+<code>{question}</code>，其中,<code>{context}</code>：这检索到的上下文。<code>{question}</code>是用户想要回答的问题。</p>
 <p><code>tokenize=False</code>表示不对模板进行token化（即将模板转换为模型可以直接处理的token）。这是因为我们只想要模板的文本形式而不是token形式。</p>
 <p><code>add_generation_prompt=True</code>表示可能会在模板中增加提示信息，以便模型知道它需要生成新的内容。通常，这个提示可能是告诉模型进入生成模式，而不是只回答问题。</p>
-<pre><code class="python">retrieved_docs_text = [doc.page_content for doc in retrieved_docs]
-context = &quot;\nExtracted documents:\n&quot;
-context += &quot;&quot;.join([f&quot;Document &#123;str(i)&#125;:::\n&quot; + doc for i, doc in enumerate(retrieved_docs_text)])
+<pre class="python"><code>retrieved_docs_text = [doc.page_content for doc in retrieved_docs]
+context = "\nExtracted documents:\n"
+context += "".join([f"Document {str(i)}:::\n" + doc for i, doc in enumerate(retrieved_docs_text)])
 
-final_prompt = RAG_PROMPT_TEMPLATE.format(question=&quot;How to create a pipeline object?&quot;, context=context)
+final_prompt = RAG_PROMPT_TEMPLATE.format(question="How to create a pipeline object?", context=context)
 
-answer = READER_LLM(final_prompt)[0][&quot;generated_text&quot;]
-print(answer)
-</code></pre>
+answer = READER_LLM(final_prompt)[0]["generated_text"]
+print(answer)</code></pre>
 <p>提取检索文档的文本，构建上下文，然后通过<code>RAG_PROMPT_TEMPLATE.format()</code>将问题和上下文（前面拼接的context）填充到RAG提示模板中，形成一个完整的提示字符串。</p>
 <p>现在已经可以让模型基于检索到的内容进行回答了，但还可以进一步优化。</p>
-<h3 id="重排序-可选"><a href="#重排序-可选" class="headerlink" title="重排序(可选)"></a>重排序(可选)</h3><p>对于 RAG 来说，通常更好的选择会最终检索出比你想要的更多的文档，然后在保留 top_k 之前，使用更强大的检索模型对结果进行重新排序。</p>
-<p>为此，Colbertv2是一个很好的选择：它不是像我们传统的嵌入模型那样的双向编码器，而是一个交叉编码器，它计算查询 token 与每个文档 token 之间更细致的交互。</p>
+<h3 id="重排序可选">重排序(可选)</h3>
+<p>对于 RAG
+来说，通常更好的选择会最终检索出比你想要的更多的文档，然后在保留 top_k
+之前，使用更强大的检索模型对结果进行重新排序。</p>
+<p>为此，Colbertv2是一个很好的选择：它不是像我们传统的嵌入模型那样的双向编码器，而是一个交叉编码器，它计算查询
+token 与每个文档 token 之间更细致的交互。</p>
 <p>由于有了 RAGatouille 库，它的使用变得非常简单。</p>
-<pre><code class="python">from ragatouille import RAGPretrainedModel
+<pre class="python"><code>from ragatouille import RAGPretrainedModel
 
-RERANKER = RAGPretrainedModel.from_pretrained(&quot;colbert-ir/colbertv2.0&quot;)
-</code></pre>
-<h2 id="集成所有组件"><a href="#集成所有组件" class="headerlink" title="集成所有组件"></a>集成所有组件</h2><pre><code class="python">from transformers import Pipeline
+RERANKER = RAGPretrainedModel.from_pretrained("colbert-ir/colbertv2.0")</code></pre>
+<h2 id="集成所有组件">集成所有组件</h2>
+<pre class="python"><code>from transformers import Pipeline
 
 
 def answer_with_rag(
@@ -619,37 +780,38 @@ def answer_with_rag(
     num_docs_final: int = 5,
 ) -&gt; Tuple[str, List[LangchainDocument]]:
     # Gather documents with retriever
-    print(&quot;=&gt; Retrieving documents...&quot;)
+    print("=&gt; Retrieving documents...")
     relevant_docs = knowledge_index.similarity_search(query=question, k=num_retrieved_docs)
     relevant_docs = [doc.page_content for doc in relevant_docs]  # keep only the text
 
     # Optionally rerank results
     if reranker:
-        print(&quot;=&gt; Reranking documents...&quot;)
+        print("=&gt; Reranking documents...")
         relevant_docs = reranker.rerank(question, relevant_docs, k=num_docs_final)
-        relevant_docs = [doc[&quot;content&quot;] for doc in relevant_docs]
+        relevant_docs = [doc["content"] for doc in relevant_docs]
 
     relevant_docs = relevant_docs[:num_docs_final]
 
     # Build the final prompt
-    context = &quot;\nExtracted documents:\n&quot;
-    context += &quot;&quot;.join([f&quot;Document &#123;str(i)&#125;:::\n&quot; + doc for i, doc in enumerate(relevant_docs)])
+    context = "\nExtracted documents:\n"
+    context += "".join([f"Document {str(i)}:::\n" + doc for i, doc in enumerate(relevant_docs)])
 
     final_prompt = RAG_PROMPT_TEMPLATE.format(question=question, context=context)
 
     # Redact an answer
-    print(&quot;=&gt; Generating answer...&quot;)
-    answer = llm(final_prompt)[0][&quot;generated_text&quot;]
+    print("=&gt; Generating answer...")
+    answer = llm(final_prompt)[0]["generated_text"]
 
-    return answer, relevant_docs
-</code></pre>
-<pre><code class="python">question = &quot;how to create a pipeline object?&quot;
+    return answer, relevant_docs</code></pre>
+<pre class="python"><code>question = "how to create a pipeline object?"
 
-answer, relevant_docs = answer_with_rag(question, READER_LLM, KNOWLEDGE_VECTOR_DATABASE, reranker=RERANKER)
-</code></pre>
+answer, relevant_docs = answer_with_rag(question, READER_LLM, KNOWLEDGE_VECTOR_DATABASE, reranker=RERANKER)</code></pre>
 <p>大功告成</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>基本就是搬运了别人的文章，然后加了一些补充让整篇文章从一篇简单易懂的文章变成了一篇面向纯小白的文章，不过我好像也确实就是纯小白，其中还有好多概念其实不是特别清楚，不过短时间应该够用了，日后有机会再回过头来查漏补缺吧。</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>1.<a target="_blank" rel="noopener" href="https://huggingface.co/learn/cookbook/zh-CN/advanced_rag">https://huggingface.co/learn/cookbook/zh-CN/advanced_rag</a><br>2.<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzkxNjYxMjUwMA==&mid=2247484519&idx=1&sn=55a9fa5107d3b69a019db36703b86538&chksm=c14c709cf63bf98a615255cb55041338eaaa024066f721c9c81456c99eaf8f423ae27a56fa8a&token=1160261652&lang=zh_CN#rd">https://mp.weixin.qq.com/s?__biz=MzkxNjYxMjUwMA==&amp;mid=2247484519&amp;idx=1&amp;sn=55a9fa5107d3b69a019db36703b86538&amp;chksm=c14c709cf63bf98a615255cb55041338eaaa024066f721c9c81456c99eaf8f423ae27a56fa8a&amp;token=1160261652&amp;lang=zh_CN#rd</a></p>
+<h2 id="后记">后记</h2>
+<p>基本就是搬运了别人的文章，然后加了一些补充让整篇文章从一篇简单易懂的文章变成了一篇面向纯小白的文章，不过我好像也确实就是纯小白，其中还有好多概念其实不是特别清楚，不过短时间应该够用了，日后有机会再回过头来查漏补缺吧。</p>
+<h2 id="参考文章">参考文章</h2>
+<p>1.https://huggingface.co/learn/cookbook/zh-CN/advanced_rag<br>
+2.https://mp.weixin.qq.com/s?__biz=MzkxNjYxMjUwMA==&amp;mid=2247484519&amp;idx=1&amp;sn=55a9fa5107d3b69a019db36703b86538&amp;chksm=c14c709cf63bf98a615255cb55041338eaaa024066f721c9c81456c99eaf8f423ae27a56fa8a&amp;token=1160261652&amp;lang=zh_CN#rd</p>
 
     </div>
     

@@ -48,7 +48,119 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 <body>
     <div id="layout">
         <transition name="fade">
@@ -184,7 +296,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%89%8D%E7%AB%AF/" style="color: #03a9f4">
+                <a href="/tags/%E5%89%8D%E7%AB%AF/" style="color: #00a596">
                     前端
                 </a>
             </span>
@@ -205,7 +317,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/Node-js/" style="color: #ffa2c4">
+                <a href="/tags/Node-js/" style="color: #00a596">
                     Node.js
                 </a>
             </span>
@@ -216,22 +328,27 @@
     
     <div class="content" v-pre>
         <p>作为一名嵌入式软件工程师，我理应具备丰富的前端知识。</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前的llm基本能用了，现在该基于他来搭建一个chatbot了。但对于从来没接触过前端开发的我来说，从零开始的工程量有些感人了（虽然应该会很有趣吧），所以还是老老实实用人家的开源项目吧。</p>
-<h2 id="开发准备"><a href="#开发准备" class="headerlink" title="开发准备"></a>开发准备</h2><p>正如我前面所说的，我此前完全没有接触过前端开发，所以这里也需要从配置环境和<code>hello world</code>开始。</p>
-<h3 id="安装fnm"><a href="#安装fnm" class="headerlink" title="安装fnm"></a>安装fnm</h3><p>fnm（Fast Node Manager）是一款轻量、快速的Node.js版本管理工具，用来替代nvm来管理Node.js版本。它比nvm更高效，特别适合需要频繁切换Node.js版本的开发者。</p>
-<p>直接在github上下载：<a target="_blank" rel="noopener" href="https://github.com/Schniz/fnm/releases">https://github.com/Schniz/fnm/releases</a></p>
+<h2 id="前言">前言</h2>
+<p>之前的llm基本能用了，现在该基于他来搭建一个chatbot了。但对于从来没接触过前端开发的我来说，从零开始的工程量有些感人了（虽然应该会很有趣吧），所以还是老老实实用人家的开源项目吧。</p>
+<h2 id="开发准备">开发准备</h2>
+<p>正如我前面所说的，我此前完全没有接触过前端开发，所以这里也需要从配置环境和<code>hello world</code>开始。</p>
+<h3 id="安装fnm">安装fnm</h3>
+<p>fnm（Fast Node
+Manager）是一款轻量、快速的Node.js版本管理工具，用来替代nvm来管理Node.js版本。它比nvm更高效，特别适合需要频繁切换Node.js版本的开发者。</p>
+<p>直接在github上下载：<a target="_blank" rel="noopener" href="https://github.com/Schniz/fnm/releases" class="uri">https://github.com/Schniz/fnm/releases</a></p>
 <p>解压后将<code>fnm.exe</code>放到创建好的目录下，我放到了<code>D:\fnm</code>目录下。</p>
-<p>然后再系统变量的<code>path</code>中添加<code>D:\fnm</code>，再添加如下两个系统变量：</p>
+<p>然后在系统变量的<code>path</code>中添加<code>D:\fnm</code>，再添加如下两个系统变量：</p>
 <pre><code>FNM_DIR  
 E:\fnm\node
 
 FNM_NODE_DIST_MIRRORs  
-E:\fnm\node
-</code></pre>
-<p>在<code>power shell</code>中输入<code>fnm -V</code>  </p>
-<p><img src="/2024/10/28/chatUI/image.png" alt="alt text"><br>安装成功</p>
-<h3 id="安装Node-js和npm"><a href="#安装Node-js和npm" class="headerlink" title="安装Node.js和npm"></a>安装Node.js和npm</h3><p>参照node.js官网上的说明：<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/download/package-manager">https://nodejs.org/zh-cn/download/package-manager</a></p>
-<pre><code class="powershell"># 安装 fnm (快速 Node 管理器)
+E:\fnm\node</code></pre>
+<p>在<code>power shell</code>中输入<code>fnm -V</code></p>
+<p><img src="image.png" alt="alt text"><br>
+安装成功</p>
+<h3 id="安装node.js和npm">安装Node.js和npm</h3>
+<p>参照node.js官网上的说明：<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/download/package-manager" class="uri">https://nodejs.org/zh-cn/download/package-manager</a></p>
+<pre class="powershell"><code># 安装 fnm (快速 Node 管理器)
 winget install Schniz.fnm
 
 # 配置 fnm 环境
@@ -244,282 +361,284 @@ fnm use --install-if-missing 20
 node -v # 应该打印 `v20.18.0`
 
 # 验证环境中是否存在正确的 npm 版本
-npm -v # 应该打印 `10.8.2`
-</code></pre>
-<p><img src="/2024/10/28/chatUI/image-1.png" alt="alt text"><br>安装成功</p>
+npm -v # 应该打印 `10.8.2`</code></pre>
+<p><img src="image-1.png" alt="alt text"><br>
+安装成功</p>
 <p>配置国内的镜像源：</p>
-<pre><code class="powershell">npm config set registry https://registry.npmmirror.com
-</code></pre>
+<pre class="powershell"><code>npm config set registry https://registry.npmmirror.com</code></pre>
 <p>这里设置的是淘宝镜像。</p>
-<h2 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h2><p>先来创建一个React项目：</p>
-<pre><code class="bash">npx create-react-app my-chat-app
-</code></pre>
+<h2 id="快速上手">快速上手</h2>
+<p>先来创建一个React项目：</p>
+<pre class="bash"><code>npx create-react-app my-chat-app</code></pre>
 <p>然后在<strong>项目中</strong>安装chatui的包：</p>
-<pre><code class="bash">cd my-chat-app
-npm install @chatui/core --save
-</code></pre>
+<pre class="bash"><code>cd my-chat-app
+npm install @chatui/core --save</code></pre>
 <p>在终端中运行以下命令以启动服务器：</p>
-<pre><code class="bash">npm start
-</code></pre>
+<pre class="bash"><code>npm start</code></pre>
 <p>这样就会打开一个本地的网页。</p>
-<p>生成React项目后会得到一个文件夹：<br><img src="/2024/10/28/chatUI/image-2.png" alt="alt text">  </p>
+<p>生成React项目后会得到一个文件夹：<br>
+<img src="image-2.png" alt="alt text"></p>
 <p>其中的<code>ChatApp.js</code>是我新增的，内容如下：</p>
-<pre><code class="JavaScript">import React from &#39;react&#39;;
-import &#39;@chatui/core/es/styles/index.less&#39;;
-import Chat, &#123; Bubble, useMessages &#125; from &#39;@chatui/core&#39;;
-import &#39;@chatui/core/dist/index.css&#39;;
+<pre class="javascript"><code>import React from 'react';
+import '@chatui/core/es/styles/index.less';
+import Chat, { Bubble, useMessages } from '@chatui/core';
+import '@chatui/core/dist/index.css';
 
-const ChatApp = () =&gt; &#123;
-    const &#123; messages, appendMsg, setTyping &#125; = useMessages([]);
+const ChatApp = () =&gt; {
+    const { messages, appendMsg, setTyping } = useMessages([]);
   
-    function handleSend(type, val) &#123;
-      if (type === &#39;text&#39; &amp;&amp; val.trim()) &#123;
-        appendMsg(&#123;
-          type: &#39;text&#39;,
-          content: &#123; text: val &#125;,
-          position: &#39;right&#39;,
-        &#125;);
+    function handleSend(type, val) {
+      if (type === 'text' &amp;&amp; val.trim()) {
+        appendMsg({
+          type: 'text',
+          content: { text: val },
+          position: 'right',
+        });
   
         setTyping(true);
   
-        setTimeout(() =&gt; &#123;
-          appendMsg(&#123;
-            type: &#39;text&#39;,
-            content: &#123; text: &#39;嗯嗯好的，知道了&#39; &#125;,
-          &#125;);
-        &#125;, 1000);
-      &#125;
-    &#125;
+        setTimeout(() =&gt; {
+          appendMsg({
+            type: 'text',
+            content: { text: '嗯嗯好的，知道了' },
+          });
+        }, 1000);
+      }
+    }
   
-    function renderMessageContent(msg) &#123;
-      const &#123; content &#125; = msg;
-      return &lt;Bubble content=&#123;content.text&#125; /&gt;;
-    &#125;
+    function renderMessageContent(msg) {
+      const { content } = msg;
+      return &lt;Bubble content={content.text} /&gt;;
+    }
   
     return (
       &lt;Chat
-        navbar=&#123;&#123; title: '智能助理' &#125;&#125;
-        messages=&#123;messages&#125;
-        renderMessageContent=&#123;renderMessageContent&#125;
-        onSend=&#123;handleSend&#125;
+        navbar={{ title: '智能助理' }}
+        messages={messages}
+        renderMessageContent={renderMessageContent}
+        onSend={handleSend}
       /&gt;
     );
-&#125;;
+};
 
-export default ChatApp;
-</code></pre>
-<p><code>const App = () =&gt; &#123;...&#125;;</code>：定义App函数组件，构成整个应用的聊天界面。括号里的内容是函数的参数，大括号里的是函数的具体内容。  </p>
-<p><code>const &#123; messages, appendMsg, setTyping &#125; = useMessages([]);</code>：使用useMessages钩子管理消息列表，获取<code>messages</code>、<code>appendMsg</code>和<code>setTyping</code>等函数。</p>
-<ul>
-<li><code>messages</code>：当前消息的数组列表，用于渲染聊天记录。</li>
-<li><code>appendMsg</code>：用于在消息列表中追加消息的函数。</li>
-<li><code>setTyping</code>：设置“正在输入”状态的函数。</li>
-</ul>
-<p><code>function handleSend(type, val) &#123;...&#125;</code>：定义消息发送处理函数handleSend。</p>
-<ul>
-<li><code>type</code>：消息的类型，例如<code>text</code>表示文本消息。</li>
-<li><code>val</code>：消息内容。</li>
-</ul>
-<p><code>if (type === &#39;text&#39; &amp;&amp; val.trim()) &#123;...&#125;</code>：确认消息类型是文本且内容不为空。</p>
-<ul>
-<li><code>appendMsg(&#123;...&#125;)</code>：在消息列表中添加用户的消息，内容为<code>val</code>。</li>
-<li><code>position: &#39;right&#39;</code>：表示该消息显示在右侧（表示用户消息）。</li>
-<li><code>setTyping(true);</code>：设置“正在输入”状态。</li>
-<li><code>setTimeout(...)</code>：模拟1秒后回复固定消息”‘嗯嗯好的，知道了’”。</li>
-</ul>
-<p><code>function renderMessageContent(msg) &#123;...&#125;</code>：定义渲染消息内容的函数<code>renderMessageContent</code>。</p>
-<ul>
-<li><code>msg</code>：消息对象，包含消息内容和类型等信息。</li>
-<li><code>return &lt;Bubble content=&#123;content.text&#125; /&gt;;</code>：使用Bubble组件显示消息内容。</li>
-</ul>
-<p><code>&lt;Chat ... /&gt;</code>：渲染ChatUI的<code>Chat</code>组件。</p>
-<ul>
-<li><code>navbar=&#123;&#123; title: '智能助理' &#125;&#125;</code>：设置聊天窗口标题为“智能助理”。</li>
-<li><code>messages=&#123;messages&#125;</code>：将<code>messages</code>列表传入<code>Chat</code>组件，以渲染消息内容。</li>
-<li><code>renderMessageContent=&#123;renderMessageContent&#125;</code>：指定消息内容的渲染函数。</li>
-<li><code>onSend=&#123;handleSend&#125;</code>：设置消息发送处理函数<code>handleSend</code>，以便在用户发送消息时调用。</li>
-</ul>
+export default ChatApp;</code></pre>
+<p><code>const App = () =&gt; {...};</code>：定义App函数组件，构成整个应用的聊天界面。括号里的内容是函数的参数，大括号里的是函数的具体内容。</p>
+<p><code>const { messages, appendMsg, setTyping } = useMessages([]);</code>：使用useMessages钩子管理消息列表，获取<code>messages</code>、<code>appendMsg</code>和<code>setTyping</code>等函数。<br>
+- <code>messages</code>：当前消息的数组列表，用于渲染聊天记录。<br>
+- <code>appendMsg</code>：用于在消息列表中追加消息的函数。<br>
+- <code>setTyping</code>：设置“正在输入”状态的函数。</p>
+<p><code>function handleSend(type, val) {...}</code>：定义消息发送处理函数handleSend。<br>
+-
+<code>type</code>：消息的类型，例如<code>text</code>表示文本消息。<br>
+- <code>val</code>：消息内容。</p>
+<p><code>if (type === 'text' &amp;&amp; val.trim()) {...}</code>：确认消息类型是文本且内容不为空。<br>
+-
+<code>appendMsg({...})</code>：在消息列表中添加用户的消息，内容为<code>val</code>。<br>
+-
+<code>position: 'right'</code>：表示该消息显示在右侧（表示用户消息）。<br>
+- <code>setTyping(true);</code>：设置“正在输入”状态。<br>
+-
+<code>setTimeout(...)</code>：模拟1秒后回复固定消息"‘嗯嗯好的，知道了’"。</p>
+<p><code>function renderMessageContent(msg) {...}</code>：定义渲染消息内容的函数<code>renderMessageContent</code>。<br>
+- <code>msg</code>：消息对象，包含消息内容和类型等信息。<br>
+-
+<code>return &lt;Bubble content={content.text} /&gt;;</code>：使用Bubble组件显示消息内容。</p>
+<p><code>&lt;Chat ... /&gt;</code>：渲染ChatUI的<code>Chat</code>组件。<br>
+-
+<code>navbar={{ title: '智能助理' }}</code>：设置聊天窗口标题为“智能助理”。<br>
+-
+<code>messages={messages}</code>：将<code>messages</code>列表传入<code>Chat</code>组件，以渲染消息内容。<br>
+-
+<code>renderMessageContent={renderMessageContent}</code>：指定消息内容的渲染函数。<br>
+-
+<code>onSend={handleSend}</code>：设置消息发送处理函数<code>handleSend</code>，以便在用户发送消息时调用。</p>
 <p><code>export default ChatApp;</code>：将模块中的ChatApp组件作为默认导出导出。</p>
 <p>然后修改<code>App.js</code>以调用<code>ChatApp</code>组件：</p>
-<pre><code class="JavaScript">import &#39;./App.css&#39;;
-import ChatApp from &#39;./ChatApp.js&#39;
+<pre class="javascript"><code>import './App.css';
+import ChatApp from './ChatApp.js'
 
-function App() &#123;
+function App() {
   return (
     &lt;div&gt;
-      &lt;div className=&#39;title&#39;&gt;
+      &lt;div className='title'&gt;
         &lt;p&gt;标题标题标题&lt;/p&gt;
       &lt;/div&gt;
-      &lt;div className=&quot;chatApp&quot;&gt;
+      &lt;div className="chatApp"&gt;
         &lt;ChatApp /&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   );
-&#125;
-export default App;
-</code></pre>
+}
+export default App;</code></pre>
 <p><code>&lt;div&gt;</code>是HTML中的一个块级元素，代表一个文档中的一个容器或分组，用于组织和布局内容,通常用于将页面分成不同的区域，以便更好地组织和管理内容。<code>&lt;div&gt;</code>本身没有特定的语义，可以在其中放置其他HTML元素，如文本、图像、其他容器等。</p>
-<p>访问 <a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000/</a> ，页面显示如下效果：<br><img src="/2024/10/28/chatUI/image-3.png" alt="alt text"></p>
-<p>到此为止，我们就实现了一个稍微复杂了点的hello world，下一步就是将这个对话界面和我们的LLM服务连接起来。</p>
-<h2 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h2><p>WebSocket 是一种协议，用于在 Web 应用程序中创建实时、双向的通信通道。</p>
-<p>传统的 HTTP 请求通常是一次请求一次响应的，而 WebSocket 则可以建立一个持久连接，允许服务器即时向客户端推送数据，同时也可以接收客户端发送的数据。WebSocket 相比于传统的轮询或长轮询方式，能够显著减少网络流量和延迟，提高数据传输的效率和速度。它对实时 Web 应用程序和在线游戏的开发非常有用。</p>
+<p>访问 <a target="_blank" rel="noopener" href="http://localhost:3000/" class="uri">http://localhost:3000/</a> ，页面显示如下效果：<br>
+<img src="image-3.png" alt="alt text"></p>
+<p>到此为止，我们就实现了一个稍微复杂了点的hello
+world，下一步就是将这个对话界面和我们的LLM服务连接起来。</p>
+<h2 id="websocket">WebSocket</h2>
+<p>WebSocket 是一种协议，用于在 Web
+应用程序中创建实时、双向的通信通道。</p>
+<p>传统的 HTTP 请求通常是一次请求一次响应的，而 WebSocket
+则可以建立一个持久连接，允许服务器即时向客户端推送数据，同时也可以接收客户端发送的数据。WebSocket
+相比于传统的轮询或长轮询方式，能够显著减少网络流量和延迟，提高数据传输的效率和速度。它对实时
+Web 应用程序和在线游戏的开发非常有用。</p>
 <p>我的理解是，HTTP相当于写信，收到来信了才知道怎么回信，Websocket更像打电话，两边接通了就能想说什么说什么了。</p>
-<p>在文章《Cherrypy入门》中，用的其实就是传统的HTTP请求，每次调用都向后端进行一次 request，然后等待后端的响应。这种方式虽然也可以实现我的需要，但更先进的通讯方式总是更好的，也许能避免许多不必要的麻烦。</p>
+<p>在文章《Cherrypy入门》中，用的其实就是传统的HTTP请求，每次调用都向后端进行一次
+request，然后等待后端的响应。这种方式虽然也可以实现我的需要，但更先进的通讯方式总是更好的，也许能避免许多不必要的麻烦。</p>
 <p>更基础的原理部分我将把他放到《计算机网络相关概念》一文中，遇到了其他不懂的概念可以一并整理，这里只介绍应用部分。</p>
 <p>实现并不复杂，首先是前端部分：</p>
-<pre><code class="JavaScript">import React, &#123; useEffect, useState &#125; from &#39;react&#39;;
-import &#39;@chatui/core/es/styles/index.less&#39;;
-import Chat, &#123; Bubble, useMessages &#125; from &#39;@chatui/core&#39;;
-import &#39;@chatui/core/dist/index.css&#39;;
+<pre class="javascript"><code>import React, { useEffect, useState } from 'react';
+import '@chatui/core/es/styles/index.less';
+import Chat, { Bubble, useMessages } from '@chatui/core';
+import '@chatui/core/dist/index.css';
 
 // 初始信息
 const initialMessages = [
-  &#123;
-    type: &#39;text&#39;,
-    content: &#123;text: &#39;智能助理加载中，这需要耗费一定时间，请耐心等待。&#39;&#125;,
-    user: &#123; avatar: &#39;//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg&#39; &#125;,
-  &#125;
+  {
+    type: 'text',
+    content: {text: '智能助理加载中，这需要耗费一定时间，请耐心等待。'},
+    user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+  }
 ]
 
-const ChatApp = () =&gt; &#123;
-  const &#123; messages, appendMsg, setTyping &#125; = useMessages(initialMessages);
+const ChatApp = () =&gt; {
+  const { messages, appendMsg, setTyping } = useMessages(initialMessages);
   // 定义socket
   const [socket, setSocket] = useState(null);
   const [initialized, setInitialized] = useState(false)
   const MAX_RETRIES = 5
 
-  useEffect(() =&gt; &#123; 
+  useEffect(() =&gt; { 
     // 建立新的websocket连接
-    const ws = new WebSocket(&quot;ws://localhost:8765&quot;);
+    const ws = new WebSocket("ws://localhost:8765");
     setSocket(ws);
 
-    ws.onopen = () =&gt; &#123;
-      console.log(&quot;WebSocket connection established&quot;);
+    ws.onopen = () =&gt; {
+      console.log("WebSocket connection established");
       sendInitMessages(ws);
-    &#125;;
+    };
 
-    ws.onmessage = (event) =&gt; &#123;
+    ws.onmessage = (event) =&gt; {
       // 接收到信息
-      if (event.data === &quot;llm_done&quot;)
-      &#123;
+      if (event.data === "llm_done")
+      {
         setInitialized(true)
         setTyping(true);
-        setTimeout(() =&gt; &#123;
-          appendMsg(&#123;
-            type: &#39;text&#39;,
-            content: &#123; text: &#39;初始化完成，欢迎使用！&#39; &#125;,
-            user: &#123; avatar: &#39;//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg&#39; &#125;,
-          &#125;);
-        &#125;, 1000);
-        console.log(&quot;connect to llm&quot;);
-      &#125;
+        setTimeout(() =&gt; {
+          appendMsg({
+            type: 'text',
+            content: { text: '初始化完成，欢迎使用！' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          });
+        }, 1000);
+        console.log("connect to llm");
+      }
       else
-      &#123;
+      {
         setTyping(true);
-        setTimeout(() =&gt; &#123;
-        appendMsg(&#123;
-          type: &#39;text&#39;,
-          content: &#123; text: event.data &#125;,
-          user: &#123; avatar: &#39;//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg&#39; &#125;,
-        &#125;);
-      &#125;, 1000);
-      &#125;
-    &#125;;
+        setTimeout(() =&gt; {
+        appendMsg({
+          type: 'text',
+          content: { text: event.data },
+          user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+        });
+      }, 1000);
+      }
+    };
 
-    ws.onclose = () =&gt; &#123;
+    ws.onclose = () =&gt; {
       // 关闭连接
-      console.log(&quot;WebSocket connection closed111&quot;);
-    &#125;;
+      console.log("WebSocket connection closed111");
+    };
 
-    return () =&gt; &#123;
+    return () =&gt; {
       ws.close();
-    &#125;;
-  &#125;, [appendMsg]);
+    };
+  }, [appendMsg]);
 
-  const sendInitMessages = (ws) =&gt; &#123;
-    const initMessages = &quot;initLLM02175&quot;;
+  const sendInitMessages = (ws) =&gt; {
+    const initMessages = "initLLM02175";
     let attempts = 0;
 
-    const sendMessageWithRetry = (msg) =&gt; &#123;
+    const sendMessageWithRetry = (msg) =&gt; {
       if (initialized === true) 
-      &#123;
+      {
         return
-      &#125; 
+      } 
       if (ws.readyState === WebSocket.OPEN) 
-      &#123;
+      {
         ws.send(msg);
-      &#125; 
+      } 
       else if (attempts &lt; MAX_RETRIES)
-      &#123;
+      {
         attempts += 1;
-        console.log(`Retrying to send: $&#123;msg&#125; (attempt $&#123;attempts&#125;)`);
+        console.log(`Retrying to send: ${msg} (attempt ${attempts})`);
         setTimeout(() =&gt; sendMessageWithRetry(msg), 1000); // 延时重试
-      &#125; 
+      } 
       else 
-      &#123;
-        console.warn(`Failed to send message: $&#123;msg&#125; after $&#123;MAX_RETRIES&#125; attempts`);
-      &#125;
-    &#125;;
+      {
+        console.warn(`Failed to send message: ${msg} after ${MAX_RETRIES} attempts`);
+      }
+    };
 
     sendMessageWithRetry(initMessages)
-  &#125;;
+  };
 
-  function handleSend(type, val) &#123;
-    if (type === &#39;text&#39; &amp;&amp; val.trim()) &#123;
-      appendMsg(&#123;
-        type: &#39;text&#39;,
-        content: &#123; text: val &#125;,
-        position: &#39;right&#39;,
-      &#125;);
+  function handleSend(type, val) {
+    if (type === 'text' &amp;&amp; val.trim()) {
+      appendMsg({
+        type: 'text',
+        content: { text: val },
+        position: 'right',
+      });
 
       setTyping(true);
 
       if (initialized != true)
-      &#123;
-        setTimeout(() =&gt; &#123;
-          appendMsg(&#123;
-            type: &#39;text&#39;,
-            content: &#123; text: &#39;初始化中，请稍后...&#39; &#125;,
-            user: &#123; avatar: &#39;//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg&#39; &#125;,
-          &#125;);
-        &#125;, 1000);
-      &#125;
+      {
+        setTimeout(() =&gt; {
+          appendMsg({
+            type: 'text',
+            content: { text: '初始化中，请稍后...' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          });
+        }, 1000);
+      }
       else 
-      &#123;
+      {
         if (socket &amp;&amp; socket.readyState === WebSocket.OPEN)
-        &#123;
+        {
           socket.send(val);
-        &#125;
-      &#125;
+        }
+      }
 
       
-    &#125;
-  &#125;
+    }
+  }
 
-  function renderMessageContent(msg) &#123;
-    const &#123; content &#125; = msg;
-    return &lt;Bubble content=&#123;content.text&#125; /&gt;;
-  &#125;
+  function renderMessageContent(msg) {
+    const { content } = msg;
+    return &lt;Bubble content={content.text} /&gt;;
+  }
 
   return (
     &lt;div&gt;
         &lt;Chat
-          navbar=&#123;&#123; title: '智能助理' &#125;&#125;
-          messages=&#123;messages&#125;
-          renderMessageContent=&#123;renderMessageContent&#125;
-          onSend=&#123;handleSend&#125;
+          navbar={{ title: '智能助理' }}
+          messages={messages}
+          renderMessageContent={renderMessageContent}
+          onSend={handleSend}
         /&gt;
     &lt;/div&gt;
   );
-&#125;;
+};
 
-export default ChatApp;
-</code></pre>
+export default ChatApp;</code></pre>
 <p>为了确保未来的我在源代码遗失的情况下还能看懂，还是把整个写好的前端都放上来吧。</p>
 <p>建立连接后首先会向后端发送初始化大模型的消息，后端接收到消息后开始初始化大模型，初始化完毕后再向前端返回初始化完成的消息，整个chat组件开始正常工作。</p>
 <p>为保证后端收到初始化消息，前端会按固定的间隔发送多条消息，保证初始化顺利进行。</p>
 <p>后端就更简单了：</p>
-<pre><code class="python">import os
+<pre class="python"><code>import os
 import cherrypy
 import asyncio
 import websockets
@@ -556,7 +675,7 @@ class WebSocketServer:
         llmc.init_reader()
 
     async def broadcast(self, message):
-        if message != &quot;llm_done&quot;:
+        if message != "llm_done":
             response, relevant_docs = llmc.chat(message)
         else:
             response = message
@@ -565,11 +684,11 @@ class WebSocketServer:
                 await client.send(response)
 
     async def message_processing(self, message):
-        if message == &quot;initLLM02175&quot; and self.llm_initialized == True:
-            await self.broadcast(&quot;llm_done&quot;)
-        elif message == &quot;initLLM02175&quot; and self.llm_initialized == False:
+        if message == "initLLM02175" and self.llm_initialized == True:
+            await self.broadcast("llm_done")
+        elif message == "initLLM02175" and self.llm_initialized == False:
             await self.init_llm()
-            await self.broadcast(&quot;llm_done&quot;)
+            await self.broadcast("llm_done")
             self.llm_initialized = True
         else:
             await self.broadcast(message)
@@ -577,7 +696,7 @@ class WebSocketServer:
     def run(self):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        server = websockets.serve(self.handler, &quot;localhost&quot;, 8765)
+        server = websockets.serve(self.handler, "localhost", 8765)
         loop.run_until_complete(server)
         loop.run_forever()
 
@@ -585,9 +704,9 @@ class Root:
 
     @cherrypy.expose
     def index(self):
-        return open(f&#39;C:/Users/76489/Desktop/chatUI/my-chat-app/public/index.html&#39;)
+        return open(f'C:/Users/76489/Desktop/chatUI/my-chat-app/public/index.html')
     
-if __name__ == &#39;__main__&#39;:
+if __name__ == '__main__':
 
     llmc = llm.LLMClient()
     dsc = dataset.DatasetClient()
@@ -595,13 +714,16 @@ if __name__ == &#39;__main__&#39;:
     websocket_thread = threading.Thread(target=WebSocketServer().run)
     websocket_thread.start()
 
-    cherrypy.quickstart(Root(), &#39;/&#39;, &#123;&#39;/&#39;: &#123;&#39;tools.sessions.on&#39;: True&#125;&#125;)
-</code></pre>
-<p>后端建立一个无限循环，保证服务持续进行，保证前后端ws服务的地址相同就能建立起通讯了。  </p>
-<p>效果大概是这样：<br><img src="/2024/10/28/chatUI/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-10-31%20163918.png" alt="alt text"></p>
+    cherrypy.quickstart(Root(), '/', {'/': {'tools.sessions.on': True}})</code></pre>
+<p>后端建立一个无限循环，保证服务持续进行，保证前后端ws服务的地址相同就能建立起通讯了。</p>
+<p>效果大概是这样：<br>
+<img src="屏幕截图%202024-10-31%20163918.png" alt="alt text"></p>
 <p>还有很多不完善的地方，但至少能用了。</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>大部分内容好像和ChatUI没啥关系，毕竟这块儿主要还是补充了些前后端和网络的相关知识，未来或许还需要给这个聊天组件添加别的功能，到时候再做补充吧。</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tn666/p/18082581">https://www.cnblogs.com/tn666/p/18082581</a><br><a target="_blank" rel="noopener" href="https://apifox.com/apiskills/what-is-websocket/">https://apifox.com/apiskills/what-is-websocket/</a></p>
+<h2 id="后记">后记</h2>
+<p>大部分内容好像和ChatUI没啥关系，毕竟这块儿主要还是补充了些前后端和网络的相关知识，未来或许还需要给这个聊天组件添加别的功能，到时候再做补充吧。</p>
+<h2 id="参考文章">参考文章</h2>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tn666/p/18082581" class="uri">https://www.cnblogs.com/tn666/p/18082581</a><br>
+<a target="_blank" rel="noopener" href="https://apifox.com/apiskills/what-is-websocket/" class="uri">https://apifox.com/apiskills/what-is-websocket/</a></p>
 
     </div>
     

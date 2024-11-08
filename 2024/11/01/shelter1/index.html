@@ -48,7 +48,119 @@
 
 <link rel="stylesheet" href="/css/main.css" />
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 <body>
     <div id="layout">
         <transition name="fade">
@@ -184,14 +296,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/python/" style="color: #ffa2c4">
+                <a href="/tags/python/" style="color: #03a9f4">
                     python
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Pyside6/" style="color: #00a596">
+                <a href="/tags/Pyside6/" style="color: #ffa2c4">
                     Pyside6
                 </a>
             </span>
@@ -205,6 +317,15 @@
 <p>现在的东西感觉在未来大概率都是要推翻的，比如换一个内核，换一种载体。建一栋大楼，爆破，用他的废墟拼出另一座大楼，周而复始，直到完美的大楼建立，这种感觉应该还挺美妙的，起码会挺有收获的。</p>
 <p>那么第一步，先来搭一个放置挂机游戏的框架，放置挂机并不一定要成为他的核心玩法，但要在短时间内建立起奖励反馈的机制，这种方式肯定是最简单直接且有效的。</p>
 <p>点击一个按钮，每一次点击将为我带来某种资源，并将这种资源永久保存，至于怎么消耗这些资源，等我具体构思好了再说。</p>
+<p>这种资源本身也需要个名字，虽然对于这个世界上的存在名字并不是什么必要的属性，但这玩意已经是一个虚拟世界里的抽象存在了，连名字也没有就更抽象了。</p>
+<p>最开始我希望将他命名为“思绪”。shelter的诞生某种程度上大概出于我希望寻找一个情绪垃圾桶的想法。寄希望于重复按一个按钮能让我的心灵变得相对宁静，感觉并不靠谱，不过，管他呢。</p>
+<p>我还求助ChatGPT帮我找一个能更好概述人类一切情感的词，但他给了我这个词：<br>
+&gt;sonder</p>
+<p>查了一下，它可以被解释为：<br>
+&gt;意识到每一个随机的路人都过着与你一样生动而复杂的生活。</p>
+<p>某种程度上，它确实包含了所有的情感，情绪由人产生，那么所有人的情绪自然就能包含所有的情绪。体会过后自己好像也变得文青起来了呢。可惜我希望自己能过的更自私一点，所以这个词不太适合作为资源的名字，但毕竟都学了它具体的意思了，还是记录一下，毕竟我写博客的初衷就是帮我保存各种各样的知识，无论有用还没有。</p>
+<p>最终在程序里我还是将他命名为了<code>Base1</code>
+，在界面的说明里他还是会被称为“思绪”，毕竟也不知道未来我会不会给他换个名字，真的遇到了想改名字的情况这么做也能让我不必修改整个工程，为自己写的东西我还是不希望搞得太屎山的。</p>
 
     </div>
     
