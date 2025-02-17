@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>短评合集1 | 渡河</title>
+    <meta name="author" content="傅里叶今天不想变换" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>渡河</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;渡河</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>短评合集1</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/1/29
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00a596">
+                    日常
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="书籍">书籍</h2>
+<h3 id="银河铁道之夜">银河铁道之夜</h3>
+<p><img src="image2.png" alt="alt text"><br>
+因为玩了素晴日，所以对这个故事产生了一些兴趣（虽然在我写下这篇短评的时候应该是还没推完的），不过从结果来说还是有些失望了。</p>
+<p>先说说优点吧，故事里关于银河的描写确实很美，字里行间都流溢着星河的美好灿烂。但故事本身在我看来就是一个纯粹的悲剧，甚至说是带着恶意的悲剧。善意的人们都没什么好下场。乔班尼还要继续过着辛苦的、受人歧视的生活，作为自己生活中为数不多的期盼的父亲似乎也遭遇了海难；康帕内拉的死换来的是自己母亲的悲伤和欺负乔班尼的恶人的苟活；还有列车上的乘客们，他们也都是很好的人。看到的解读说银河列车是寻找幸福的列车，但死后前往天堂这种机械降神的幸福真的是我们要去追寻的吗？</p>
+<p>作者似乎是想借此宣扬某些宗教意义上的苦修思想，现实里的苦难将转化为死后在天堂里的永久幸福。这大概是日本人板载文化和基督教教义碰撞后产生的奇妙结果。上一次接触类似的作品好像还是宝石之国。这两部作品的悲剧叙事从宗教的角度来解读似乎都没有什么问题，但你不能要求一个普通的读者也带入到这种思想中去，这不相当于是传教了吗。感觉作为童话来说，对少年儿童的危害，不可估量。</p>
+<h3 id="百年孤独">百年孤独</h3>
+<p><img src="image3.png" alt="alt text"><br>
+&gt;爽，这才叫文学👍<br>
+爽，这才叫文学👍<br>
+爽，这才叫文学👍</p>
+<p>这应该是我第一本在有一定文学鉴赏基础上完整体验完的世界名著了，也是第一次切切实实感受到了一本书究竟为何能被称为世界名著。这样光怪陆离的故事，这样倒峡泻河的文字，应该直到人类文明的灭亡也不会出现在我的手下了。</p>
+<p>本书的一大特点就是布恩迪亚家族子女继承父母姓名的习俗，让本就建立在乱伦上的布恩迪亚家族的家族关系变得愈加混乱，与此同时，继承了某个名字的家族成员也在不断重复这一名字上一辈成员的宿命，如果不是一口气读下来，真的很难搞清楚当下讲述的是哪一代人的故事。</p>
+<p>何为孤独，在我看来书中的孤独是一种求而不得后的状态。求而不得，陷入孤独。这种求而不得是多方面的，探索的止碍，变革的失败，真爱的丧失，每一代人都在追求着相似的欲望，但总有一股无形的力量将结果导向孤独，直到飓风将这一切摧毁。从社会的层面来看，作者可能想表达的是南美殖民地人民的“孤独”，挣扎在无限循环的泥潭中，一次次重复求而不得的幻象，或许也只能等待一次无比强烈的飓风，将旧有的一切彻底摧毁重来，才能真正摆脱这百年孤独。</p>
+<p>这样一部旷世巨著肯定值得我长篇大论大书特书一番，但想了想真要展开的话，这篇评论篇幅大概要超过我迄今为止写过的所有文本了，这样的宏伟工程一方面容易让我因为犯懒从而半途而废；另一方面以我现在的知识储备和文学素养写这种东西大概率要漏洞百出，所以还是不让未来的自己或别人贻笑大方了。</p>
+<h2 id="游戏">游戏</h2>
+<h3 id="无主之地3">无主之地3</h3>
+<p><img src="image1.png" alt="alt text"><br>
+没有购买DLC，现在想想也是歪打正着了，因为本体后期的体验已经让我觉得有点坐牢了，根本没有通关后继续DLC的动力了。究其原因，大概是到了中后期build定下来以后战斗变得越来越千篇一律了，中间也尝试过更换不同的流派，浅浅试了一下以后发现纯纯没事找事。我或许应该试一下普通以上的难度，普通难度的战斗实在不需要什么技巧，后期感觉自己都不需要战斗，按下F等着狗杀完就好了。游戏里的各种橙色武器感觉还都挺有意思的，只是在数值碾压的情况下，我也懒得去尝试哪些花里胡哨的东西，只愿意用最简单粗暴的实弹武器最高效的射爆每个人的头。在这种情况下我也同样不会再有去多周目刷毕业Build的欲望了。另外本作联机内容的占比似乎并不少，也许联机游玩会更有乐趣吧，反正我是体验不到了。</p>
+<p>不过本作最让我痛苦的还是每张地图的收集要素，当我随着游戏的进行逐渐了解到各式各样的收集要素后，我的强迫症就让我完全无法忽略掉这些藏在角落里的，对角色成长微乎其微的收集要素，这实在太痛苦了。后边借助外置的小地图稍微缓解了这一情况，但依然很痛苦，体验甚至不如清单类开放世界，起码不会让我因为找不到而感到焦虑。（或者说是我该继续吃药了）</p>
+<p>本作的剧情也是个重量级，不过剧情故事在一款刷宝射击游戏中毕竟是次要的部分，所以他带给我的伤害并没有那么大，但槽点太多实在很难让人对此保持沉默。包括但不限于：剧情冲突主要来源与生硬的不补刀环节，强行用二代主角垫了个完全不讨喜的熊孩子等等（想到艾娃的戏份显而易见的会在下一部里进一步增加，我就对下一部的剧情更绝望了）。游戏的剧情演出给了我一种很强烈的二游既视感：过场动画外将主角描述的无所不能，可一进了过场动画立马查无此人，装逼吃瘪都没你的份。我不知道这是不是为了节省成本而故意为之，但站在玩家的角度，观感确实十分离谱。此外虽然占比不多，游戏里确实夹杂了相当部分的LGBT和女性力量等逆天内容，让我对下一部的游戏内容更加担心了。不过管他呢，反正我也不是这个系列的核心受众，4代我也肯定是等风评稳定了再打折购入。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2025 渡河
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;傅里叶今天不想变换
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
