@@ -296,7 +296,7 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/linux/" style="color: #03a9f4">
+                <a href="/tags/linux/" style="color: #ffa2c4">
                     linux
                 </a>
             </span>
@@ -393,20 +393,63 @@ mjx-container[display="true"] + br {
 <p><code>kill</code>
 是用来向进程发送信号的命令。通常用于终止（杀死）进程，虽然它的名字是“kill”，但实际上是<strong>发送指定的信号给进程</strong>，默认信号是
 SIGTERM（终止信号）。</p>
-<p>常见信号：<br>
-|信号|信号编号|作用说明|<br>
-| --- | --- | --- |<br>
-|SIGTERM |15 |默认信号，要求进程正常退出（优雅退出）。|<br>
-|SIGKILL |9 |强制终止进程，无法被捕获或忽略。进程立即退出。|<br>
-|SIGHUP |1 |通常用于告知进程重新加载配置文件或重新启动。|<br>
-|SIGINT |2 |来自键盘的中断信号，通常对应
-Ctrl+C，用于停止前台进程。|<br>
-|SIGSTOP |19 |暂停进程，无法被捕获或忽略。|<br>
-|SIGCONT |18 |恢复暂停的进程（SIGSTOP 后）。|<br>
-|SIGSEGV |11
-|常见的段错误信号，通常由进程访问无效内存地址时触发。|<br>
-|SIGUSR1 |10 |用户自定义信号1，可以由程序根据需求进行处理。|<br>
-|SIGUSR2 |12 |用户自定义信号2，可以由程序根据需求进行处理。|</p>
+<p>常见信号：</p>
+<table>
+<thead>
+<tr>
+<th>信号</th>
+<th>信号编号</th>
+<th>作用说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SIGTERM</td>
+<td>15</td>
+<td>默认信号，要求进程正常退出（优雅退出）。</td>
+</tr>
+<tr>
+<td>SIGKILL</td>
+<td>9</td>
+<td>强制终止进程，无法被捕获或忽略。进程立即退出。</td>
+</tr>
+<tr>
+<td>SIGHUP</td>
+<td>1</td>
+<td>通常用于告知进程重新加载配置文件或重新启动。</td>
+</tr>
+<tr>
+<td>SIGINT</td>
+<td>2</td>
+<td>来自键盘的中断信号，通常对应 Ctrl+C，用于停止前台进程。</td>
+</tr>
+<tr>
+<td>SIGSTOP</td>
+<td>19</td>
+<td>暂停进程，无法被捕获或忽略。</td>
+</tr>
+<tr>
+<td>SIGCONT</td>
+<td>18</td>
+<td>恢复暂停的进程（SIGSTOP 后）。</td>
+</tr>
+<tr>
+<td>SIGSEGV</td>
+<td>11</td>
+<td>常见的段错误信号，通常由进程访问无效内存地址时触发。</td>
+</tr>
+<tr>
+<td>SIGUSR1</td>
+<td>10</td>
+<td>用户自定义信号1，可以由程序根据需求进行处理。</td>
+</tr>
+<tr>
+<td>SIGUSR2</td>
+<td>12</td>
+<td>用户自定义信号2，可以由程序根据需求进行处理。</td>
+</tr>
+</tbody>
+</table>
 <p>其他选项：<br>
 <code>-l</code>：列出所有信号的名称和对应的数字。<br>
 <code>-s</code> 或
