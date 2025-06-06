@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>基于STM32CubeMX创建platformio工程 | 渡河</title>
+    <title>keil疑难杂症汇总 | 渡河</title>
     <meta name="author" content="傅里叶今天不想变换" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -268,14 +268,14 @@ mjx-container[display="true"] + br {
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>基于STM32CubeMX创建platformio工程</h1>
+        <h1>keil疑难杂症汇总</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/5/29
+            2025/6/6
         </span>
         
         <span class="category">
@@ -296,8 +296,15 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/stm32/" style="color: #ffa2c4">
-                    stm32
+                <a href="/tags/keil/" style="color: #00a596">
+                    keil
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/SWD/" style="color: #ff7d73">
+                    SWD
                 </a>
             </span>
             
@@ -306,30 +313,22 @@ mjx-container[display="true"] + br {
     </div>
     
     <div class="content" v-pre>
-        <p>生成代码时，Toolchain/IDE 选择 Makefile<br>
+        <h2 id="微库microlib">微库（Microlib）</h2>
+<p>这是为了小内存嵌入式系统设计的，用于代替标准C语言库的库，同时也可以实现一些特殊的功能。</p>
+<p>在这个地方开启：<br>
 <img src="image.png" alt="alt text"></p>
-<p>然后在PIO Home中选择New Project<br>
-<img src="image-1.png" alt="alt text"></p>
-<p><img src="image-2.png" alt="alt text"></p>
-<p>注意，这里的工程名和选择的地址都要和STM32CubeMX中对应的部分完全一致。</p>
-<p>最后一步，编写platformio.ini文件：</p>
-<pre><code>[platformio]
-src_dir = .
-default_envs = black_f407zg ;默认环境
-
-[env:black_f407zg]
-platform = ststm32
-board = black_f407zg
-framework = stm32cube
-build_flags = 
-    -ICore/Inc              ; -I：包含的库
-    -ICMSIS/Core/Include
-    -D USART_SEND_DATA      ; -D：宏定义
-build_src_filter = 
-    +&lt;Core/**&gt;              ; 要编译的文件，这里是Core下的所有文件
-debug_tool = jlink
-upload_protocol = jlink</code></pre>
-<p>相关的指令还有很多，不过有这些基本的就可以编译运行了。</p>
+<p>有一个很方便的用途是，开启微库后，可以通过重写<code>fputc()</code>函数来直接用<code>printf()</code>进行串口输出。</p>
+<pre class="c"><code>int fputc(int ch, FILE *f)
+{
+ uint8_t temp[1] = {ch};
+ HAL_UART_Transmit(&amp;huart2, temp, 1, 200);
+ return ch;
+}</code></pre>
+<p>但这玩意的执行效率显著低于直接<code>HAL_UART_Transmit()</code>，所以慎用。</p>
+<h2 id="设置使用swd">设置使用SWD</h2>
+<p><img src="image-1.png" alt="alt text"><br>
+<img src="image-2.png" alt="alt text"></p>
+<p>这么设置就能用SWD烧录和调试程序了。</p>
 
     </div>
     
