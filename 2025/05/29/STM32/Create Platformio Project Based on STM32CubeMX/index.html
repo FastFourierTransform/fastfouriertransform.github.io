@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>配置stm32cubemx中的GPIO | 渡河</title>
+    <title>基于STM32CubeMX创建platformio工程 | 渡河</title>
     <meta name="author" content="傅里叶今天不想变换" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -268,14 +268,14 @@ mjx-container[display="true"] + br {
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>配置stm32cubemx中的GPIO</h1>
+        <h1>基于STM32CubeMX创建platformio工程</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/3/31
+            2025/5/29
         </span>
         
         <span class="category">
@@ -296,7 +296,7 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/stm32/" style="color: #00a596">
+                <a href="/tags/stm32/" style="color: #00bcd4">
                     stm32
                 </a>
             </span>
@@ -306,145 +306,31 @@ mjx-container[display="true"] + br {
     </div>
     
     <div class="content" v-pre>
-        <p>配置引脚时可以看到如下选项，这篇文章主要解释GPIO相关的选项</p>
-<p><img src="image.png" alt="alt text"></p>
-<h2 id="gpio_input">GPIO_Input</h2>
-<p><img src="image-1.png" alt="alt text"></p>
-<h3 id="gpio-pull-uppull-down">GPIO Pull-up/Pull-down</h3>
-<p>确定引脚在无外部信号时的默认电平，避免浮空引发误触。</p>
-<ul>
-<li><p>No pull-up and no pull-down<br>
-浮空状态，适用于已有外部上/下拉电阻的电路。</p></li>
-<li><p>Pull-up<br>
-内部上拉电阻连接到VDD，默认高电平。</p></li>
-<li><p>Pull-down<br>
-内部下拉电阻连接到GND，默认低电平。</p></li>
-</ul>
-<h2 id="gpio_output">GPIO_Output</h2>
+        <p>生成代码时，Toolchain/IDE 选择
+Makefile，如果是已经生成过的工程，就先另存为一个新的工程，再生成。<br>
+<img src="image.png" alt="alt text"></p>
+<p>然后在PIO Home中选择New Project。<br>
+<img src="image-1.png" alt="alt text"></p>
 <p><img src="image-2.png" alt="alt text"></p>
-<h3 id="gpio-output-level">GPIO output level</h3>
-<p>默认输出电平</p>
-<ul>
-<li>Low<br>
-默认输出低电平</li>
-<li>High<br>
-默认输出高电平</li>
-</ul>
-<h3 id="gpio-mode">GPIO mode</h3>
-<ul>
-<li>Output Push Pull<br>
-推挽模式</li>
-<li>Output Open Drain<br>
-开漏模式</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>特性</th>
-<th>推挽模式</th>
-<th>开漏模式</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>驱动能力</td>
-<td>强（直接驱动高/低电平）</td>
-<td>弱（高电平由上拉电阻提供）</td>
-</tr>
-<tr>
-<td>电平切换速度</td>
-<td>快（MOSFET直接驱动）</td>
-<td>慢（高电平依赖RC充电）</td>
-</tr>
-<tr>
-<td>是否需要上拉电阻</td>
-<td>不需要</td>
-<td>需要（外部或内部）</td>
-</tr>
-<tr>
-<td>总线冲突风险</td>
-<td>高（多设备可能短路）</td>
-<td>低（支持“线与”逻辑）</td>
-</tr>
-<tr>
-<td>功耗</td>
-<td>较高（瞬态电流）</td>
-<td>较低（静态电流小）</td>
-</tr>
-<tr>
-<td>典型应用</td>
-<td>LED、PWM、高速单设备通信</td>
-<td>I²C、多设备总线、电平转换</td>
-</tr>
-</tbody>
-</table>
-<p>总结就是开漏需要上拉电阻实现输出高电平，但推挽不需要。<br>
-开漏的优势在于可以实现线与逻辑，即多个设备的输出信号通过物理连接共享同一总线，当所有输出均为高电平时，总线输出才为高电平。</p>
-<h3 id="gpio-pull-uppull-down-1">GPIO Pull-up/Pull-down</h3>
-<p>确定引脚在无外部信号时的默认电平，避免浮空引发误触。</p>
-<ul>
-<li><p>No pull-up and no pull-down<br>
-浮空状态，适用于已有外部上/下拉电阻的电路。</p></li>
-<li><p>Pull-up<br>
-内部上拉电阻连接到VDD，默认高电平。</p></li>
-<li><p>Pull-down<br>
-内部下拉电阻连接到GND，默认低电平。</p></li>
-</ul>
-<p>主要用于开漏，推挽似乎没什么用。</p>
-<h3 id="maximum-output-speed">Maximum output speed</h3>
-<p>输出速率,取决于具体的芯片，下面以stm32F1系列为例，部分芯片可能存在very
-high配置。</p>
-<table>
-<thead>
-<tr>
-<th>配置</th>
-<th>速率</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Low</td>
-<td>2MHz</td>
-</tr>
-<tr>
-<td>Medium</td>
-<td>10MHz</td>
-</tr>
-<tr>
-<td>High</td>
-<td>50MHz</td>
-</tr>
-</tbody>
-</table>
-<h2 id="gpio_analog">GPIO_Analog</h2>
-<p><img src="image-3.png" alt="alt text"><br>
-GPIO
-Analog模式用于配置引脚为模拟功能，适用于需要处理模拟信号的场景（如ADC输入或DAC输出）。</p>
-<h2 id="gpio_extix">GPIO_EXTIx</h2>
-<p><img src="image-4.png" alt="alt text"><br>
-配置本身没什么好说的，主要讲讲中断和事件的区别（当年应该是学过的，但我居然一点印象都没有了）。</p>
-<table>
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr>
-<th>外部中断（Interrupt）</th>
-<th>外部事件（Event）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>触发后通知CPU，跳转执行中断服务程序（ISR）。</td>
-<td>触发后直接控制外设硬件（如ADC、DMA等），无需CPU干预。</td>
-</tr>
-<tr>
-<td>需要软件处理（例如读取数据、清除标志位）。</td>
-<td>完全由硬件自动完成，例如直接启动ADC转换或DMA传输。</td>
-</tr>
-</tbody>
-</table>
+<p>注意，这里的工程名和选择的地址都要和STM32CubeMX中对应的部分完全一致。</p>
+<p>最后一步，编写platformio.ini文件：</p>
+<pre><code>[platformio]
+src_dir = .
+default_envs = black_f407zg ;默认环境
+
+[env:black_f407zg]
+platform = ststm32
+board = black_f407zg
+framework = stm32cube
+build_flags = 
+    -ICore/Inc              ; -I：包含的库
+    -ICMSIS/Core/Include
+    -D USART_SEND_DATA      ; -D：宏定义
+build_src_filter = 
+    +&lt;Core/**&gt;              ; 要编译的文件，这里是Core下的所有文件
+debug_tool = jlink
+upload_protocol = jlink</code></pre>
+<p>相关的指令还有很多，不过有这些基本的就可以编译运行了。</p>
 
     </div>
     
