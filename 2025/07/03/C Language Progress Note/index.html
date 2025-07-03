@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>Categories: 日常 | 渡河</title>
+    <title>C语言进步笔记 | 渡河</title>
     <meta name="author" content="傅里叶今天不想变换" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -262,47 +266,20 @@ mjx-container[display="true"] + br {
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                嵌入式
-            </a>
+            <div class="article">
+    <div>
+        <h1>C语言进步笔记</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/7/3
         </span>
         
-        
-        
-        <span>
-            <a href="/categories/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                全栈开发
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" style="background: #ff7d73">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                理论知识
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/debug/" style="background: #ffa2c4">
+        <span class="category">
+            <a href="/categories/debug/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -311,178 +288,59 @@ mjx-container[display="true"] + br {
         </span>
         
         
-        
-        <span>
-            <a href="/categories/GUI%E5%BC%80%E5%8F%91/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                GUI开发
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/C-C/" style="color: #ffa2c4">
+                    C/C++
+                </a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                机器学习
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                数字信号处理
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="background: #ffa2c4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                操作系统
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/%E6%97%A5%E5%B8%B8/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                日常
-            </a>
-        </span>
-        
-        
-        
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/6/9</div>
-            <a href="/2025/06/09/Collections/Internet%20Gleanings-The%20Tall%20Dog/">
-                <h3>互联网拾遗-高高狗</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E6%97%A5%E5%B8%B8/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        日常
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #00a596">
-                            日常
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <h2 id="全局指针指向局部变量导致悬垂">全局指针指向局部变量导致悬垂</h2>
+<p>指针指向局部变量，函数返回后局部变量被销毁，导致悬垂指针：</p>
+<pre class="c"><code>void Resp_Init(void)
+{
+   // ... 
+   bool temp_mAutoRespThreshold = true;        // 局部变量
+   uint16_t temp_mRrApneaTime = 20;            // 函数退出后销毁
+   int16_t  temp_mHiRespThreshold = 138;
+   int16_t  temp_mLoRespThreshold = 118;
+   
+   respCore.pAutoThreshold = &amp;temp_mAutoRespThreshold;  // 危险！指向局部变量
+   respCore.pRrApneaTime = &amp;temp_mRrApneaTime;
+   respCore.pHiThreshold = &amp;temp_mHiRespThreshold;
+   respCore.pLoThreshold = &amp;temp_mLoRespThreshold;
+}</code></pre>
+<p><br></p>
+<p>应该修改为：</p>
+<pre class="c"><code>void Resp_Init(void)
+{
+   static bool temp_mAutoRespThreshold = true;  // 改为静态变量
+   static uint16_t temp_mRrApneaTime = 20;
+   static int16_t temp_mHiRespThreshold = 138;
+   static int16_t temp_mLoRespThreshold = 118;
+   // ... 其余不变 ...
+}</code></pre>
+<p><br></p>
+<p>另外在调试时，局部变量是不会被销毁的。另外调试时也会自动初始化一些未初始化的变量。今后再遇到调试与直接运行结果不同时，可以往这几个方面考虑。</p>
+
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/1/29</div>
-            <a href="/2025/01/29/Reviews/Short%20Reviews1/">
-                <h3>短评合集1</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E6%97%A5%E5%B8%B8/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        日常
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #ff7d73">
-                            日常
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2025/1/13</div>
-            <a href="/2025/01/13/Reviews/Suisou%20Ginka%20no%20Istoria/">
-                <h3>通关留念-水葬银币的伊斯特里亚</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/%E6%97%A5%E5%B8%B8/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        日常
-                    </a>
-                </span>
-                
-                
-                <span class="tags">
-                    <span class="icon">
-                        <i class="fa-solid fa-tags fa-fw"></i>
-                    </span>
-                    
-                    
-                    <span class="tag">
-                        
-                        <a href="/tags/%E6%97%A5%E5%B8%B8/" style="color: #03a9f4">
-                            日常
-                        </a>
-                    </span>
-                    
-                </span>
-                
-            </div>
-        </div>
-    </div>
+    
+    
+    
+    
     
 </div>
 
@@ -514,6 +372,12 @@ mjx-container[display="true"] + br {
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>

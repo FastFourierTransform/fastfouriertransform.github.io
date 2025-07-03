@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>keil疑难杂症汇总 | 渡河</title>
+    <title>keil及platformio疑难杂症汇总 | 渡河</title>
     <meta name="author" content="傅里叶今天不想变换" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -268,7 +268,7 @@ mjx-container[display="true"] + br {
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>keil疑难杂症汇总</h1>
+        <h1>keil及platformio疑难杂症汇总</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -303,7 +303,7 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/SWD/" style="color: #03a9f4">
+                <a href="/tags/SWD/" style="color: #ff7d73">
                     SWD
                 </a>
             </span>
@@ -313,7 +313,8 @@ mjx-container[display="true"] + br {
     </div>
     
     <div class="content" v-pre>
-        <h2 id="微库microlib">微库（Microlib）</h2>
+        <h1 id="keil">KEIL</h1>
+<h2 id="微库microlib">微库（Microlib）</h2>
 <p>这是为了小内存嵌入式系统设计的，用于代替标准C语言库的库，同时也可以实现一些特殊的功能。</p>
 <p>在这个地方开启：<br>
 <img src="image.png" alt="alt text"></p>
@@ -329,6 +330,10 @@ mjx-container[display="true"] + br {
 <p><img src="image-1.png" alt="alt text"><br>
 <img src="image-2.png" alt="alt text"></p>
 <p>这么设置就能用SWD烧录和调试程序了。</p>
+<h1 id="platformio">PLATFORMIO</h1>
+<h2 id="调试时运行到hal_init时卡住">调试时运行到HAL_Init()时卡住</h2>
+<p>在SYS里设置以下Debug就好了，但之前也没设置，忽然就有了这个问题了，很奇怪。<br>
+<img src="image-3.png" alt="alt text"></p>
 
     </div>
     
