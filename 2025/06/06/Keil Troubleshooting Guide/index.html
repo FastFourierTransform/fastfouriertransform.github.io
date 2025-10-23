@@ -296,14 +296,14 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/keil/" style="color: #00bcd4">
+                <a href="/tags/keil/" style="color: #ff7d73">
                     keil
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/SWD/" style="color: #ff7d73">
+                <a href="/tags/SWD/" style="color: #03a9f4">
                     SWD
                 </a>
             </span>
@@ -313,27 +313,22 @@ mjx-container[display="true"] + br {
     </div>
     
     <div class="content" v-pre>
-        <h1 id="keil">KEIL</h1>
-<h2 id="微库microlib">微库（Microlib）</h2>
-<p>这是为了小内存嵌入式系统设计的，用于代替标准C语言库的库，同时也可以实现一些特殊的功能。</p>
-<p>在这个地方开启：<br>
-<img src="image.png" alt="alt text"></p>
+        <h1 id="KEIL"><a href="#KEIL" class="headerlink" title="KEIL"></a>KEIL</h1><h2 id="微库（Microlib）"><a href="#微库（Microlib）" class="headerlink" title="微库（Microlib）"></a>微库（Microlib）</h2><p>这是为了小内存嵌入式系统设计的，用于代替标准C语言库的库，同时也可以实现一些特殊的功能。</p>
+<p>在这个地方开启：<br><img src="/2025/06/06/Keil%20Troubleshooting%20Guide/image.png" alt="alt text"></p>
 <p>有一个很方便的用途是，开启微库后，可以通过重写<code>fputc()</code>函数来直接用<code>printf()</code>进行串口输出。</p>
-<pre class="c"><code>int fputc(int ch, FILE *f)
+<pre><code class="language-C">int fputc(int ch, FILE *f)
 {
  uint8_t temp[1] = {ch};
  HAL_UART_Transmit(&amp;huart2, temp, 1, 200);
  return ch;
-}</code></pre>
+}
+</code></pre>
 <p>但这玩意的执行效率显著低于直接<code>HAL_UART_Transmit()</code>，所以慎用。</p>
-<h2 id="设置使用swd">设置使用SWD</h2>
-<p><img src="image-1.png" alt="alt text"><br>
-<img src="image-2.png" alt="alt text"></p>
+<h2 id="设置使用SWD"><a href="#设置使用SWD" class="headerlink" title="设置使用SWD"></a>设置使用SWD</h2><p><img src="/2025/06/06/Keil%20Troubleshooting%20Guide/image-1.png" alt="alt text"><br><img src="/2025/06/06/Keil%20Troubleshooting%20Guide/image-2.png" alt="alt text"></p>
 <p>这么设置就能用SWD烧录和调试程序了。</p>
-<h1 id="platformio">PLATFORMIO</h1>
-<h2 id="调试时运行到hal_init时卡住">调试时运行到HAL_Init()时卡住</h2>
-<p>在SYS里设置以下Debug就好了，但之前也没设置，忽然就有了这个问题了，很奇怪。<br>
-<img src="image-3.png" alt="alt text"></p>
+<h1 id="PLATFORMIO"><a href="#PLATFORMIO" class="headerlink" title="PLATFORMIO"></a>PLATFORMIO</h1><h2 id="调试时运行到HAL-Init-时卡住"><a href="#调试时运行到HAL-Init-时卡住" class="headerlink" title="调试时运行到HAL_Init()时卡住"></a>调试时运行到HAL_Init()时卡住</h2><p>在SYS里设置以下Debug就好了，但之前也没设置，忽然就有了这个问题了，很奇怪。<br><img src="/2025/06/06/Keil%20Troubleshooting%20Guide/image-3.png" alt="alt text"></p>
+<h2 id="Build速度非常非常慢"><a href="#Build速度非常非常慢" class="headerlink" title="Build速度非常非常慢"></a>Build速度非常非常慢</h2><p>具体原因不明，尝试下来可用的方法是重装PIO。<br>记得删掉<code>C:\Users\用户名</code>下的<code>.pio</code>文件</p>
+<p>破案了，是windows某次更新给我的电脑里莫名安装了一个类似360安全卫士的东西，有机会我一定要重装系统，让狗日的windows滚出我的生活。</p>
 
     </div>
     

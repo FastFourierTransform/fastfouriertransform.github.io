@@ -296,7 +296,7 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/C-C/" style="color: #ffa2c4">
+                <a href="/tags/C-C/" style="color: #00a596">
                     C/C++
                 </a>
             </span>
@@ -306,9 +306,8 @@ mjx-container[display="true"] + br {
     </div>
     
     <div class="content" v-pre>
-        <h2 id="全局指针指向局部变量导致悬垂">全局指针指向局部变量导致悬垂</h2>
-<p>指针指向局部变量，函数返回后局部变量被销毁，导致悬垂指针：</p>
-<pre class="c"><code>void Resp_Init(void)
+        <h2 id="全局指针指向局部变量导致悬垂"><a href="#全局指针指向局部变量导致悬垂" class="headerlink" title="全局指针指向局部变量导致悬垂"></a>全局指针指向局部变量导致悬垂</h2><p>指针指向局部变量，函数返回后局部变量被销毁，导致悬垂指针：</p>
+<pre><code class="language-C">void Resp_Init(void)
 {
    // ... 
    bool temp_mAutoRespThreshold = true;        // 局部变量
@@ -320,18 +319,22 @@ mjx-container[display="true"] + br {
    respCore.pRrApneaTime = &amp;temp_mRrApneaTime;
    respCore.pHiThreshold = &amp;temp_mHiRespThreshold;
    respCore.pLoThreshold = &amp;temp_mLoRespThreshold;
-}</code></pre>
-<p><br></p>
+}
+</code></pre>
+<br>
+
 <p>应该修改为：</p>
-<pre class="c"><code>void Resp_Init(void)
+<pre><code class="language-C">void Resp_Init(void)
 {
    static bool temp_mAutoRespThreshold = true;  // 改为静态变量
    static uint16_t temp_mRrApneaTime = 20;
    static int16_t temp_mHiRespThreshold = 138;
    static int16_t temp_mLoRespThreshold = 118;
    // ... 其余不变 ...
-}</code></pre>
-<p><br></p>
+}
+</code></pre>
+<br>
+
 <p>另外在调试时，局部变量是不会被销毁的。另外调试时也会自动初始化一些未初始化的变量。今后再遇到调试与直接运行结果不同时，可以往这几个方面考虑。</p>
 
     </div>

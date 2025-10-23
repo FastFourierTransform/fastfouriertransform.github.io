@@ -306,12 +306,9 @@ mjx-container[display="true"] + br {
     </div>
     
     <div class="content" v-pre>
-        <p>生成代码时，Toolchain/IDE 选择
-Makefile，如果是已经生成过的工程，就先另存为一个新的工程，再生成。<br>
-<img src="image.png" alt="alt text"></p>
-<p>然后在PIO Home中选择New Project。<br>
-<img src="image-1.png" alt="alt text"></p>
-<p><img src="image-2.png" alt="alt text"></p>
+        <p>生成代码时，Toolchain/IDE 选择 Makefile，如果是已经生成过的工程，就先另存为一个新的工程，再生成。<br><img src="/2025/05/29/STM32/Create%20Platformio%20Project%20Based%20on%20STM32CubeMX/image.png" alt="alt text"></p>
+<p>然后在PIO Home中选择New Project。<br><img src="/2025/05/29/STM32/Create%20Platformio%20Project%20Based%20on%20STM32CubeMX/image-1.png" alt="alt text"></p>
+<p><img src="/2025/05/29/STM32/Create%20Platformio%20Project%20Based%20on%20STM32CubeMX/image-2.png" alt="alt text"></p>
 <p>注意，这里的工程名和选择的地址都要和STM32CubeMX中对应的部分完全一致。</p>
 <p>最后一步，编写platformio.ini文件：</p>
 <pre><code>[platformio]
@@ -329,7 +326,8 @@ build_flags =
 build_src_filter = 
     +&lt;Core/**&gt;              ; 要编译的文件，这里是Core下的所有文件
 debug_tool = jlink
-upload_protocol = jlink</code></pre>
+upload_protocol = jlink
+</code></pre>
 <p>相关的指令还有很多，不过有这些基本的就可以编译运行了。</p>
 
     </div>

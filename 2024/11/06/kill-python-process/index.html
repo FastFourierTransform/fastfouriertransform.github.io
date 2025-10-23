@@ -296,7 +296,7 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/linux/" style="color: #ff7d73">
+                <a href="/tags/linux/" style="color: #ffa2c4">
                     linux
                 </a>
             </span>
@@ -307,37 +307,23 @@ mjx-container[display="true"] + br {
     
     <div class="content" v-pre>
         <p>输入：</p>
-<pre class="shell"><code>ps -ef |grep python</code></pre>
-<p>然后就会出现如下内容：<br>
-<img src="image.png" alt="alt text"></p>
+<pre><code class="language-shell">ps -ef |grep python
+</code></pre>
+<p>然后就会出现如下内容：<br><img src="/2024/11/06/kill-python-process/image.png" alt="alt text"></p>
 <p>接着<code>kill</code>掉对应的进程就好了，比如说：</p>
-<pre class="shell"><code>kill -9 13626</code></pre>
+<pre><code class="language-shell">kill -9 13626
+</code></pre>
 <p>感觉这样的小tips更适合放进某种更精巧的浏览器窗口，但目前还不知道怎么去弄。但既然都已经写到文章里了，还是稍微充实一下内容吧。</p>
 <p>详解一下上述的命令：</p>
-<h2 id="ps">ps</h2>
-<p><code>ps</code> 代表 "process status"（进程状态）。<br>
-默认情况下，<code>ps</code>
-显示当前用户（即运行该命令的用户）所属会话的进程。</p>
+<h2 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h2><p><code>ps</code> 代表 “process status”（进程状态）。<br>默认情况下，<code>ps</code> 显示当前用户（即运行该命令的用户）所属会话的进程。</p>
 <p>常见的 <code>ps</code> 命令选项包括：</p>
-<p><code>ps -e</code> 或 <code>ps -A</code>：显示所有进程。<br>
-<code>ps -f</code>：显示进程的详细信息，包括进程的父进程、启动时间、占用的资源等。<br>
-<code>ps -u username</code>：显示指定用户的进程。<br>
-<code>ps -aux</code>：显示所有用户的所有进程，并且是以长格式显示。<br>
-<code>ps -ef</code>：以全格式显示所有进程，通常用于显示所有进程的信息，包括进程树（父子关系）。</p>
-<p>其他部分：<br>
-<code>|</code>：管道符，将 ps -ef 命令的输出传递给 grep 命令。<br>
-<code>grep python</code>：在 ps -ef 的输出中筛选出包含 "python"
-字符串的行。</p>
-<h2 id="grep">grep</h2>
-<p><code>grep</code> 命令是 Linux 和类 Unix
-系统中用于在文件或标准输入中搜索文本字符串的工具。它通过使用正则表达式（regex）来匹配和显示包含特定模式的行。<code>grep</code>
-命令常用于从大量数据中提取信息，特别是在日志文件或输出中查找特定内容。</p>
+<p><code>ps -e</code> 或 <code>ps -A</code>：显示所有进程。<br><code>ps -f</code>：显示进程的详细信息，包括进程的父进程、启动时间、占用的资源等。<br><code>ps -u username</code>：显示指定用户的进程。<br><code>ps -aux</code>：显示所有用户的所有进程，并且是以长格式显示。<br><code>ps -ef</code>：以全格式显示所有进程，通常用于显示所有进程的信息，包括进程树（父子关系）。</p>
+<p>其他部分：<br><code>|</code>：管道符，将 ps -ef 命令的输出传递给 grep 命令。<br><code>grep python</code>：在 ps -ef 的输出中筛选出包含 “python” 字符串的行。</p>
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p><code>grep</code> 命令是 Linux 和类 Unix 系统中用于在文件或标准输入中搜索文本字符串的工具。它通过使用正则表达式（regex）来匹配和显示包含特定模式的行。<code>grep</code> 命令常用于从大量数据中提取信息，特别是在日志文件或输出中查找特定内容。</p>
 <p>基本语法</p>
-<pre class="bash"><code>grep [options] pattern [file...]</code></pre>
-<p><code>[options]</code>：可选的参数，用来控制 grep 命令的行为。<br>
-<code>pattern</code>：要匹配的模式（可以是一个普通字符串或正则表达式）。<br>
-<code>[file...]</code>：要搜索的文件。如果不指定文件，grep
-将从标准输入（通常是键盘输入或其他命令的输出）读取数据。</p>
+<pre><code class="language-bash">grep [options] pattern [file...]
+</code></pre>
+<p><code>[options]</code>：可选的参数，用来控制 grep 命令的行为。<br><code>pattern</code>：要匹配的模式（可以是一个普通字符串或正则表达式）。<br><code>[file...]</code>：要搜索的文件。如果不指定文件，grep 将从标准输入（通常是键盘输入或其他命令的输出）读取数据。</p>
 <p>常见命令选项：</p>
 <table>
 <thead>
@@ -346,8 +332,7 @@ mjx-container[display="true"] + br {
 <th>说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>-i</td>
 <td>忽略大小写，进行不区分大小写的搜索。</td>
 </tr>
@@ -387,13 +372,9 @@ mjx-container[display="true"] + br {
 <td>-e</td>
 <td>允许指定多个匹配模式。</td>
 </tr>
-</tbody>
-</table>
-<h2 id="kill">kill</h2>
-<p><code>kill</code>
-是用来向进程发送信号的命令。通常用于终止（杀死）进程，虽然它的名字是“kill”，但实际上是<strong>发送指定的信号给进程</strong>，默认信号是
-SIGTERM（终止信号）。</p>
-<p>常见信号：</p>
+</tbody></table>
+<h2 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h2><p><code>kill</code> 是用来向进程发送信号的命令。通常用于终止（杀死）进程，虽然它的名字是“kill”，但实际上是<strong>发送指定的信号给进程</strong>，默认信号是 SIGTERM（终止信号）。</p>
+<p>常见信号：  </p>
 <table>
 <thead>
 <tr>
@@ -402,8 +383,7 @@ SIGTERM（终止信号）。</p>
 <th>作用说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>SIGTERM</td>
 <td>15</td>
 <td>默认信号，要求进程正常退出（优雅退出）。</td>
@@ -448,14 +428,8 @@ SIGTERM（终止信号）。</p>
 <td>12</td>
 <td>用户自定义信号2，可以由程序根据需求进行处理。</td>
 </tr>
-</tbody>
-</table>
-<p>其他选项：<br>
-<code>-l</code>：列出所有信号的名称和对应的数字。<br>
-<code>-s</code> 或
-<code>--signal</code>：指定要发送的信号，可以使用信号的名字或数字。<br>
-<code>-HUP</code>：发送 SIGHUP
-信号，通常用于让进程重新加载配置文件或重启。</p>
+</tbody></table>
+<p>其他选项：<br><code>-l</code>：列出所有信号的名称和对应的数字。<br><code>-s</code> 或 <code>--signal</code>：指定要发送的信号，可以使用信号的名字或数字。<br><code>-HUP</code>：发送 SIGHUP 信号，通常用于让进程重新加载配置文件或重启。  </p>
 
     </div>
     

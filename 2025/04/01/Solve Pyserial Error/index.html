@@ -296,7 +296,7 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/python/" style="color: #00a596">
+                <a href="/tags/python/" style="color: #ffa2c4">
                     python
                 </a>
             </span>
@@ -307,12 +307,14 @@ mjx-container[display="true"] + br {
     
     <div class="content" v-pre>
         <p>使用时虽然都是</p>
-<pre class="python"><code>import serial</code></pre>
-<p>但实际上我们导入的应该是 <code>pyserial</code>
-这个包，<code>serial</code>并里没有<code>Serial</code>这个属性，从而导致了这个错误。</p>
+<pre><code class="language-python">import serial
+</code></pre>
+<p>但实际上我们导入的应该是 <code>pyserial</code> 这个包，<code>serial</code>并里没有<code>Serial</code>这个属性，从而导致了这个错误。</p>
 <p>解决办法:</p>
-<pre class="bash"><code>pip uninstall serial</code></pre>
-<pre class="bash"><code>pip install pyserial</code></pre>
+<pre><code class="language-bash">pip uninstall serial
+</code></pre>
+<pre><code class="language-bash">pip install pyserial
+</code></pre>
 
     </div>
     

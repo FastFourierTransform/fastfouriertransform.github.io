@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>STM32CubeMX中定时器中断的配置 | 渡河</title>
+    <title>STM32定时器生成PWM波 | 渡河</title>
     <meta name="author" content="傅里叶今天不想变换" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -268,14 +268,14 @@ mjx-container[display="true"] + br {
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>STM32CubeMX中定时器中断的配置</h1>
+        <h1>STM32定时器生成PWM波</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/6/20
+            2025/10/23
         </span>
         
         <span class="category">
@@ -306,98 +306,8 @@ mjx-container[display="true"] + br {
     </div>
     
     <div class="content" v-pre>
-        <p>查了很多教程，第一步都是配置RCC</p>
-<p><img src="image.png" alt="alt text"></p>
-<p>这里是用来配置外部时钟源的，这部分内容本文主要起一个记录的作用。</p>
-<p>不同的芯片的定时器不尽相同，STM32f103有三类定时器：</p>
-<table>
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr>
-<th>类型</th>
-<th>编号</th>
-<th>总线</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>高级定时器</td>
-<td>TIM1、TIME8</td>
-<td>APB2</td>
-<td>拥有通用定时器全部功能，并额外具有重复计数器、死区生成、互补输出、刹车输入等功能</td>
-</tr>
-<tr>
-<td>通用定时器</td>
-<td>TIM2、TIM3、TIM4、TIM5</td>
-<td>APB1</td>
-<td>拥有基本定时器全部功能，并额外具有内外时钟源选择、输入捕获、输出比较、编码器接口、主从触发模式等功能</td>
-</tr>
-<tr>
-<td>基本定时器</td>
-<td>TIM6、TIM7</td>
-<td>APB1</td>
-<td>拥有定时中断、主模式触发DAC的功能</td>
-</tr>
-</tbody>
-</table>
-<p>高级和通用以后再鸽，这里先说基本定时器。</p>
-<p><img src="image-1.png" alt="alt text"></p>
-<table>
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Prescaler（时钟预分频数）</td>
-<td>总线分频减一，这里意思是64分频</td>
-</tr>
-<tr>
-<td>Counter Mode（计数模式）</td>
-<td>向上或向下计数，基本定时器只能是向上计数</td>
-</tr>
-<tr>
-<td>Counter Period（自动重装载值）</td>
-<td>计数器的上限，从零开始</td>
-</tr>
-<tr>
-<td>auto-reload-preload（自动重装载）</td>
-<td>到达上限后是否自动重新装载</td>
-</tr>
-<tr>
-<td>TRGO Parameters（触发输出）</td>
-<td>是否在定时器的定时时间到达的时候输出一个信号</td>
-</tr>
-</tbody>
-</table>
-<p>不过触发输出这部分我没找到太多的资料，不太清楚里面的设置具体是什么意思，这个也放在未来鸽吧。</p>
-<p>在这里开启中断：<br>
-<img src="image-2.png" alt="alt text"><br>
-<br><br>
-比较麻烦的是需要手动开启定时器：</p>
-<pre class="c"><code>// 开启定时器
-HAL_TIM_Base_Start_IT(&amp;htim6);
-
-// 中断函数
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  if(htim-&gt;Instance == TIM6)
-  {
-    // 中断任务
-  }
-}</code></pre>
+        <p>好久没有写博客了，归根结底还是前段时间有点摆烂了，有些蛮重要的内容也没有得到及时的记录（比如ADC配置，下个项目要配置ADC估计又得重新学一遍），这并不好。同时在第一次编译危机的影响下，也让我的博客产生了诡异的变化，某些细节变得异常丑陋，这在某种程度上也是我疏于打理博客的恶果，因为过了那么长时间，导致我博客出现异常的具体原因已不可靠，只能寄希望于在未来重新部署整个博客了。</p>
+<p>那么言归正传</p>
 
     </div>
     

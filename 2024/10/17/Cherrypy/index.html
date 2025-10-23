@@ -310,7 +310,7 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/python/" style="color: #03a9f4">
+                <a href="/tags/python/" style="color: #00bcd4">
                     python
                 </a>
             </span>
@@ -321,20 +321,21 @@ mjx-container[display="true"] + br {
     
     <div class="content" v-pre>
         <p>借此机会顺便补一下计网的相关知识，大概不会太复杂，所以直接开始吧。</p>
-<pre class="bash"><code>pip install cherrypy</code></pre>
-<pre class="python"><code>import cherrypy
+<pre><code class="language-bash">pip install cherrypy
+</code></pre>
+<pre><code class="language-python">import cherrypy
 
 class HelloWorld:
     @cherrypy.expose
     def index(serlf):
         return "hello world!"
-cherrypy.quickstart(HelloWorld())</code></pre>
+cherrypy.quickstart(HelloWorld())
+</code></pre>
 <p>这里涉及到一个装饰器的概念。</p>
 <p>装饰器（Decorator）是Python中的一种高级函数，主要用于在不改变原函数代码的情况下，动态地修改或扩展函数或类的功能。它可以通过在函数或方法前添加装饰器来执行额外的逻辑，例如日志记录、权限检查、性能监测等。</p>
-<p>装饰器本质上是一个接受函数作为参数的函数，并返回一个新的函数或增强后的版本。<a href="mailto:它通常通过**@符号" class="email">它通常通过**@符号</a>**来简化语法，应用在函数或方法定义的上方。</p>
-<p>一个最简单的装饰器形式如下：<br>
-的</p>
-<pre class="python"><code>def my_decorator(func):
+<p>装饰器本质上是一个接受函数作为参数的函数，并返回一个新的函数或增强后的版本。它通常通过**@符号**来简化语法，应用在函数或方法定义的上方。</p>
+<p>一个最简单的装饰器形式如下：<br>的</p>
+<pre><code class="language-python">def my_decorator(func):
     def wrapper():
         print("装饰器逻辑：在原函数执行之前")
         func()  # 执行原函数
@@ -345,24 +346,25 @@ cherrypy.quickstart(HelloWorld())</code></pre>
 def say_hello():
     print("Hello!")
 
-say_hello()</code></pre>
+say_hello()
+</code></pre>
 <p>输出结果为：</p>
-<pre class="bash"><code>装饰器逻辑：在原函数执行之前
+<pre><code class="language-bash">装饰器逻辑：在原函数执行之前
 Hello!
-装饰器逻辑：在原函数执行之后</code></pre>
-<p><code>@cherrypy.expose</code>：这是一个 CherryPy
-自带的装饰器，用来将某个方法暴露为可通过 HTTP 访问的 Web API 路由。</p>
+装饰器逻辑：在原函数执行之后
+</code></pre>
+<p><code>@cherrypy.expose</code>：这是一个 CherryPy 自带的装饰器，用来将某个方法暴露为可通过 HTTP 访问的 Web API 路由。</p>
 <p>然后还有其他两个常用的装饰器：</p>
-<p><code>@cherrypy.tools.json_in()</code><br>
-<code>@cherrypy.tools.json_out()</code></p>
+<p><code>@cherrypy.tools.json_in()</code><br><code>@cherrypy.tools.json_out()</code></p>
 <p>用于通过json文件实现输入输出。</p>
-<pre class="python"><code>import requests
+<pre><code class="language-python">import requests
 
 # 获取网页输出
 requests.get(URL).json()
 
 # 输入json文件，并获取输出
-requsets.post(URL,json_file).json()</code></pre>
+requsets.post(URL,json_file).json()
+</code></pre>
 <p><code>cherrypy.tools</code>中还有许多其他功能，但对于现在的我来说，目前这点基本够用了。</p>
 
     </div>
