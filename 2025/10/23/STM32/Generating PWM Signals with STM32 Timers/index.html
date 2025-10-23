@@ -296,7 +296,7 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/stm32/" style="color: #ff7d73">
+                <a href="/tags/stm32/" style="color: #03a9f4">
                     stm32
                 </a>
             </span>
@@ -307,7 +307,61 @@ mjx-container[display="true"] + br {
     
     <div class="content" v-pre>
         <p>好久没有写博客了，归根结底还是前段时间有点摆烂了，有些蛮重要的内容也没有得到及时的记录（比如ADC配置，下个项目要配置ADC估计又得重新学一遍），这并不好。同时在第一次编译危机的影响下，也让我的博客产生了诡异的变化，某些细节变得异常丑陋，这在某种程度上也是我疏于打理博客的恶果，因为过了那么长时间，导致我博客出现异常的具体原因已不可靠，只能寄希望于在未来重新部署整个博客了。</p>
-<p>那么言归正传</p>
+<p>那么言归正传，在中断一节只讲了基本定时器，但基本定时器不具备生成PWM波的功能，这次使用通用定时器。</p>
+<h3 id="原理讲解"><a href="#原理讲解" class="headerlink" title="原理讲解"></a>原理讲解</h3><p><img src="/2025/10/23/STM32/Generating%20PWM%20Signals%20with%20STM32%20Timers/image.png" alt="alt text">  </p>
+<p>上图为向上计数模式。</p>
+<p>在PWM输出模式下，除了CNT（计数器当前值）、ARR（自动重装载值）之外，还多了一个值CCRx（捕获/比较寄存器值）。当CNT小于CCRx时，TIMx_CHx通道输出低电平。当CNT等于或大于CCRx时，TIMx_CHx通道输出高电平。  </p>
+<p>所以PWM的一个周期为</p>
+<ol>
+<li>定时器从0开始向上计数</li>
+<li>当0-t1段,定时器计数器TIMx_CNT值小于CCRx值,输出低电平</li>
+<li>t1-t2段,定时器计数器TIMx_CNT值大于CCRx值,输出高电平</li>
+<li>当TIMx_CNT值达到ARR时,定时器溢出,重新向上计数…循环此过程</li>
+<li>一个PWM周期完成</li>
+</ol>
+<p>所以设置的时钟的频率直接决定了PWM的频率精度、频率范围和占空比分辨率。</p>
+<h3 id="配置步骤"><a href="#配置步骤" class="headerlink" title="配置步骤"></a>配置步骤</h3><p><img src="/2025/10/23/STM32/Generating%20PWM%20Signals%20with%20STM32%20Timers/image-1.png" alt="alt text"></p>
+<p>时钟配置为100kHz，PWM部分的参数解释如下</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数/配置项</th>
+<th align="left">含义与作用</th>
+<th align="left">常见配置选项/建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Mode</strong></td>
+<td align="left">设置PWM的工作模式，决定了计数值与比较值如何控制输出电平</td>
+<td align="left">- <strong>PWM Mode 1</strong>：向上计数时CNT &lt; CCRx为有效电平<br>- <strong>PWM Mode 2</strong>：向上计数时CNT &lt; CCRx为无效电平</td>
+</tr>
+<tr>
+<td align="left"><strong>Pulse</strong></td>
+<td align="left">设定PWM的初始占空比，对应捕获/比较寄存器(CCRx)的值</td>
+<td align="left">取值范围：0 到 Counter Period(ARR)，决定初始占空比大小</td>
+</tr>
+<tr>
+<td align="left"><strong>Output Compare Preload</strong></td>
+<td align="left">启用输出比较预加载功能</td>
+<td align="left">- <strong>使能</strong>：修改CCRx值在下次更新事件生效，防止毛刺<br>- <strong>禁用</strong>：立即修改CCRx值，可能导致当前周期异常</td>
+</tr>
+<tr>
+<td align="left"><strong>Fast Mode</strong></td>
+<td align="left">快速模式，影响输出比较的响应方式</td>
+<td align="left">- <strong>使能</strong>：匹配时立即置位标志，响应更快<br>- <strong>禁用</strong>：在更新事件时处理标志位，通用场景</td>
+</tr>
+<tr>
+<td align="left"><strong>CH Polarity</strong></td>
+<td align="left">设置PWM通道的输出极性</td>
+<td align="left">- <strong>High</strong>：有效电平为高电平<br>- <strong>Low</strong>：有效电平为低电平</td>
+</tr>
+</tbody></table>
+<p>占空比将在程序中动态修改，这里就先配置成0。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code class="language-C">HAL_TIM_PWM_Start(&amp;htim4,TIM_CHANNEL_1); // 记得先开启
+
+__HAL_TIM_SET_COMPARE(&amp;htim4, TIM_CHANNEL_1, 500); // 程序中动态控制占空比
+</code></pre>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/as480133937/article/details/99231677">https://blog.csdn.net/as480133937/article/details/99231677</a></p>
 
     </div>
     

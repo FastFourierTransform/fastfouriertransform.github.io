@@ -296,7 +296,7 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/stm32/" style="color: #ffa2c4">
+                <a href="/tags/stm32/" style="color: #03a9f4">
                     stm32
                 </a>
             </span>
@@ -349,7 +349,7 @@ mjx-container[display="true"] + br {
 </thead>
 <tbody><tr>
 <td>Prescaler（时钟预分频数）</td>
-<td>总线分频减一，这里意思是64分频</td>
+<td>总线分频减一，因为是从零开始，这里意思是64分频</td>
 </tr>
 <tr>
 <td>Counter Mode（计数模式）</td>
@@ -369,6 +369,8 @@ mjx-container[display="true"] + br {
 </tr>
 </tbody></table>
 <p>不过触发输出这部分我没找到太多的资料，不太清楚里面的设置具体是什么意思，这个也放在未来鸽吧。</p>
+<p>这里补充一下定时器频率的计算方式。假设总线ABP1的频率为64MHz，那么：</p>
+<p>预分频的频率 = 64/(64-1+1) = 1 MHz<br>定时器溢出频率 = 1 / (500-1+1) = 2 kHz<br>定时周期（定时器中断触发周期） = 1 / 2000 = 0.5 ms</p>
 <p>在这里开启中断：<br><img src="/2025/06/20/STM32/Timer%20Interrupt%20in%20STM32CubeMX/image-2.png" alt="alt text"><br><br><br>比较麻烦的是需要手动开启定时器：</p>
 <pre><code class="language-C">// 开启定时器
 HAL_TIM_Base_Start_IT(&amp;htim6);
