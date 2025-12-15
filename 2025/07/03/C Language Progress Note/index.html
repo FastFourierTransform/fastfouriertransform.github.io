@@ -296,7 +296,7 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/C-C/" style="color: #00bcd4">
+                <a href="/tags/C-C/" style="color: #ffa2c4">
                     C/C++
                 </a>
             </span>
@@ -336,6 +336,15 @@ mjx-container[display="true"] + br {
 <br>
 
 <p>另外在调试时，局部变量是不会被销毁的。另外调试时也会自动初始化一些未初始化的变量。今后再遇到调试与直接运行结果不同时，可以往这几个方面考虑。</p>
+<h2 id="指针的内存分配问题"><a href="#指针的内存分配问题" class="headerlink" title="指针的内存分配问题"></a>指针的内存分配问题</h2><pre><code class="language-C">LinkedListQueue queue;
+initQueue(&amp;queue);
+// 这种情况是可行的，因为已经在栈上分配了结构体内存，可以通过取地址符号获取其地址
+
+LinkedListQueue *queue;
+initQueue(queue);
+// 这种会出问题，因为并没有给指针分配地址，指针指向了未定义的内存
+</code></pre>
+<p>还是这个经典的问题，指针不保存具体数据，只指向一段内存，想一下就很容易明白，但实际用的时候还挺容易忘记这茬的。</p>
 
     </div>
     
