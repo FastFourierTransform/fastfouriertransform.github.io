@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>STM32CubeMX中定时器中断的配置 | 渡河</title>
+    <title>收集一些可能有用的网页 | 渡河</title>
     <meta name="author" content="傅里叶今天不想变换" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -268,22 +268,22 @@ mjx-container[display="true"] + br {
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>STM32CubeMX中定时器中断的配置</h1>
+        <h1>收集一些可能有用的网页</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/6/20
+            2026/1/6
         </span>
         
         <span class="category">
-            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+            <a href="/categories/%E6%97%A5%E5%B8%B8/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
-                嵌入式
+                日常
             </a>
         </span>
         
@@ -296,8 +296,8 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/stm32/" style="color: #03a9f4">
-                    stm32
+                <a href="/tags/%E6%94%B6%E9%9B%86/" style="color: #ff7d73">
+                    收集
                 </a>
             </span>
             
@@ -306,84 +306,36 @@ mjx-container[display="true"] + br {
     </div>
     
     <div class="content" v-pre>
-        <p>查了很多教程，第一步都是配置RCC</p>
-<p><img src="/2025/06/20/STM32/Timer%20Interrupt%20in%20STM32CubeMX/image.png" alt="alt text"></p>
-<p>这里是用来配置外部时钟源的，这部分内容本文主要起一个记录的作用。</p>
-<p>不同的芯片的定时器不尽相同，STM32f103有三类定时器：</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>编号</th>
-<th>总线</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>高级定时器</td>
-<td>TIM1、TIME8</td>
-<td>APB2</td>
-<td>拥有通用定时器全部功能，并额外具有重复计数器、死区生成、互补输出、刹车输入等功能</td>
-</tr>
-<tr>
-<td>通用定时器</td>
-<td>TIM2、TIM3、TIM4、TIM5</td>
-<td>APB1</td>
-<td>拥有基本定时器全部功能，并额外具有内外时钟源选择、输入捕获、输出比较、编码器接口、主从触发模式等功能</td>
-</tr>
-<tr>
-<td>基本定时器</td>
-<td>TIM6、TIM7</td>
-<td>APB1</td>
-<td>拥有定时中断、主模式触发DAC的功能</td>
-</tr>
-</tbody></table>
-<p>高级和通用以后再鸽，这里先说基本定时器。</p>
-<p><img src="/2025/06/20/STM32/Timer%20Interrupt%20in%20STM32CubeMX/image-1.png" alt="alt text"></p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Prescaler（时钟预分频数）</td>
-<td>总线分频减一，因为是从零开始，这里意思是64分频</td>
-</tr>
-<tr>
-<td>Counter Mode（计数模式）</td>
-<td>向上或向下计数，基本定时器只能是向上计数</td>
-</tr>
-<tr>
-<td>Counter Period（自动重装载值）</td>
-<td>计数器的上限，从零开始</td>
-</tr>
-<tr>
-<td>auto-reload-preload（自动重装载）</td>
-<td>到达上限后是否自动重新装载</td>
-</tr>
-<tr>
-<td>TRGO Parameters（触发输出）</td>
-<td>是否在定时器的定时时间到达的时候输出一个信号</td>
-</tr>
-</tbody></table>
-<p>不过触发输出这部分我没找到太多的资料，不太清楚里面的设置具体是什么意思，这个也放在未来鸽吧。</p>
-<p>这里补充一下定时器频率的计算方式。假设总线ABP1的频率为64MHz，那么：</p>
-<p>预分频的频率 = 64/(64-1+1) = 1 MHz<br>定时器溢出频率 = 1 / (500-1+1) = 2 kHz<br>定时周期（定时器中断触发周期） = 1 / 2000 = 0.5 ms</p>
-<p>在这里开启中断：<br><img src="/2025/06/20/STM32/Timer%20Interrupt%20in%20STM32CubeMX/image-2.png" alt="alt text"><br><br><br>比较麻烦的是需要手动开启定时器：</p>
-<pre><code class="language-C">// 开启定时器
-HAL_TIM_Base_Start_IT(&amp;htim6);
-
-// 中断函数
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  if(htim-&gt;Instance == TIM6)
-  {
-    // 中断任务
-  }
-}
-</code></pre>
+        <p>日常冲浪时经常会有一些网页，看着好像挺有用的，但平时确实用不到，但又总觉得未来肯定能用上，放在浏览器书签栏里太碍眼了，所以统一丢到这里来。</p>
+<p>然而整理的时候有些网页已经404了，这不禁让我觉得，整理这些内容真的有意义吗？</p>
+<h3 id="姿势大全"><a href="#姿势大全" class="headerlink" title="姿势大全"></a>姿势大全</h3><p>真的有用得上的那天吗？</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://sex-positions.online/zh-cn/">https://sex-positions.online/zh-cn/</a></p>
+</blockquote>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p>好久没写过这东西了，嵌入式里确实用不怎么到。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://regex101.com/">https://regex101.com/</a></p>
+</blockquote>
+<h3 id="阿里矢量图标库"><a href="#阿里矢量图标库" class="headerlink" title="阿里矢量图标库"></a>阿里矢量图标库</h3><p>未来应该会找到更多好用的库吧。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.iconfont.cn/?spm=a313x.collections_detail.i3.2.515f3a81MZlD6L">https://www.iconfont.cn/?spm=a313x.collections_detail.i3.2.515f3a81MZlD6L</a></p>
+</blockquote>
+<h3 id="信号与系统奥本海姆第二版答案"><a href="#信号与系统奥本海姆第二版答案" class="headerlink" title="信号与系统奥本海姆第二版答案"></a>信号与系统奥本海姆第二版答案</h3><p>也不知道啥时候才会开始做这里的题。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/_aX09puJKBCUTYY5CW6D-w">https://mp.weixin.qq.com/s/_aX09puJKBCUTYY5CW6D-w</a></p>
+</blockquote>
+<p>作为配合，用于辅助画重点</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/VeritaszZ/article/details/124593752">https://blog.csdn.net/VeritaszZ/article/details/124593752</a></p>
+</blockquote>
+<h3 id="速写素材"><a href="#速写素材" class="headerlink" title="速写素材"></a>速写素材</h3><p>等我学完最基础的内容，一定来高强度画速写。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://line-of-action.com/zh">https://line-of-action.com/zh</a></p>
+</blockquote>
+<h3 id="安卓开发环境配置"><a href="#安卓开发环境配置" class="headerlink" title="安卓开发环境配置"></a>安卓开发环境配置</h3><p>有时间我得研究一下怎么用脚本直接把人家博客偷过来，到时候就不需要存这些网站了。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/2301_80035882/article/details/142249097">https://blog.csdn.net/2301_80035882/article/details/142249097</a></p>
+</blockquote>
 
     </div>
     
