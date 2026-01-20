@@ -296,14 +296,14 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/stm32/" style="color: #ff7d73">
+                <a href="/tags/stm32/" style="color: #ffa2c4">
                     stm32
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/" style="color: #03a9f4">
+                <a href="/tags/%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/" style="color: #ff7d73">
                     通讯协议
                 </a>
             </span>
@@ -440,7 +440,7 @@ mjx-container[display="true"] + br {
 </tr>
 </tbody></table>
 <p>值得注意的是，这里只设置了SCLK的极性，但没有提到MOSI和MISO的极性。以MOSI为例，在STM32中，如果发的数据的最后一位是1，那么MOSI就会被一直拉高，直到下一次传输将其置为0。</p>
-<p>一般来说，这两条数据线只要在对应的SCLK边沿处于对应的电平。但也存在要求MOSI或MISO空闲时处于特定电平的情况（ADAS1000要求MOSI空闲时处于高电平以同步数据）。但STM32无法对此进行设置，只能通过GPIO模拟SPI。RX62N芯片可以设置这样的状态，想来这样的设计有可能是出于某些残酷的商业竞争的目的吧。</p>
+<p>一般来说，这两条数据线只要在对应的SCLK边沿处于对应的电平。但也存在要求MOSI或MISO空闲时处于特定电平的情况（ADAS1000要求MOSI空闲时处于高电平以同步数据）。但STM32无法对此进行设置，只能通过GPIO模拟SPI。RX62N芯片可以设置这样的状态，这大概就是资本主义的小巧思吧。</p>
 <h2 id="5-代码实现"><a href="#5-代码实现" class="headerlink" title="5. 代码实现"></a>5. 代码实现</h2><p>STM32下可以直接使用方便的HAL库。</p>
 <pre><code class="language-C">HAL_GPIO_WritePin(CS_Port, CS_Pin, GPIO_PIN_RESET);
 HAL_SPI_Transmit(&amp;hspi1, tx_data_spi, 4, 100);
