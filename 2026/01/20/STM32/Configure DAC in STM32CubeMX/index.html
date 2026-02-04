@@ -296,7 +296,7 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/stm32/" style="color: #03a9f4">
+                <a href="/tags/stm32/" style="color: #ffa2c4">
                     stm32
                 </a>
             </span>
@@ -307,7 +307,7 @@ mjx-container[display="true"] + br {
     
     <div class="content" v-pre>
         <p>来了，久违的STM32时间，好像除了被我鸽了的ADC，大部分基本功能都已经写到博客里了。</p>
-<p><img src="/2026/01/20/STM32/Configure%20DAC%20in%20STM32CubeMX/image.png" alt="alt text"></p>
+<h3 id="直接输出"><a href="#直接输出" class="headerlink" title="直接输出"></a>直接输出</h3><p><img src="/2026/01/20/STM32/Configure%20DAC%20in%20STM32CubeMX/image.png" alt="alt text"></p>
 <p>选择输出口，并在下方Enable，可以同时输出两路。</p>
 <p>然后，就可以使用最基本的功能了。</p>
 <pre><code class="language-C">  HAL_DAC_Start(&amp;hdac, DAC_CHANNEL_1); // 开始DAC输出
@@ -333,6 +333,12 @@ mjx-container[display="true"] + br {
         }
     }
 </code></pre>
+<h3 id="通过DMA输出"><a href="#通过DMA输出" class="headerlink" title="通过DMA输出"></a>通过DMA输出</h3><p>使用DMA的话，首先在这里改成定时器触发：<br><img src="/2026/01/20/STM32/Configure%20DAC%20in%20STM32CubeMX/image-3.png" alt="alt text"></p>
+<p>DMA模式选循环：<br><img src="/2026/01/20/STM32/Configure%20DAC%20in%20STM32CubeMX/image-4.png" alt="alt text"></p>
+<pre><code class="language-C">    uint16_t square_wave_dac[2] = {0, 4095};
+    HAL_DAC_Start_DMA(&amp;hdac, DAC_CHANNEL_1, (uint32_t*)square_wave_dac, 2, DAC_ALIGN_12B_R);
+</code></pre>
+<p>这样就会不断的把数组中的值移到DAC输出中，通过这种方式也可以生成更复杂的波形。</p>
 
     </div>
     
