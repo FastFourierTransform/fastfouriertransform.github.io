@@ -296,7 +296,7 @@ mjx-container[display="true"] + br {
             
             <span class="tag">
                 
-                <a href="/tags/stm32/" style="color: #00bcd4">
+                <a href="/tags/stm32/" style="color: #03a9f4">
                     stm32
                 </a>
             </span>
@@ -333,12 +333,32 @@ mjx-container[display="true"] + br {
         }
     }
 </code></pre>
-<h3 id="通过DMA输出"><a href="#通过DMA输出" class="headerlink" title="通过DMA输出"></a>通过DMA输出</h3><p>使用DMA的话，首先在这里改成定时器触发：<br><img src="/2026/01/20/STM32/Configure%20DAC%20in%20STM32CubeMX/image-3.png" alt="alt text"></p>
+<h3 id="通过DMA输出"><a href="#通过DMA输出" class="headerlink" title="通过DMA输出"></a>通过DMA输出</h3><p>使用DMA的话，首先在这里改成定时器触发：<br><img src="/2026/01/20/STM32/Configure%20DAC%20in%20STM32CubeMX/image-3.png" alt="alt text"><br>注意，定时器的Trigger Event Selection 需要设置为Update Event，否则无法正常输出。</p>
 <p>DMA模式选循环：<br><img src="/2026/01/20/STM32/Configure%20DAC%20in%20STM32CubeMX/image-4.png" alt="alt text"></p>
 <pre><code class="language-C">    uint16_t square_wave_dac[2] = {0, 4095};
     HAL_DAC_Start_DMA(&amp;hdac, DAC_CHANNEL_1, (uint32_t*)square_wave_dac, 2, DAC_ALIGN_12B_R);
 </code></pre>
 <p>这样就会不断的把数组中的值移到DAC输出中，通过这种方式也可以生成更复杂的波形。</p>
+<p>再补充一些细节，来自HAL中的注释：</p>
+<p>(+) 在数据传输到一半时，会执行 HAL_DAC_ConvHalfCpltCallbackCh1() 或 HAL_DACEx_ConvHalfCpltCallbackCh2() 函数，用户可以通过自定义这些函数指针来添加自己的代码。</p>
+<p>(+) 在数据传输结束时，会执行 HAL_DAC_ConvCpltCallbackCh1() 或 HAL_DACEx_ConvCpltCallbackCh2() 函数，用户可以通过自定义这些函数指针来添加自己的代码。</p>
+<p>(+) 如果发生传输错误，将执行 HAL_DAC_ErrorCallbackCh1() 函数，用户可以通过自定义该函数指针来添加自己的代码。</p>
+<p>具体用法的话：</p>
+<pre><code class="language-C">// --- DMA 中断回调函数 ---
+
+// 1. 半传输完成 (Half Transfer) - 填充前半段
+void HAL_DAC_ConvHalfCpltCallbackCh1(DAC_HandleTypeDef *hdac)
+{
+    Fill_DAC_Buffer(&amp;dac_buffer[0], BUFFER_SIZE / 2);
+}
+
+// 2. 传输完成 (Transfer Complete) - 填充后半段
+void HAL_DAC_ConvCpltCallbackCh1(DAC_HandleTypeDef *hdac)
+{
+    Fill_DAC_Buffer(&amp;dac_buffer[BUFFER_SIZE / 2], BUFFER_SIZE / 2);
+}
+</code></pre>
+<p>这样可以方便的在使用DMA的情况下修改数据的具体内容。</p>
 
     </div>
     
