@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>Hello World | 渡河</title>
+    <title>Hexo常见操作整理指南 | 渡河</title>
     <meta name="author" content="花弁、それにまつわる音声" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,7 +156,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>Hello World</h1>
+        <h1>Hexo常见操作整理指南</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -171,7 +171,7 @@
     
     <div class="content" v-pre>
         <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
 </code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
@@ -183,6 +183,15 @@
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
 </code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>以上，就是hexo 自带的hello world的内容</p>
+<h2 id="设置文章资源文件夹"><a href="#设置文章资源文件夹" class="headerlink" title="设置文章资源文件夹"></a>设置文章资源文件夹</h2><p>在根目录的_config.yml中修改如下内容：</p>
+<pre><code class="yml">post_asset_folder: true
+marked:
+  prependRoot: true
+  postAsset: true
+</code></pre>
+<p>这样就会在 new 的时候自动生成一个同名文件夹，文章里需要插入的图片（或是其他资源），都可以放在这个文件夹下，避免混乱。</p>
+<h2 id="首页文章排序"><a href="#首页文章排序" class="headerlink" title="首页文章排序"></a>首页文章排序</h2><p>在 Front-Matter 里设置 pinned 作为置顶参数，越大越靠前，默认为 0。</p>
 
     </div>
     
