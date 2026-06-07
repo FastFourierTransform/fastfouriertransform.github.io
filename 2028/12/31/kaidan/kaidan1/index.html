@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>小说1 | Hexo</title>
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>HEXO</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;HEXO</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>小说1</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2028/12/31
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>上班一天都没事干，实在坐不住了，写点东西骗点小红点，给大伙讲讲我上上周去浙二天城路院区看急诊的故事。</p>
+<p>背景可见LZ的历史发帖，作为一名年轻的二糖患者，虽然在98上的记录好久之前就摆了，日常生活里的血糖控制还是不敢懈怠的。年后感觉整体状态好了不少，就决定上周末去复查一下血糖。</p>
+<p>好消息是控制的效果确实不错，血糖血脂的相关指标都有了非常明显的改善，只是发现肌酸激酶指标高出了正常值的十倍不止，联想到检查前几天半夜还出现过比较严重的胸痛情况，担心会不会是有了什么心血管并发症，于是又挂了心内科复查，初步的检查结果出来已经是晚上七点了，结果似乎并不乐观，无奈只能去急诊做进一步检查。</p>
+<p>因为急诊患者多医生少，没办法像白天那样坐在大厅里慢慢等候叫号，所以基本都是一群人挤在一间诊室里争先恐后的看病，问诊过程基本没什么隐私可言，这也让我有机会一睹诸多神人的风采。</p>
+<p>首先向我们走来的是神人大姐A，来急诊是因为手脚发麻严重且一直没有缓解的迹象，初步血常规发现这大姐血糖高达20几，我进来的时候医生正在让大姐A赶紧去查酮症，然后进行下一步治疗，但大姐A表示现在到饭点了，自己要先到医院外面吃饭，医生都快急眼了，说你血糖都20多了，不能再吃饭了，但大姐就杠上了，说人怎么能不吃饭呢，不吃饭我以后不就没法活了吗，我血糖一直都这样，一直该怎么吃怎么吃，就手脚麻一点，出去吃个饭没事的。最后医生连威胁带劝说总算是让大姐拿着单子去检查了，就是不知道大姐会不会拿着单子转头就扎进食堂。</p>
+<p>神人B是一个小姐姐，带着她的两个闺蜜，当然这个描述可能有点不太准确，因为患者小姐姐已经坐在轮椅上一副快死掉的样子了，全程是她两个闺蜜和医生交流，所以神人的应该是她那两个闺蜜。小姐姐的症状疑似肠胃炎，说是已经吐了一天了，初步检查发现她血糖已经飙到了30多，已经是能把前面的大姐A都腻死的水平了，医生比刚才更着急了，立刻让赶紧去抢救室，有啥情况先抢救吧，进一步的检查也都在抢救室做。但B的两个闺蜜却拒绝了医生，理由是她们不是本地人，必须明天离开杭州，所以不能让B住院，让医生给开点药输点液就行，非要住院她们就换家医院。说真的，听到这儿我感觉大脑褶皱都被抚平了，谁说这世界上没有完美犯罪。哪怕说你一点医学常识都没有，不知道30多的血糖代表什么，作为一个有正常认知能力的成年智人也多少能看出，自己那个半天在轮椅上一动不动一言不发的同伴已经马上要和太奶展开会晤了，此情此景首先考虑的居然是自己的行程方便与否，多少是有点畜生了。不知道B在那个时候精神状态如何，时候如果她还记得今晚的经历，还是早些和这两个魔丸闺蜜绝交吧，不然真得死她俩手上。好消息是医生通过进抢救室不等于住院的说辞，成功说服了那两个魔丸送B进了抢救室。</p>
+<p>神人C和D是一对中老年夫妇，推着他们躺在转运床上的95岁老母亲E，至于为什么我对95岁这个年龄记得这么清除，大伙看到后面就明白了。CD一进来就抱怨杭州的急诊服务不行，自己在上海叫了救护车直接就送到医生面前了，来杭州居然还得自己排队找医生，所以C大妈一进门就大喊：“老人95岁了，让我们先看吧”。周围的人也就很识趣的让开了CDE和医生之间的道路。接下来就是顶级的窒息体验。</p>
+<p>医生：患者什么情况？<br>C大妈：疼啊，老人95岁了，哎呦你们这个医院怎么这样的啊，怎么急诊就一个内科医生啊。<br>医生：患者哪里疼啊？<br>C大妈：哪里都疼啊，全身都疼，老人95岁了，每天都疼，全身都疼啊。<br>医生：啊？全身都疼（摆出一副窒息的表情），什么时候开始的。<br>C大妈：一直都疼啊，疼了好久了，老人95岁了，疼了好几年了。<br>医生：怎么可能一疼好几年，肯定是加重了才来急诊的，什么时候加重的。<br>C大妈：不知道啊，老人95岁了，晚上实在受不了了才叫救护车送过来的，你们这个医院怎么这样啊，我们在上海叫救护车直接就送到病房去了，你们医院怎么还要自己排队啊。<br>医生：那做个XX检查吧。（LZ医学知识不够，没听明白是什么检查）<br>C大妈：哎呦，我们可不做了，之前在XX医院就做了，老人95岁了，太折腾了，什么也没查出来，老人都95岁了，给输点止痛让老人别那么痛苦了。<br>医生：那你们的需求就是给老人开个止痛？<br>C大妈：怎么能就输个止痛呢，过来医院你光输止痛有什么用，上海医院直接就送到病房里了，你们这里都怎么搞得啊，老人95岁了，大半夜的。<br>医生：那你不做XX检查怎么知道是什么问题啊。<br>C大妈：哎呦，真别做XX检查了，老人95岁了，太折腾了，上次在XX医院也做了，做完了也没用，就折腾了，老人都95岁了。<br>医生：那你们当时做的检查报告带了吗。<br>D大爷：没带。<br>C大妈：当时在XX医院做了的，做了也啥都没查出来，老人95岁了，光折腾了，你们这个医院啊……</p>
+<p>医生这时候有点无奈了，磨叽了老半天，一点有用信息没有，于是选择了直接和E老太对话。</p>
+<p>医生：哪里疼啊。<br>E老太：肚子疼。<br>医生（摸了肚子的两个部位）：这里疼还是那里疼<br>E老太：这里疼。<br>医生：呕吐拉肚子有没有？<br>E老太：没有。</p>
+<p>最后医生还是让CD先带着E去打止痛，然后再做XX检查。CD骂骂咧咧的走了，只留下95这个数字永远刻印在了我的脑中。</p>
+<p>说真的，轮到我看诊的时候我心里甚至产生了一丝负罪感，我这种状况真的有必要来急诊吗，我是不是恶意挤占医疗资源了。在观赏完那么多抽象患者及其家属后，我现在的心态是，给我看病时医生忽然情绪爆发个我一巴掌，我也绝对是能原谅对方的，真的太辛苦了。不过医生姐姐的心态也确实不一般，轮到我的时候可能是因为我精神状态明显好过其他人外加排队时正义制裁了好几个插队的，不光没打我，还跟我开了个玩笑抱怨了几句。最后检查发现只是在健身房沉淀太狠有些轻微的横纹肌溶解，并不是什么要命的问题。</p>
+<p>那晚的经历了我一个启示，如果你受够了咄咄逼人的客户、不可理喻的同事，和不近人情的领导，你可以在下班后围观一下医院的急诊门诊，再窒息的工作环境，在胡搅蛮缠的急诊患者及其家属面前，都可爱的像个淘气的孩子，而且你也不用担心自己加班太晚赶不上，因为你加班的时候，急诊医生肯定也在加班。感谢全体一线医护人员的奉献，瑞思拜。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 Hexo
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;John Doe
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
