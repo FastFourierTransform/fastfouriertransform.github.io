@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>通关留念-水葬银币的伊斯特里亚 | 渡河</title>
+    <meta name="author" content="花弁、それにまつわる音声" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>渡河</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;渡河</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>通关留念-水葬银币的伊斯特里亚</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/1/13
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E6%97%A5%E5%B8%B8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                日常
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%8C%87%E7%82%B9%E6%B1%9F%E5%B1%B1/" style="color: #00a596">
+                    指点江山
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h3 id="水葬银币的伊斯特里亚（水葬銀貨のイストリア）"><a href="#水葬银币的伊斯特里亚（水葬銀貨のイストリア）" class="headerlink" title="水葬银币的伊斯特里亚（水葬銀貨のイストリア）"></a>水葬银币的伊斯特里亚（水葬銀貨のイストリア）</h3><p><img src="/2025/01/13/Article%20Group%20Daily/Comments/Suisou%20Ginka%20no%20Istoria/image.png" alt="alt text">  </p>
+<p>伊斯特里亚即istoria，来源于拉丁语historia，与history一词同源。<br>标题即为水葬银币的历史传说之意。这是我彻底通关后才知道的，推的过程中还一直在意标题中的伊斯特利亚到底是什么。</p>
+<p>其实在此之前我也刷到过本作那生死抉择的梗图，不过玩的时候并没有想起这茬。选择本身对我来说倒也没那么痛苦，一部分来源于我对电车难题的态度——那就是一刀捅死那个把别人绑到铁轨上的人，因为电车难题从来都不应该发生，特别是本作的始作俑者确实是个顶级畜生，对始作俑者本身的憎恨冲淡了我对选择本身的纠结；另一部分来源于前面已经做过一次的背叛选择，此情此景，不论牺牲什么，我都不愿意说出那句“相信我”。</p>
+<p>不过抉择之后的隐隐暗示也让能坦然接受自己的选择了，隐约中我感受到被抛弃的那个人过的似乎远没有那么悲惨，真结局证实了我的想法。所以摆脱了“现在的幸福是通过牺牲他人换来的”这层精神桎梏后，四条个人线都变得有些无聊了，毕竟抛开前面压抑沉重的部分，个人线的内容说是纯纯废萌也不为过，我此时此刻更期待的，其实是主线中悬而未决的部分。</p>
+<p>所以对我来说推个人线的环节确实很无聊，特别是第一遍走完玖玖里线后导致我最喜欢玖玖里戏份骤减，从而进一步丧失了对其他个人线的兴趣。我一度期待在欢乐日常里多来点“元和二年”环节，好提醒我这依然是个压抑悲伤的故事，让我的感情能有更多的波动，可惜没有，个人线真的就是一乐乐到底，欢快轻松到仿佛直接换了个新游戏。但就像我之前说的，这种方式本质是为了用乐景衬哀情，进一步强化前面抉择带来的伤害，但经过暗示，哀情没那么哀了，乐景也就真的只剩下傻乐了。</p>
+<p>不得不说，本作似乎并不怎么执着于在隐藏的小细节里创造什么惊天大反转，大部分的反转都有足够的暗示或铺垫，导致大部分的发展都被我猜了个七七八八，丧失了许多乐趣。（每每这个时候我都在后悔自己为什么那么早通关了《十三机兵防卫圈》）</p>
+<p>抛去了个人线的主线（或者说真结局线）也不是全无槽点，究其原因，小岛还是太城市化了，或者说，角色实在太多了，四个女主，三个反派，还有好几个对剧情举足轻重的配角，再加上男主本身，放在一条线里根本讲不完。结果就是真结局线其实更像反派们的集体个人线，解决了眼下的事件，然后反派们轮番上场，进行才艺展示和有问必答环节后一一退场（手打肉丸环节我是真爽到了，但突然冒出来的新设定感觉并没有什么必要，经历了前面的一系列环节玩家的仇恨值早就超过上限了，再搞这种东西反而画蛇添足，让本能完美结局的故事变得没那么完美了），但这个过程里几乎都是男主的独角戏，主角团戏份第二多的是灯，其他人的戏份有些过于少了。至于四个女主，虽然在各自的个人线里已经完成了对角色的塑造，但毕竟是平行世界里发生的事情，我更希望角色们的成长能够在真结局线完成一个彻底的升华，可惜并没有那样的环节。</p>
+<p>点名表扬祈吏，纯纯的支线工具人，主线核心设定一点没接触到，只能在支线实在找不到戏剧冲突的时候被抓来当反派。夕樱线里更是重量级。这个世界上真的存在到赌场里把钱输光了还能一脸开心的支持把自己的钱赢光的人吗，就算是二次元，也别把“XX真是太开心了”的模板套到赌博里啊，起码在这个环节里保持一点点黑暗的氛围啊，不要再破坏水葬的世界观了啊。</p>
+<p>嘛，虽然吐槽了这么多，但本作的剧本本身我还是非常喜欢的。因为故事本身真的非常触动我，无关悲剧本身，而是悲剧之后对正义和奉献的探讨。写下这句话的时刻，我心中也怀有着当个滥好人的理想，渴望通过这样那样的善行满足自己奇怪扭曲的内心。游戏将我的这种心理定义为“伪善”。我倒是并没有觉得有什么问题，理想化的真正的正义在现实里实在是太难了，难到根本不可能达成，所以才会为故事中不惜一切，燃烧生命的真正的无私而感动。</p>
+<p>纵观我云过或者真正体验过的作品，主角将微笑作为slogan作品大都很难让观众用被气笑以外的方式笑出来，在海报里印着大大的催泪和感动的电影也大都充斥着二流编剧基于自我感动的无病呻吟，至少对于我来说大都如此。将流泪作为核心设定贯穿始终的本作从某种程度上来说也没能完全免俗，至少在弄哭我这一方面本作并没有上一部的纸魔那么到位。本作我最喜欢的地方在于对眼泪进行了全新的诠释：不是因为经历的苦难，不是因为遭受的折磨，是因为想要去牺牲，想要去奉献，想要去相信，想要去爱。为爱的人而落泪，为相信的人而落泪，用这份最激烈的情感去治愈一切，救赎一切，这都是情感干涸的我此时此刻所期望的啊。</p>
+<p>行吧，本来是想拿这个当醋包饺子写一个短评合集的，这样以后再想写类似的东西都可以塞进一篇文章里，而且只写短评也会轻松不少。然而回过头来发现光吐槽部分就写了一千多字了。其实还想写点人物分析和桐叶玉图鉴赏的，但全加上怕不是真要变成万字解析了，想了想感觉太容易半途而废了。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 渡河
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;花弁、それにまつわる音声
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

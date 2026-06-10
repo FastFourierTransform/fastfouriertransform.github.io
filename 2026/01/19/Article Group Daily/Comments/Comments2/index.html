@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>2026短评合集 | 渡河</title>
+    <meta name="author" content="花弁、それにまつわる音声" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>渡河</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;渡河</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>2026短评合集</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/1/19
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E6%97%A5%E5%B8%B8/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                日常
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%8C%87%E7%82%B9%E6%B1%9F%E5%B1%B1/" style="color: #ff7d73">
+                    指点江山
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="碧蓝幻想Relink"><a href="#碧蓝幻想Relink" class="headerlink" title="碧蓝幻想Relink"></a>碧蓝幻想Relink</h2><blockquote>
+<p>2026.1.18</p>
+</blockquote>
+<p>不得不说，gbf在我心中一直都是完美的手游模板，随时随地拿起来就能玩，打什么都能有收益，想猛猛肝的时候也有足够的内容让你消耗，当然前提是没有死氪的抽卡系统和灭绝人性的高强度死肝PVP，可惜的是大部分厂商都没什么兴趣在这套框架下推陈出新，而是猛猛搞那个逼开放世界。不过事到如今，可能像我这样讨厌开放世界的才是少数用户吧。</p>
+<p>说回Relink本身，这游戏似乎是经过了好几个版本的迭代，因为我感觉他有不少内容都是先有了A，然后通过B将A简化，而不是直接用一个简化版本的C。举个例子像是地图里宝箱的摆放位置，开局回头有个宝箱这种设计我在Relink里大概品鉴了3-4次了，与之相对的，《雷曼传奇》里这种设计只在第一关的开头用了一次，这明显就是Relink关卡设计没活了的表现。复盘主线很多关卡的设计思路，大概就是做了个一本道地图，发现地图太空太无聊了，加入找宝箱的要素，宝箱放的很没水平导致玩起来更无聊了，干脆在地图上把所有宝箱都标出来，顺便让玩家大部分时间都盯着地图，以掩盖场景细节的不足。虽然这个说法恶意揣测的意味有点重，但确实是我游玩时的第一感觉：这不是一个一气呵成的作品，而是跌跌撞撞好不容易才端上来的。</p>
+<p>不过就像我对《魔法少女的魔女审判》的评价，做的不好并不是大问题，这世界上没有那么多六边形战士，能扬长避短也不失为一部好作品，所以Relink把游戏的核心玩法放到了主线结束后的共斗环节，这也是我当时购入的主要原因（原以为经过2077我已经不会被首发游戏坑了，没想到还是栽在荒野上了）。至于共斗部分我只能说很难评，我刷下来的体验就是，每当我想给这游戏一点尊重，他就要开始给我喂屎了。</p>
+<p>和我不久前打了一个赛季的暗黑相比，二次元风格的Relink确实更能让我刷下去，但在这里真的很难让你刷的爽起来。我认为的刷子游戏的心流循环应该是，解锁新内容，学习了解新内容，在新内容里获得数值和机制的提升，通过挑战BOSS等进入一个下一个阶段，解锁新内容……Relink令我最不爽的一点在于，在提升这方面实在给的太吝啬了，相当于整个心流循环里有一环是直接断掉的。正常来说，当我摸清了当前阶段该怎么刷时，我应该会进入一个提升较快的阶段，这个阶段会给我带来强烈的反馈，提升逐步平稳，意味着我该挑战下一阶段的内容。但在Relink这里，很多时候都是，我摸清接下来要刷什么了，然后我就没有提升了。首先我发现自己的伤害卡到上限了（我也不知道为什么一定要把本家的伤害上限搬过来），所以我该去刷个伤害上限因子，但刷了几天都刷不到，后来才发现，满级的伤害上限因子得到很后面的关卡出率才正常，早期关卡虽然写在掉落里，但掉率简直低的离谱。既然如此，刷不到新因子那我升级一下现有的因子和装备怎么样，好的我要卡你稀有材料了，最后还是只有蚊子腿提升。Relink掉率感觉就是照着手游本家来填的，我怪猎刷天鳞都没这么痛苦，可差别在于手游我可以拿出过日子的心每天刷五分钟刷个一年半载的，手游我还可以通过抽卡社交等获得反馈，但到了Relink里，除了反反复复刷那些换皮怪以外真没别的能干了，虽然BOSS的演出确实不错，但优秀演出还远不够在刷子游戏的重复劳动强度里降低玩家的无聊程度，就像春节的烟花，只有前两下能蕴含节日的喜悦和对未来的祈愿，后面的不论再好看也都只剩下吵闹了。</p>
+<p>至于主线剧情方面，给我的感觉就很微妙。这是一个非常典型的手游活动剧情，主角更像是是当期卡池UP角色而非古兰&#x2F;姬塔（因为我选了姬塔，所以后面就都只说姬塔了），到后半段尤其如此，CG里的C位基本都是新角色，姬塔已经快成为巴哈姆特发射器了（可能也和我一直用老男人推主线有关吧），还有些微妙阴湿情节，都让我有点想给这段剧情差评，但等到彻底通关后，我却都释怀了，因为通篇看下来，这整体的故事其实还挺王道的，罪魁祸首坏的不留余地，死的干脆利落，洗白的角色淡化了其恶行的同时也给予了足够的高光方便玩家得以接受，打到最后，我甚至真的开始对伊德产生好感了，毕竟老老实实的让玩家看到角色一步一个脚印的成长，观感就是比按着头原谅一个PTSD发作的神经病来的好太多。总的来说就是不怎么讨厌，但也确实找不到地方夸就是了。<br><br></p>
+<h2 id="小小梦魇1-小小梦魇2"><a href="#小小梦魇1-小小梦魇2" class="headerlink" title="小小梦魇1 &amp; 小小梦魇2"></a>小小梦魇1 &amp; 小小梦魇2</h2><blockquote>
+<p>2026.1.18</p>
+</blockquote>
+<p>质量上乘的小品之作，两部连着通关只需要一天的时间。虽然原价一百多，但打折只要十几，还要什么自行车。</p>
+<p>一代的话好久之前就通关过了，只是买二代的时候附赠了一代的升级版，所以就又重温了一下一代，虽然也不知道升级了什么，总不能只是多了个可付费DLC吧，那大概白升级了，因为我并没有买这个DLC。不过一代有些桥段我居然完全不记得了，我甚至打了好一会儿才想起长手怪是盲人，要靠踩在毛巾上降低脚步声来躲避。这下失忆再玩一遍的梦想实现了，可惜不是我真正想失忆玩的游戏。</p>
+<p>总之一代也就是这样了，美术和设定很有意思，最重要的是恐怖程度非常亲民，是连我都能轻松游玩的恐怖游戏。不过有些场景确实太黑了，有点难受。</p>
+<p>二代可以说是全面的进步了，肉眼可见的那种，延续了前作优秀美术的基础上，新增了许多室外场景，虽说是室外，但压迫感丝毫未减，氛围的塑造依旧十分到位，谜题的质量感觉也是提升了不少，第一章刚开始时有不少“单人成行”的设计感觉还挺有意思的，不过后面队友就逐渐路边化了，可能也是搞这种设计有些过于限制设计思路了。</p>
+<p>二代最值得说的部分大概是恐怖环节相较于一代提升的可以说不止一点半点，大概是从《床下有人》直接飞升到《咒怨》的水平。至少医院人偶那段是真给我吓到了，已经超过了我对恐怖游戏接受极限的那种，也就是因为是第三人称所以我才没有想生化危机8那样干脆当逃兵了，但对我来说依旧是能应激程度的吓人。真假人偶互相掩护产生的jump scare，加上几乎全程拉满的追逐战环节，说实话也是体会了一次玩恐怖游戏卡关以至于情感都麻木了的感觉。不过说真的，真的真的就到这里吧，三代如果还能进步那我就真的只能告辞了。不过三代最终还是败给了资本，此情此景多少有点让人哭笑不得了。</p>
+<p>此外有个问题我确实要狠狠攻击一下，二代游玩过程中我一共遇到两次bug，两次还都是那种会导致卡关的恶性bug。第一次是第一章刚出门没多久，角色模型直接卡到了某个小缝里动弹不得，无奈直接重开，说实话，一进游戏就遇到bug确实挺拉印象分的，好在后面质量过硬又给我印象分拉回来了。第二次是最最恶心的，应该是在医院那关，谜题的内容是让你烧掉某个玩具，然后藏在玩具里的钥匙，然后初见的时候发现并没有提示里对应的玩具，最后把能烧的都烧了也没找到钥匙在哪儿。无奈查了查攻略，发现是bug导致对应的玩具压根没有刷出来，甚至我第二次读档也欸刷出来，直到第三次玩具才正确刷新了，过程之波折一度让我以为整个存档都废了，虽然最后存档没废，但整个过程还是十分的恶心的。如果没这两个bug，我的二代体验应该就很完整了。</p>
+<h2 id="成群结伴！西顿学园"><a href="#成群结伴！西顿学园" class="headerlink" title="成群结伴！西顿学园"></a>成群结伴！西顿学园</h2><p>我去，扫福瑞。</p>
+<p>我倒是没被这个标题吸引到，但是刷贴吧说这里有B站怀旧服看我就来了。总的来说没那么怀旧，但是有纯粹的烂梗狂欢，从弹幕文化复兴的角度来说，确实没毛病，可惜没有OP空耳环节，到了怀旧服没有空耳总还是觉得缺点什么，虽然在平台都能全自动跳OP外加大家都不怎么喜欢空耳这种艺术形式的大背景下，也确实没有道理搞这个了。</p>
+<p>回归片子本身，作为20年的动画当时差不多是异世界番刚开始烂大街的时候，虽然称不上多老资历，但内容还是相对复古的校园后宫题材吗，如今能看点纯粹的奇幻校园后宫还是十分享受的，所谓入宅启蒙，对这种题材多少带点白月光的性质，一口气看下来还真有点上头。不过动画本身的发糖环节确实有点贫瘠，后期甚至女二卖百合的桥段都比男女主的发糖环节多。云完了原著后期的一些内容，我感觉作者可能确实不太会画这种题材，也是比较遗憾了，小狗女主的人设我还挺喜欢的。抛开这部分不谈，弹幕满装填的动画在提供快乐这方面还是夯爆了的，不过毕竟是盗版搬运，希望不会遇到被大手拿下或者搬运工起号成功跑路的情况，以后说不定还想回顾一下。</p>
+<h2 id="超时空辉夜姬"><a href="#超时空辉夜姬" class="headerlink" title="超时空辉夜姬"></a>超时空辉夜姬</h2><blockquote>
+<p>2026.2.3</p>
+</blockquote>
+<p>看完之后感觉在和全世界逆行，说实话，如果让我评价这片子大概也就及格的程度，远达不到大部分网站给出的好评如潮的程度，甚至及格也是因为画面制作等部分强行拉到及格线以上的，因为在我看来他压根没讲完一个完整的故事，只是卖了两个好看的人设（算上女儿的皮套大搞勉强算三个人设吧），然后展现这几个人设的互动日常。但哪怕是带着cp脑去看，这故事依然很琐碎。对于我来说，展现两个人的互动最重要的应该是心灵上的沟通，没有心的角色就只是单纯的好看的空壳，所以本片在我看来最神人的地方，大概就在于，在角色互动方面，对于角色内心的交互，基本是能省则省，反倒是把大量的笔墨用在了展示各种身体接触上，比如两个女生牵手一类的，说实话，虽然在二次元里展现的不多，但客观地讲，这种行为放在两个关系比较好的直女身上也很常见吧，真的有那么好嗑吗？</p>
+<p>这也就引出了我觉得另一个难以接受的点，就是我觉得应该很重要的情节，这片子都搞得很儿戏。女一生病那段，我觉得这是一个相当好的塑造角色的环节，让强势方被迫展示出弱势的一面，机能营造反差感，加深观众对角色的认知，也能借由照顾病患来展现一些在我看来能真正展现角色互动的环节，然后一笔带过了。女二即将离开那段，没有一句有营养的台词，也没有任何内心挣扎的呈现，就纯是走个过长，然后快进到下一段肢体接触。最神人的是女一的原生家庭问题，女一为什么要脱离原生家庭，没有细说，前面搞那么多闪回，本以为应该是后期的重要伏笔，结果和她妈通了个电话一切问题就都解决了，甚至没有涉及到见面，就只是随随便便打了个电话，那到底图啥呢？一个电话就能消解的问题，真的犯得上让女一在猝死的边缘苦苦挣扎那么久吗？我能理解这种设计是为了创造同居环境，但这种情节设计实在是蠢得没边了，哪怕让女一直接死全家了呢，哦对，不能死全家，还要卖女一他哥和他哥基友的人设和卖女主和他妈的抽象cp。但说真的，直到时空穿越环节之前，我也依然对这片子抱有期待，毕竟是穿越题材，肯定会有反转的吧，结果嘛，一如既往的儿戏，这片子也就这样了，我还能要求什么呢。</p>
+<p>总结下来如果按分类讲这片子大概算是那种最爆米花的爆米花电影了，但我确实get不到这种爆米花的口味所在，而且其中的异味我实在是难以接受。我感觉经历了一场大型的行为艺术。给你两个美少女，她俩是女同，快去磕吧，然后真的就有一大堆人来嗑了，甚至就因为设定集了提了某个路人女生对女一抱有超越朋友的感情，这对cp的二创也就如火如荼的展开了。真的就只是纯粹的贩卖人设，但这人设的空洞程度大概也就比一张图一句话的oc好一点，问题是还真的有非常非常多的人买账，这真的合理吗？好吧，回顾了一些我接触到的同人内容，好像挺合理的，操。</p>
+<h2 id="玩乐关系1-2卷"><a href="#玩乐关系1-2卷" class="headerlink" title="玩乐关系1&amp;2卷"></a>玩乐关系1&amp;2卷</h2><blockquote>
+<p>2026.2</p>
+</blockquote>
+<p>好多年没完整看完一本轻小说了，这些年来我对自己似乎有些太严格了，说到底游戏都打那么多了，也没必要在阅读上这么较真，偶尔看点不用脑子的文字其实挺好的。</p>
+<p>书的开头还是很神人的，说是三角恋，但三角上的每个点都觉得自己被另外两个点牛了，女二甚至还要换个皮套再多添点乱，可以说是很淫乱了。噱头部分结束后，也就回归到了相对普通的青春恋爱喜剧节奏，虽然很多桥段为了凑这个3C2型三角恋搞得有些强行，但好在大部分伏笔都早早回收，整体的逻辑还是基本自洽的。回到叙事本身，两卷看下来很少有什么惊喜的地方，男主和女一的过去第一卷结束就揭开了，第二卷最大的伏笔也老早就给到暗示了，唯一让我感到意外的部分是第二卷结尾居然直接就开爆了（如果动画化的话我还挺期待看到羊宫妃娜的断气表白演出的），毕竟我认知里的恋爱喜剧不应该是猛猛互动几卷，等到某个关键节点就开始胃疼的正式拉扯表白环节，上来第二卷就开A的属实不多见。当然也可能是我想多了，说不定下一卷直接重拿轻放然后继续写日常去了，谁知道呢，反正从结果上看，骗读者看第三卷的目的是达到了。</p>
+<h2 id="Forgive-Me-Father"><a href="#Forgive-Me-Father" class="headerlink" title="Forgive Me Father"></a>Forgive Me Father</h2><blockquote>
+<p>2025.5</p>
+</blockquote>
+<p>写去年的部分时把这个忘了，但现在写去年的评论又有些怪怪的，还是补在26年的评论里吧。</p>
+<p>这游戏在我游戏库里也躺了有段时间了，那时我应该还在大学校园里，当时是被2D纸片人+克苏鲁风格吸引了，只是初见时自不量力难度拉的太高了，最终在第二个Boss处卡关折戟。重新下回来后也是很老实地选择了最简单的难度。</p>
+<p>游戏属于是类doom游戏，也算是我的苦手范围内了，即使是简单难度，玩下来也还是没那么顺畅的，各种畜生远程怪特别多，不能一两枪快速干掉就得猛猛吃战损，而且资源啥的也不能说有多充裕，还有不少Jump scare 环节。不过美术这块儿确实顶级，虽然是2D纸片，但飞溅的血肉，扭曲的怪物，表现力都很到位，配合越打越疯的色调变化，只能说当初冲着美术来是真来对了。不过这种情况，我大概是不会去支持续作了，因为本作的游玩过程本身对我来说确实有些痛苦了。</p>
+<h2 id="爱乐之城"><a href="#爱乐之城" class="headerlink" title="爱乐之城"></a>爱乐之城</h2><blockquote>
+<p>2026.3.10</p>
+</blockquote>
+<p>我称之为不朽的艺术品，虽然写下这篇评论距离看完电影已经隔了很久了，但本片带给我的震撼真的丝毫未减，再多的赞美之词我都会觉得理所应当，而任何赞美以外的评价都让我自惭形愧，我鸡巴算老几有资格评价这种水平的巨作。</p>
+<h2 id="闪灵"><a href="#闪灵" class="headerlink" title="闪灵"></a>闪灵</h2><blockquote>
+<p>2026.3.11</p>
+</blockquote>
+<h2 id="lost-in-play"><a href="#lost-in-play" class="headerlink" title="lost in play"></a>lost in play</h2><blockquote>
+<p>2026.4</p>
+</blockquote>
+<h2 id="咒术回战第三季"><a href="#咒术回战第三季" class="headerlink" title="咒术回战第三季"></a>咒术回战第三季</h2><h2 id="狙击精英V2重制版"><a href="#狙击精英V2重制版" class="headerlink" title="狙击精英V2重制版"></a>狙击精英V2重制版</h2><h2 id="热血无赖"><a href="#热血无赖" class="headerlink" title="热血无赖"></a>热血无赖</h2>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 渡河
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;花弁、それにまつわる音声
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

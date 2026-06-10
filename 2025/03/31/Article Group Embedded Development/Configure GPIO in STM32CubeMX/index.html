@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>STM32CubeMX中GPIO口的配置 | 渡河</title>
+    <meta name="author" content="花弁、それにまつわる音声" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>渡河</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;渡河</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>STM32CubeMX中GPIO口的配置</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/3/31
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                嵌入式
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/stm32/" style="color: #00a596">
+                    stm32
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>配置引脚时可以看到如下选项，这篇文章主要解释GPIO相关的选项</p>
+<p><img src="/2025/03/31/Article%20Group%20Embedded%20Development/Configure%20GPIO%20in%20STM32CubeMX/image.png" alt="alt text"></p>
+<h2 id="GPIO-Input"><a href="#GPIO-Input" class="headerlink" title="GPIO_Input"></a>GPIO_Input</h2><p><img src="/2025/03/31/Article%20Group%20Embedded%20Development/Configure%20GPIO%20in%20STM32CubeMX/image-1.png" alt="alt text"></p>
+<h3 id="GPIO-Pull-up-Pull-down"><a href="#GPIO-Pull-up-Pull-down" class="headerlink" title="GPIO Pull-up&#x2F;Pull-down"></a>GPIO Pull-up&#x2F;Pull-down</h3><p>确定引脚在无外部信号时的默认电平，避免浮空引发误触。</p>
+<ul>
+<li><p>No pull-up and no pull-down<br>浮空状态，适用于已有外部上&#x2F;下拉电阻的电路。</p>
+</li>
+<li><p>Pull-up<br>内部上拉电阻连接到VDD，默认高电平。</p>
+</li>
+<li><p>Pull-down<br>内部下拉电阻连接到GND，默认低电平。</p>
+</li>
+</ul>
+<h2 id="GPIO-Output"><a href="#GPIO-Output" class="headerlink" title="GPIO_Output"></a>GPIO_Output</h2><p><img src="/2025/03/31/Article%20Group%20Embedded%20Development/Configure%20GPIO%20in%20STM32CubeMX/image-2.png" alt="alt text"></p>
+<h3 id="GPIO-output-level"><a href="#GPIO-output-level" class="headerlink" title="GPIO output level"></a>GPIO output level</h3><p>默认输出电平</p>
+<ul>
+<li>Low<br>默认输出低电平</li>
+<li>High<br>默认输出高电平</li>
+</ul>
+<h3 id="GPIO-mode"><a href="#GPIO-mode" class="headerlink" title="GPIO mode"></a>GPIO mode</h3><ul>
+<li>Output Push Pull<br>推挽模式</li>
+<li>Output Open Drain<br>开漏模式</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>推挽模式</th>
+<th>开漏模式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>驱动能力</td>
+<td>强（直接驱动高&#x2F;低电平）</td>
+<td>弱（高电平由上拉电阻提供）</td>
+</tr>
+<tr>
+<td>电平切换速度</td>
+<td>快（MOSFET直接驱动）</td>
+<td>慢（高电平依赖RC充电）</td>
+</tr>
+<tr>
+<td>是否需要上拉电阻</td>
+<td>不需要</td>
+<td>需要（外部或内部）</td>
+</tr>
+<tr>
+<td>总线冲突风险</td>
+<td>高（多设备可能短路）</td>
+<td>低（支持“线与”逻辑）</td>
+</tr>
+<tr>
+<td>功耗</td>
+<td>较高（瞬态电流）</td>
+<td>较低（静态电流小）</td>
+</tr>
+<tr>
+<td>典型应用</td>
+<td>LED、PWM、高速单设备通信</td>
+<td>I²C、多设备总线、电平转换</td>
+</tr>
+</tbody></table>
+<p>总结就是开漏需要上拉电阻实现输出高电平，但推挽不需要。<br>开漏的优势在于可以实现线与逻辑，即多个设备的输出信号通过物理连接共享同一总线，当所有输出均为高电平时，总线输出才为高电平。</p>
+<h3 id="GPIO-Pull-up-Pull-down-1"><a href="#GPIO-Pull-up-Pull-down-1" class="headerlink" title="GPIO Pull-up&#x2F;Pull-down"></a>GPIO Pull-up&#x2F;Pull-down</h3><p>确定引脚在无外部信号时的默认电平，避免浮空引发误触。</p>
+<ul>
+<li><p>No pull-up and no pull-down<br>浮空状态，适用于已有外部上&#x2F;下拉电阻的电路。</p>
+</li>
+<li><p>Pull-up<br>内部上拉电阻连接到VDD，默认高电平。</p>
+</li>
+<li><p>Pull-down<br>内部下拉电阻连接到GND，默认低电平。</p>
+</li>
+</ul>
+<p>主要用于开漏，推挽似乎没什么用。</p>
+<h3 id="Maximum-output-speed"><a href="#Maximum-output-speed" class="headerlink" title="Maximum output speed"></a>Maximum output speed</h3><p>输出速率,取决于具体的芯片，下面以stm32F1系列为例，部分芯片可能存在very high配置。</p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>速率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Low</td>
+<td>2MHz</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td>10MHz</td>
+</tr>
+<tr>
+<td>High</td>
+<td>50MHz</td>
+</tr>
+</tbody></table>
+<h2 id="GPIO-Analog"><a href="#GPIO-Analog" class="headerlink" title="GPIO_Analog"></a>GPIO_Analog</h2><p><img src="/2025/03/31/Article%20Group%20Embedded%20Development/Configure%20GPIO%20in%20STM32CubeMX/image-3.png" alt="alt text"><br>GPIO Analog模式用于配置引脚为模拟功能，适用于需要处理模拟信号的场景（如ADC输入或DAC输出）。</p>
+<h2 id="GPIO-EXTIx"><a href="#GPIO-EXTIx" class="headerlink" title="GPIO_EXTIx"></a>GPIO_EXTIx</h2><p><img src="/2025/03/31/Article%20Group%20Embedded%20Development/Configure%20GPIO%20in%20STM32CubeMX/image-4.png" alt="alt text"><br>配置本身没什么好说的，主要讲讲中断和事件的区别（当年应该是学过的，但我居然一点印象都没有了）。</p>
+<table>
+<thead>
+<tr>
+<th>外部中断（Interrupt）</th>
+<th>外部事件（Event）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>触发后通知CPU，跳转执行中断服务程序（ISR）。</td>
+<td>触发后直接控制外设硬件（如ADC、DMA等），无需CPU干预。</td>
+</tr>
+<tr>
+<td>需要软件处理（例如读取数据、清除标志位）。</td>
+<td>完全由硬件自动完成，例如直接启动ADC转换或DMA传输。</td>
+</tr>
+</tbody></table>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 渡河
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;花弁、それにまつわる音声
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

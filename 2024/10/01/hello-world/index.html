@@ -3,7 +3,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8" />
-    <title>Hexo常见操作整理指南 | 渡河</title>
+    <title>Hexo常见操作整理 | 渡河</title>
     <meta name="author" content="花弁、それにまつわる音声" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,7 +156,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>Hexo常见操作整理指南</h1>
+        <h1>Hexo常见操作整理</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -192,6 +192,97 @@ marked:
 </code></pre>
 <p>这样就会在 new 的时候自动生成一个同名文件夹，文章里需要插入的图片（或是其他资源），都可以放在这个文件夹下，避免混乱。</p>
 <h2 id="首页文章排序"><a href="#首页文章排序" class="headerlink" title="首页文章排序"></a>首页文章排序</h2><p>在 Front-Matter 里设置 pinned 作为置顶参数，越大越靠前，默认为 0。</p>
+<h2 id="设置隐藏文章"><a href="#设置隐藏文章" class="headerlink" title="设置隐藏文章"></a>设置隐藏文章</h2><p>在 Front-Matter 里设置 hide: true</p>
+<p>然后修改<code>MyBlog\themes\particlex\layout\posts.ejs</code>为如下内容</p>
+<pre><code class="ejs">&lt;%
+    // 1. 提取所有非隐藏的文章到一个纯净的普通数组中
+    let valid_posts = [];
+    site.posts.forEach(function(post) &#123;
+        if (!post.hide) &#123;
+            valid_posts.push(post);
+        &#125;
+    &#125;);
+
+    // 2. 对纯数组进行排序（按置顶权重降序，再按时间降序）
+    valid_posts.sort(function(a, b) &#123;
+        let x = a.pinned || 0;
+        let y = b.pinned || 0;
+        if (x === y) &#123;
+            return b.date - a.date;
+        &#125;
+        return y - x;
+    &#125;);
+
+    // 3. 计算分页并截取当前页需要显示的文章
+    let current = (page.current - 1) * config.index_generator.per_page;
+    let display_posts = valid_posts.slice(current, config.index_generator.per_page + current);
+%&gt;
+&lt;% display_posts.forEach(function(post) &#123; %&gt;
+&lt;div class=&quot;post&quot;&gt;
+    &lt;a href=&quot;&lt;%- url_for(post.path) %&gt;&quot;&gt;
+        &lt;h2 class=&quot;post-title&quot;&gt;&lt;%= post.title %&gt;&lt;/h2&gt;
+    &lt;/a&gt;
+    &lt;div class=&quot;category-and-date&quot;&gt;
+        &lt;% if (post.categories.data.length !== 0) &#123; %&gt;
+        &lt;span class=&quot;category&quot;&gt;
+            &lt;a href=&quot;&lt;%- url_for(post.categories.data[0].path) %&gt;&quot;&gt;
+                &lt;span class=&quot;icon&quot;&gt;
+                    &lt;i class=&quot;fa-solid fa-bookmark fa-fw&quot;&gt;&lt;/i&gt;
+                &lt;/span&gt;
+                &lt;%= post.categories.data[0].name %&gt;
+            &lt;/a&gt;
+        &lt;/span&gt;
+        &lt;% &#125; %&gt;
+        &lt;span class=&quot;date&quot;&gt;
+            &lt;span class=&quot;icon&quot;&gt;
+                &lt;i class=&quot;fa-solid fa-calendar fa-fw&quot;&gt;&lt;/i&gt;
+            &lt;/span&gt;
+            &lt;%- date(post.date, &quot;YYYY/M/D&quot;) %&gt;
+        &lt;/span&gt;
+        &lt;% if (theme.crypto.enable &amp;&amp; typeof post.secret !== &quot;undefined&quot;) &#123; %&gt;
+        &lt;span class=&quot;special&quot;&gt;
+            &lt;i class=&quot;fa-solid fa-lock fa-fw&quot;&gt;&lt;/i&gt;
+        &lt;/span&gt;
+        &lt;% &#125; %&gt;
+        &lt;% if (typeof post.pinned !== &quot;undefined&quot;) &#123; %&gt;
+        &lt;span class=&quot;special&quot;&gt;
+            &lt;i class=&quot;fa-solid fa-grip-vertical fa-fw&quot;&gt;&lt;/i&gt;
+        &lt;/span&gt;
+        &lt;% &#125; %&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;description&quot;&gt;
+        &lt;div class=&quot;content&quot; v-pre&gt;
+            &lt;% if (typeof post.description !== &quot;undefined&quot;) &#123; %&gt;
+            &lt;%- markdown(post.description) %&gt;
+            &lt;% &#125; else if (post.excerpt) &#123; %&gt;
+            &lt;%- post.excerpt %&gt;
+            &lt;% &#125; else &#123; %&gt;
+            &lt;%- post.content %&gt;
+            &lt;% &#125; %&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;post-tags&quot;&gt;
+        &lt;% if (post.tags.data.length !== 0) &#123; %&gt;
+        &lt;span class=&quot;icon&quot;&gt;
+            &lt;i class=&quot;fa-solid fa-tags fa-fw&quot;&gt;&lt;/i&gt;
+        &lt;/span&gt;
+        &lt;% &#125; %&gt;
+        &lt;% let prev; %&gt;
+        &lt;% post.tags.data.forEach(function(tag) &#123; %&gt;
+        &lt;span class=&quot;tag&quot;&gt;
+            &lt;%
+                const colors = theme.colors.filter(function(color) &#123; return color !== prev; &#125;);
+                let id = Math.floor(Math.random() * colors.length);
+                prev = colors[id];
+            %&gt;
+            &lt;a href=&quot;&lt;%- url_for(tag.path) %&gt;&quot; style=&quot;color: &lt;%- colors[id] %&gt;&quot;&gt;&lt;%= tag.name %&gt;&lt;/a&gt;
+        &lt;/span&gt;
+        &lt;% &#125;); %&gt;
+    &lt;/div&gt;
+    &lt;a href=&quot;&lt;%- url_for(post.path) %&gt;&quot; class=&quot;go-post&quot;&gt;阅读全文&lt;/a&gt;
+&lt;/div&gt;
+&lt;% &#125;); %&gt;
+</code></pre>
 
     </div>
     

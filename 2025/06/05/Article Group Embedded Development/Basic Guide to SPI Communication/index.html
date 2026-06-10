@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8" />
+    <title>SPI通讯基础指南 | 渡河</title>
+    <meta name="author" content="花弁、それにまつわる音声" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>渡河</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;渡河</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>SPI通讯基础指南</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/6/5
+        </span>
+        
+        <span class="category">
+            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                嵌入式
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/stm32/" style="color: #ffa2c4">
+                    stm32
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/%E9%80%9A%E8%AE%AF%E5%8D%8F%E8%AE%AE/" style="color: #00a596">
+                    通讯协议
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="1-背景介绍"><a href="#1-背景介绍" class="headerlink" title="1. 背景介绍"></a>1. 背景介绍</h2><p>SPI（Serial Peripheral Interface，串行外设接口）是最常用的短距离通信协议之一。具有高速、全双工、简单灵活等特点，常用于传感器数据采集、存储器扩展、微控制器与外设的交互等场景。</p>
+<p>至于其他通讯方式，UART用的比较多，不过底层原理早就忘得差不多了，I2C更是没用过也没学过，有时间把这两个放到一起整理一下吧。</p>
+<h2 id="2-工作原理"><a href="#2-工作原理" class="headerlink" title="2. 工作原理"></a>2. 工作原理</h2><p>SPI通讯对象分为主机和从机，主机只有一个，一个主机可以对应多个从机，主机与单个从机之间通常需要四根信号线连接：  </p>
+<table>
+<thead>
+<tr>
+<th>信号线</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$\overline{CS}$</td>
+<td>片选，通常低电平有效，用于选择从机。</td>
+</tr>
+<tr>
+<td>$SCLK$</td>
+<td>时钟线，用于同步数据传输，所有的数据传输都严格依赖$SCLK$的时钟边沿。</td>
+</tr>
+<tr>
+<td>$MISO$</td>
+<td>数据线，主机输入，从机输出。</td>
+</tr>
+<tr>
+<td>$MOSI$</td>
+<td>数据线，主机输入，从机输出。</td>
+</tr>
+</tbody></table>
+<br>
+
+<p>之所以说通常需要四根线，这是因为存在特殊情况，取决于具体的工作模式。</p>
+<table>
+<thead>
+<tr>
+<th>工作模式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Full-Duplex(全双工)</td>
+<td>数据的接收和发送同时进行。</td>
+</tr>
+<tr>
+<td>Half-Duplex(半双工)</td>
+<td>数据的接收和发送不能同时进行，此时MOSI和MISO合并成一条线</td>
+</tr>
+<tr>
+<td><br></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="3-参数设置"><a href="#3-参数设置" class="headerlink" title="3. 参数设置"></a>3. 参数设置</h2><p><img src="/2025/06/05/Article%20Group%20Embedded%20Development/Basic%20Guide%20to%20SPI%20Communication/image.png" alt="alt text"></p>
+<p>见上图，时钟相关的参数将在下一章时序特性中详细说明。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Frame Format（帧格式）</td>
+<td>SPI通讯本身并没有严格的帧格式，摩托罗拉是SPI通讯的开发者</td>
+</tr>
+<tr>
+<td>Data Size（数据长度）</td>
+<td>通常为8bit，高于8bit的情况如16bit，既可以修改Data Size 为16bit，也可以发送两个8bit的Data，非常自由</td>
+</tr>
+<tr>
+<td>First Bit（数据位顺序）</td>
+<td>数据传输时是 MSB First（高位优先）还是 LSB First（低位优先），高位优先更符合人们的书写和使用习惯。</td>
+</tr>
+<tr>
+<td>CRC Calculation（循环冗余校验计算）</td>
+<td>用于检测数据传输过程中是否发生错误（如信号干扰、时钟偏移等），通常在高速通讯或噪声环境等需求高可靠性的场景下使用。</td>
+</tr>
+<tr>
+<td>NSS Signal Type（片选信号类型）</td>
+<td>软件片选或硬件片选，一般还是软件片选。</td>
+</tr>
+<tr>
+<td><br></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="4-时序特性"><a href="#4-时序特性" class="headerlink" title="4. 时序特性"></a>4. 时序特性</h2><p>这大概是SPI唯一麻烦的部分了（不算CRC的话），这里为了方便用MATLAB模拟一下示波器采集到的信号。</p>
+<p><img src="/2025/06/05/Article%20Group%20Embedded%20Development/Basic%20Guide%20to%20SPI%20Communication/image-1.png" alt="alt text"></p>
+<p>SCLK的频率通过时钟分频获得，具体分哪个时钟的频就涉及到时钟树的问题了，STM32的时钟树也是个大坑，不过得益于强大的STM32CubeMx，现在可以很方便的设置时钟树，时钟树的具体细节就日后再研究吧。</p>
+<p>数据是跟着SCLK的边沿传输的，所以SCLK的频率直接关系到SPI的传输速度，频率的单位一般为MHz。SCLK频率越高，传输速度越快，传输质量也会越不稳定，所以初期调试的时候最好选择较低的SCLK频率（几百kHz）。实际使用过程中，过低的SCLK频率有可能对整个程序的时序产生影响。需要综合速度和质量选择当前工况下尽可能合适的SCLK频率。</p>
+<p>CPOL（时钟极性）指空闲时SCLK的电平，CPOL&#x3D;0 时，SCLK空闲时为低电平（如图所示）；CPOL&#x3D;1 时，SCLK空闲时为高电平。</p>
+<p>CPHA（时钟相位）指沿SCLK的哪个边沿传输数据，CPHA&#x3D;0 时，在SCLK的第一个边沿传输（锁存和采样）数据（如图所示）；CPHA&#x3D;1 时，在SCLK的第二个边沿传输数据。</p>
+<p>对于图中的情况，CPOL&#x3D;0， CPHA&#x3D;0，所以数据沿着SCLK上升沿进行传输。根据时钟极性的不同，对应边沿是上升沿还是下降沿也是不同的，这在调试是需要多加注意。</p>
+<p>有些地方对于CPOL和CPHA的设置是通过设置SPI工作模式进行的，对应关系如下表：</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>CPOL</th>
+<th>CPHA</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td><br></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>值得注意的是，这里只设置了SCLK的极性，但没有提到MOSI和MISO的极性。以MOSI为例，在STM32中，如果发的数据的最后一位是1，那么MOSI就会被一直拉高，直到下一次传输将其置为0。</p>
+<p>一般来说，这两条数据线只要在对应的SCLK边沿处于对应的电平。但也存在要求MOSI或MISO空闲时处于特定电平的情况（ADAS1000要求MOSI空闲时处于高电平以同步数据）。但STM32无法对此进行设置，只能通过GPIO模拟SPI。RX62N芯片可以设置这样的状态，这大概就是资本主义的小巧思吧。</p>
+<h2 id="5-代码实现"><a href="#5-代码实现" class="headerlink" title="5. 代码实现"></a>5. 代码实现</h2><p>STM32下可以直接使用方便的HAL库。</p>
+<pre><code class="C">HAL_GPIO_WritePin(CS_Port, CS_Pin, GPIO_PIN_RESET);
+HAL_SPI_Transmit(&amp;hspi1, tx_data_spi, 4, 100);
+HAL_SPI_Transmit(&amp;hspi1, &amp;tx_data_spi[0], 1, 100);HAL_SPI_TransmitRecitve(&amp;hspi1, &amp;tx_data_spi[0], &amp;rx_data_spi[0], 1, 100);
+HAL_SPI_Receive(&amp;hspi1, &amp;rx_data_spi[0], 1, 100);
+HAL_GPIO_WritePin(CS_Port, CS_Pin, GPIO_PIN_SET);
+</code></pre>
+<p>因为全双工通信时接收和发送是同时进行的，所以要及时清除 <code>tx_data_spi</code> 和 <code>rx_data_spi</code>，以免错误的发送信息。<br><br></p>
+<p>GPIO模拟SPI:</p>
+<pre><code class="C">uint8_t SPIReadWriteByte(uint8_t data)
+&#123;
+    uint8_t retValue = 0;
+
+    HAL_GPIO_WritePin(SCLK_GPIO_Port, SCLK_Pin, RESET);
+    for(uint8_t i = 0; i &lt; 8; i++)
+    &#123;
+        HAL_GPIO_WritePin(SCLK_GPIO_Port, SCLK_Pin, RESET);
+        retValue &lt;&lt;= 1;
+        retValue |= HAL_GPIO_ReadPin(MISO_GPIO_Port, MISO_Pin);
+        HAL_GPIO_WritePin(MOSI_GPIO_Port, MOSI_Pin, data &amp; 0x80);
+        data &lt;&lt;= 1;
+        HAL_GPIO_WritePin(SCLK_GPIO_Port, SCLK_Pin, SET);
+    &#125;
+    HAL_GPIO_WritePin(MOSI_GPIO_Port, MOSI_Pin, SET);
+    __NOP();
+    
+    return retValue;
+&#125;
+</code></pre>
+<p>用GPIO模拟SPI时，SCLK频率只能到几百kHz，并且SCLK的周期并不稳定，只适合临时调试时使用。</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2022 - 2026 渡河
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;花弁、それにまつわる音声
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
